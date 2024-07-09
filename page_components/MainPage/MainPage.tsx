@@ -3,10 +3,19 @@ import { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { Htag } from '../../components/Common/Htag/Htag';
 import { setLocale } from '../../helpers/locale.helper';
+import { useEffect, useState } from 'react';
 
 
 export const MainPage = (): JSX.Element => {
     const router = useRouter();
+
+    const [username, setUsername] = useState('');
+
+    useEffect(() => {
+        const initDataUnsafe = window.Telegram.WebApp.initDataUnsafe;
+        setUsername(initDataUnsafe?.user?.username || 'Guest');
+        window.Telegram.WebApp.ready();
+    }, []);
     
     return (
         <>
@@ -19,7 +28,7 @@ export const MainPage = (): JSX.Element => {
 			/>
             <div className={styles.wrapper}>
                 <Htag tag='xl'>
-                    {setLocale(router.locale).accentune}
+                    {'Hello,' + username + '!'}
                 </Htag>
             </div>
         </>
