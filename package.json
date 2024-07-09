@@ -6,19 +6,33 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "stylelint": "stylelint \"**/*.css\" --fix",
+    "check": "stylelint \"**/*.css\" --fix && next lint && next build"
   },
   "dependencies": {
+    "next": "14.0.3",
     "react": "^18",
-    "react-dom": "^18",
-    "next": "14.0.3"
+    "react-dom": "^18"
   },
   "devDependencies": {
-    "typescript": "^5",
+    "@reduxjs/toolkit": "^2.2.6",
+    "@svgr/webpack": "^8.1.0",
+    "@types/classnames": "^2.3.1",
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "axios": "^1.7.2",
+    "date-fns": "^3.6.0",
     "eslint": "^8",
-    "eslint-config-next": "14.0.3"
+    "eslint-config-next": "14.0.3",
+    "framer-motion": "^11.2.13",
+    "next-redux-wrapper": "^8.1.0",
+    "react-hot-toast": "^2.4.1",
+    "stylelint": "^13.0.0",
+    "stylelint-config-standard": "^19.0.0",
+    "stylelint-order": "^4.0.0",
+    "stylelint-order-config-standard": "^0.1.3",
+    "typescript": "^5"
   }
 }

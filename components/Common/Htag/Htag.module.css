@@ -1,0 +1,127 @@
+.xxxl,
+.xxl,
+.xl,
+.l,
+.m,
+.s {
+	width: fit-content;
+	margin: 0;
+
+	color: var(--textDark);
+}
+
+.xxxl {
+	font-size: 80px;
+	font-weight: 700;
+	font-style: normal;
+	line-height: normal;
+}
+
+.xxl {
+	font-size: 60px;
+	font-weight: 700;
+	font-style: normal;
+	line-height: normal;
+}
+
+.xl {
+	font-size: 50px;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.l {
+	font-size: 40px;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.m {
+	font-size: 26px;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.s {
+	font-size: 18px;
+	font-weight: 400;
+	font-style: normal;
+}
+
+@media (max-width: 1024px) {
+	.xxxl {
+		font-size: 60px;
+	}
+
+	.xxl {
+		font-size: 40px;
+	}
+
+	.xl {
+		font-size: 30px;
+	}
+
+	.l {
+		font-size: 20px;
+	}
+
+	.m {
+		font-size: 22px;
+	}
+
+	.s {
+		font-size: 16px;
+	}
+}
+
+@media (max-width: 580px) {
+	.xxxl {
+		font-size: 50px;
+	}
+
+	.xxl {
+		font-size: 30px;
+	}
+
+	.xl {
+		font-size: 20px;
+	}
+
+	.l {
+		font-size: 17px;
+	}
+
+	.m {
+		font-size: 12px;
+	}
+
+	.s {
+		font-size: 9px;
+	}
+}
+
+@media (max-width: 300px) {
+	.xxxl {
+		font-size: 40px;
+	}
+
+	.xxl {
+		font-size: 20px;
+	}
+
+	.xl {
+		font-size: 15px;
+	}
+
+	.l {
+		font-size: 12px;
+	}
+
+	.m {
+		font-size: 7px;
+	}
+
+	.s {
+		font-size: 6px;
+	}
+}

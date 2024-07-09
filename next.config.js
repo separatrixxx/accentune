@@ -1,6 +1,33 @@
-/** @type {import('next').NextConfig} */
-const nextConfig = {
-  reactStrictMode: true,
-}
+module.exports = {
+	i18n: {
+		locales: ['en', 'ru'],
+		defaultLocale: 'ru',
+	},
+	images: {
+		domains: ['http://accentune.vercel.app/'],
+	},
+	webpack(config) {
+		config.module.rules.push({
+			loader: '@svgr/webpack',
+			issuer: /\.[jt]sx?$/,
+			options: {
+				prettier: false,
+				svgo: true,
+				svgoConfig: {
+					plugins: [{
+						name: 'preset-default',
+						params: {
+							override: {
+								removeViewBox: false
+							}
+						}
+					}],
+				},
+				titleProp: true,
+			},
+			test: /\.svg$/,
+		});
 
-module.exports = nextConfig
+		return config;
+	},
+};

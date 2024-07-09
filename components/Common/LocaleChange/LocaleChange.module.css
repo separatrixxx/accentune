@@ -1,0 +1,60 @@
+.blockLanguages {
+	display: grid;
+	gap: 10px;
+}
+
+.langLink {
+	width: fit-content;
+	margin: 5px 20px 5px 20px;
+
+	cursor: pointer;
+	transition-duration: 300ms;
+}
+
+.lang {
+	width: fit-content;
+	margin-right: 60px;
+
+	cursor: pointer;
+	transition-duration: 300ms;
+
+	color: var(--white);
+}
+
+.lang:active {
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+	filter: brightness(0.9);
+}
+
+.langLink:active {
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+	color: var(--primary);
+}
+
+@media (min-width: 1024px) {
+	.lang:hover {
+		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+		filter: brightness(0.9);
+	}
+
+	.langLink:hover {
+		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+		color: var(--primary);
+	}
+}
+
+@media (max-width: 1024px) {
+	.lang {
+		margin-right: 40px;
+	}
+}
+
+@media (max-width: 580px) {
+	.lang {
+		margin-right: 20px;
+	}
+}
