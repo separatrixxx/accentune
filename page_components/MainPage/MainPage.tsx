@@ -3,6 +3,7 @@ import { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
 import { Htag } from '../../components/Common/Htag/Htag';
 import { useEffect, useState } from 'react';
+import { setLocale } from '../../helpers/locale.helper';
 
 
 declare global {
@@ -39,6 +40,8 @@ export const MainPage = (): JSX.Element => {
             .catch((error) => {
                 console.error(error);
             });
+
+        console.log(username);
     }, []);
 
     if (!isClient) {
@@ -56,7 +59,7 @@ export const MainPage = (): JSX.Element => {
             />
             <div className={styles.wrapper}>
                 <Htag tag='xl'>
-                    {'Hello, ' + username + '!'}
+                    {setLocale(router.locale).accentune}
                 </Htag>
             </div>
         </>
