@@ -1,6 +1,6 @@
 import styles from './Header.module.css';
 import Link from 'next/link';
-import { UserIcon } from '../ProfileComponents/UserIcon/UserIcon';
+import { UserIcon } from '../../ProfileComponents/UserIcon/UserIcon';
 
 
 export const Header = (): JSX.Element => {   
