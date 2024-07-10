@@ -12,6 +12,7 @@ export const ProfilePage = (): JSX.Element => {
     BackButton.show();
     BackButton.onClick(function() {
       router.push('/');
+      BackButton.hide();
     });
   }
 
