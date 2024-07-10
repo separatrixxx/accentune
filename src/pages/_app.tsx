@@ -7,6 +7,7 @@ import { setLocale } from '../../helpers/locale.helper';
 import { wrapper } from '../../features/store/store';
 import { Provider } from 'react-redux';
 import { TelegramProvider } from '../../layout/TelegramProvider';
+import Script from 'next/script';
 
 
 export default function App({ Component, pageProps }: AppProps) {
@@ -22,7 +23,7 @@ export default function App({ Component, pageProps }: AppProps) {
         <meta property='og:description' content={setLocale(router.locale).accentune} />
         <meta charSet="utf-8" />
         <link rel="icon" href="/logo.svg" type="image/svg+xml" />
-        <script async src="https://telegram.org/js/telegram-web-app.js"></script>
+        <Script src="https://telegram.org/js/telegram-web-app.js" strategy="beforeInteractive" />
       </Head>
       <Component {...pageProps} />
     </TelegramProvider>
