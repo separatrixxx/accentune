@@ -17,13 +17,13 @@
 .errorText:active {
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 
-	color: var(--primary);
+	color: var(--tg-theme-destructive-text-color);
 }
 
 @media (min-width: 1024px) {
 	.errorText:hover {
 		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 
-		color: var(--primary);
+		filter: brightness(0.9);
 	}
 }

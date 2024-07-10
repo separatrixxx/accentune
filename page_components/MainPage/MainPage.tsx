@@ -12,6 +12,7 @@ export const MainPage = (): JSX.Element => {
   return (
     <div className={styles.wrapper}>
       <Header />
+      <br />
       <Htag tag='l'>
         {user ? `Добро пожаловать, ${user.username}` : ':('}
       </Htag>

@@ -6,7 +6,7 @@
 	height: fit-content;
 	padding: 60px 0;
 
-	background: var(--tg-theme-bg-color);
+	background: var(--tg-theme-section-bg-color);
 	justify-items: center;
 	gap: 20px;
 }
@@ -22,7 +22,7 @@
 	animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 
 	border-radius: 9999px;
-	background: var(--darkLight);
+	background: var(--tg-theme-secondary-bg-color);
 }
 
 @keyframes pulse {
