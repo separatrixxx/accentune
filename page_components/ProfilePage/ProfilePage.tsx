@@ -1,10 +1,9 @@
-import styles from './MainPage.module.css';
+import styles from './ProfilePage.module.css';
 import { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
-import { Header } from '../../components/Header/Header';
 
 
-export const MainPage = (): JSX.Element => {
+export const ProfilePage = (): JSX.Element => {
   const router = useRouter();
 
   return (
@@ -17,7 +16,7 @@ export const MainPage = (): JSX.Element => {
         }}
       />
       <div className={styles.wrapper}>
-        <Header />
+        Profile
       </div>
     </>
   );
