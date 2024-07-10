@@ -24,7 +24,6 @@ export const MainPage = (): JSX.Element => {
       if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
         const tg = window.Telegram.WebApp;
         tg.ready();
-        console.log(tg);
 
         const initUser: User = tg.initDataUnsafe.user;
         console.log(tg.initDataUnsafe);
