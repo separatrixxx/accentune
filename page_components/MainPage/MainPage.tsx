@@ -6,15 +6,23 @@ import { useEffect, useState } from 'react';
 import { setLocale } from '../../helpers/locale.helper';
 
 
+interface User {
+  id: number;
+  first_name: string;
+  last_name?: string;
+  username?: string;
+};
+
 export const MainPage = (): JSX.Element => {
   const router = useRouter();
-  const [user, setUser] = useState<any>(null);
+  const [user, setUser] = useState<User | null>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
-        const tg = window.Telegram.WebApp;
-        tg.ready();
-        setUser(tg.initDataUnsafe.user);
+      const tg = window.Telegram.WebApp;
+      tg.ready();
+      const initUser: User = tg.initDataUnsafe.user;
+      setUser(initUser);
     }
   }, []);
 
@@ -31,7 +39,7 @@ export const MainPage = (): JSX.Element => {
         <Htag tag='xl'>
           {setLocale(router.locale).accentune}
         </Htag>
-        {user && <p>Welcome, {user}</p>}
+        {user && <p>Welcome, {user.first_name} {user.last_name} (@{user.username})</p>}
       </div>
     </>
   );
