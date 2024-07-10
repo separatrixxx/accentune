@@ -6,7 +6,7 @@ import { ProfileInfo } from '../../components/ProfileComponents/ProfileInfo/Prof
 
 export const ProfilePage = (): JSX.Element => {
   const router = useRouter();
-  const { webApp, user } = useTelegram();
+  const { webApp } = useTelegram();
 
   if (webApp) {
     const BackButton = webApp?.BackButton;
