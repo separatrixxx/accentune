@@ -11,7 +11,7 @@
 	justify-items: right;
 }
 
-.userImg {
+.userIcon {
 	width: 40px;
 	height: 40px;
 	margin-right: 40px;
@@ -23,14 +23,14 @@
 	background: var(--primary);
 }
 
-.userImg:active {
+.userIcon:active {
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 
 	filter: brightness(0.9);
 }
 
 @media (min-width: 1024px) {
-	.userImg:hover {
+	.userIcon:hover {
 		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 
 		filter: brightness(0.9);
@@ -42,7 +42,7 @@
 		padding: 12px 0;
 	}
 
-	.userImg {
+	.userIcon {
 		width: 30px;
 		height: 30px;
 		margin-right: 20px;

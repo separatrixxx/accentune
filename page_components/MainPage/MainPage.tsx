@@ -7,13 +7,13 @@ import { Htag } from '../../components/Common/Htag/Htag';
 
 export const MainPage = (): JSX.Element => {
   const router = useRouter();
-  const { webApp, user } = useTelegram();
+  const { user } = useTelegram();
 
   return (
     <div className={styles.wrapper}>
       <Header />
       <Htag tag='l'>
-        {user ? user.username : ':('}
+        {user ? `Добро пожаловать, ${user.username}` : ':('}
       </Htag>
     </div>
   );
