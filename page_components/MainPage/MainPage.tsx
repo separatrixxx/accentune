@@ -16,13 +16,22 @@ interface User {
 export const MainPage = (): JSX.Element => {
   const router = useRouter();
   const [user, setUser] = useState<User | null>(null);
+  const [info, setInfo] = useState<string>('Всё ок');
+  const [initDataUnsafe, setInitDataUnsafe] = useState<any>(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
       const tg = window.Telegram.WebApp;
+
       tg.ready();
+      console.log(tg);
+
       const initUser: User = tg.initDataUnsafe.user;
+      console.log(tg.initDataUnsafe);
+      setInitDataUnsafe(tg.initDataUnsafe.user);
       setUser(initUser);
+    } else {
+        setInfo('Ошибка с window.Telegram?.WebApp');
     }
   }, []);
 
@@ -40,6 +49,12 @@ export const MainPage = (): JSX.Element => {
           {setLocale(router.locale).accentune}
         </Htag>
         {user && <p>Welcome, {user.first_name} {user.last_name} (@{user.username})</p>}
+        <Htag tag='m'>
+          {info}
+        </Htag>
+        <Htag tag='l'>
+          {initDataUnsafe}
+        </Htag>
       </div>
     </>
   );
