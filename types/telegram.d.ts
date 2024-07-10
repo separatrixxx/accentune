@@ -8,6 +8,8 @@ export interface ITelegramUser {
 
 export interface IWebApp {
   initData: string;
+  showAlert: function;
+  onEvent: function;
   initDataUnsafe: {
     query_id: string;
     user: ITelegramUser;
@@ -34,6 +36,10 @@ export interface IWebApp {
   backgroundColor: string;
   BackButton: {
     isVisible: boolean;
+    onClick: function;
+    offClick: function;
+    show: function;
+    hide: function;
   };
   MainButton: {
     text: string;

@@ -1,6 +1,6 @@
 import Script from "next/script";
 import { createContext, useContext, useEffect, useMemo, useState } from "react";
-import { ITelegramUser, IWebApp } from "../types/globals";
+import { ITelegramUser, IWebApp } from "../types/telegram";
 
 
 export interface ITelegramContext {
