@@ -6,7 +6,7 @@
 	height: fit-content;
 	padding: 60px 0;
 
-	background: var(--white);
+	background: var(--tg-theme-bg-color);
 	justify-items: center;
 	gap: 20px;
 }

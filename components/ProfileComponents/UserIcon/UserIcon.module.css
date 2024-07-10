@@ -9,7 +9,7 @@
 	transition-duration: 300ms;
 
 	border-radius: 9999px;
-	background: var(--tg-theme-accent-text-color);
+	background: var(--primary);
 	justify-items: center;
 }
 

@@ -8,7 +8,7 @@ body {
 	-ms-user-select: auto;
 	user-select: auto;
 
-	background: var(--light);
+	background: var(--tg-theme-secondary-bg-color);
 
 	font-family: 'Roboto', sans-serif;
 	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
@@ -28,12 +28,12 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-	background-color: var(--background);
+	background-color: var(--tg-theme-bg-color);
 }
 
 ::-webkit-scrollbar-thumb {
 	border-radius: 30px;
-	background-color: var(--primary);
+	background-color: var(--tg-theme-accent-text-color);
 }
 
 a {
