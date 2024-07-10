@@ -10,7 +10,7 @@ function Main(): JSX.Element {
   const { webApp } = useTelegram();
 
   if (webApp) {
-    webApp.setHeaderColor(webApp.themeParams.section_bg_color);
+    webApp.setHeaderColor('bg_color ');
     webApp.expand();
   }
 
