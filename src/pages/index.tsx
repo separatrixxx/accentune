@@ -11,7 +11,6 @@ function Main(): JSX.Element {
 
   if (webApp) {
     webApp.expand();
-    console.log(webApp.themeParams)
   }
 
   return (
