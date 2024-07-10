@@ -1,6 +1,6 @@
 import styles from './MainPage.module.css';
 import { useRouter } from 'next/router';
-import { Header } from '../../components/Header/Header';
+import { Header } from '../../components/Common/Header/Header';
 import { useTelegram } from '../../layout/TelegramProvider';
 import { Htag } from '../../components/Common/Htag/Htag';
 
