@@ -8,7 +8,7 @@ body {
 	-ms-user-select: auto;
 	user-select: auto;
 
-	background: var(--white);
+	background: var(--light);
 
 	font-family: 'Roboto', sans-serif;
 	-webkit-tap-highlight-color: rgba(255, 255, 255, 0);
@@ -51,8 +51,8 @@ a {
 	--primary: #D01120;
 	--white: #FFF;
 	--dark: #1F1F1F;
-	--light: #DDD;
-	--darkLight: #A3A3A3;
+	--light: #F4F4F4;
+	--darkLight: #D9D9D9;
 	--error: #FF1500;
 	--banana: #FFC803;
 	--font-family: 'Roboto', sans-serif;
