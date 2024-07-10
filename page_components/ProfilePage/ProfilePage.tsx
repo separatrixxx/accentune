@@ -1,23 +1,23 @@
 import styles from './ProfilePage.module.css';
-import { Toaster } from 'react-hot-toast';
 import { useRouter } from 'next/router';
+import { useTelegram } from '../../layout/TelegramProvider';
 
 
 export const ProfilePage = (): JSX.Element => {
   const router = useRouter();
+  const { webApp, user } = useTelegram();
+
+  if (webApp) {
+    const BackButton = webApp?.BackButton;
+    BackButton.show();
+    BackButton.onClick(function() {
+      router.push('/');
+    });
+  }
 
   return (
-    <>
-      <Toaster
-        position="top-center"
-        reverseOrder={true}
-        toastOptions={{
-          duration: 2000,
-        }}
-      />
-      <div className={styles.wrapper}>
-        Profile
-      </div>
-    </>
+    <div className={styles.wrapper}>
+      Profile
+    </div>
   );
 };
