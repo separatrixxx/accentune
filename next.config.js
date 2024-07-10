@@ -30,18 +30,5 @@ module.exports = {
   
 	  return config;
 	},
-	async headers() {
-	  return [
-		{
-		  source: '/:path*',
-		  headers: [
-			{
-			  key: 'Content-Security-Policy',
-			  value: "default-src 'self'; script-src 'self' 'unsafe-eval' 'unsafe-inline' *.telegram.org; style-src 'self' 'unsafe-inline'; img-src 'self' data: https:; connect-src 'self' wss: https:; frame-src 'self' https://web.telegram.org;",
-			},
-		  ],
-		},
-	  ];
-	},
   };
   

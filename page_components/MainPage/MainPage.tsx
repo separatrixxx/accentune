@@ -6,62 +6,33 @@ import { useEffect, useState } from 'react';
 import { setLocale } from '../../helpers/locale.helper';
 
 
-declare global {
-  interface Window {
-    Telegram: Telegram;
-  }
-}
-
 export const MainPage = (): JSX.Element => {
-    const router = useRouter();
-    const [username, setUsername] = useState('');
-    const [isClient, setIsClient] = useState(false);
+  const router = useRouter();
+  const [user, setUser] = useState<any>(null);
 
-    useEffect(() => {
-        setIsClient(true);
-
-        const loadTelegramScript = () => {
-            return new Promise<void>((resolve, reject) => {
-                const script = document.createElement('script');
-                script.src = 'https://telegram.org/js/telegram-web-app.js';
-                script.async = true;
-                script.onload = () => resolve();
-                script.onerror = () => reject(new Error('Telegram Web App script failed to load'));
-                document.head.appendChild(script);
-            });
-        };
-
-        loadTelegramScript()
-            .then(() => {
-                const initDataUnsafe = window.Telegram.WebApp.initDataUnsafe;
-                setUsername(initDataUnsafe?.user?.username || 'Guest');
-                window.Telegram.WebApp.ready();
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-
-        console.log(username);
-    }, []);
-
-    if (!isClient) {
-        return <></>;
+  useEffect(() => {
+    if (typeof window !== 'undefined' && window.Telegram?.WebApp) {
+        const tg = window.Telegram.WebApp;
+        tg.ready();
+        setUser(tg.initDataUnsafe.user);
     }
+  }, []);
 
-    return (
-        <>
-            <Toaster
-                position="top-center"
-                reverseOrder={true}
-                toastOptions={{
-                    duration: 2000,
-                }}
-            />
-            <div className={styles.wrapper}>
-                <Htag tag='xl'>
-                    {setLocale(router.locale).accentune}
-                </Htag>
-            </div>
-        </>
-    );
+  return (
+    <>
+      <Toaster
+        position="top-center"
+        reverseOrder={true}
+        toastOptions={{
+          duration: 2000,
+        }}
+      />
+      <div className={styles.wrapper}>
+        <Htag tag='xl'>
+          {setLocale(router.locale).accentune}
+        </Htag>
+        {user && <p>Welcome, {user}</p>}
+      </div>
+    </>
+  );
 };
