@@ -28,6 +28,7 @@ export interface IWebApp {
     hint_color: string;
     bg_color: string;
     text_color: string;
+    section_bg_color: string;
   };
   isExpanded: boolean;
   viewportHeight: number;
@@ -35,6 +36,7 @@ export interface IWebApp {
   isClosingConfirmationEnabled: boolean;
   headerColor: string;
   backgroundColor: string;
+  setHeaderColor: funcion;
   BackButton: {
     isVisible: boolean;
     onClick: function;
