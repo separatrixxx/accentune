@@ -38,6 +38,10 @@
 }
 
 @media (max-width: 580px) {
+	.header {
+		padding: 12px 0;
+	}
+
 	.userImg {
 		width: 30px;
 		height: 30px;
