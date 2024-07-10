@@ -1,0 +1,43 @@
+.profileInfo {
+	display: grid;
+	align-items: center;
+
+	width: 100%;
+	height: fit-content;
+	padding: 60px 0;
+
+	background: var(--white);
+	justify-items: center;
+	gap: 20px;
+}
+
+.username {
+	font-weight: 600;
+}
+
+.pulse {
+	width: 170px !important;
+	height: 35px !important;
+
+	animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+
+	border-radius: 9999px;
+	background: var(--darkLight);
+}
+
+@keyframes pulse {
+	0%,
+	100% {
+		opacity: 1;
+	}
+
+	50% {
+		opacity: 0.5;
+	}
+}
+
+@media (max-width: 580px) {
+	.profileInfo {
+		padding: 60px 0;
+	}
+}

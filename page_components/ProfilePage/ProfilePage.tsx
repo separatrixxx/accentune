@@ -1,6 +1,7 @@
 import styles from './ProfilePage.module.css';
 import { useRouter } from 'next/router';
 import { useTelegram } from '../../layout/TelegramProvider';
+import { ProfileInfo } from '../../components/ProfileComponents/ProfileInfo/ProfileInfo';
 
 
 export const ProfilePage = (): JSX.Element => {
@@ -18,7 +19,7 @@ export const ProfilePage = (): JSX.Element => {
 
   return (
     <div className={styles.wrapper}>
-      Profile
+      <ProfileInfo />
     </div>
   );
 };

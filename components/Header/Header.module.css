@@ -11,40 +11,8 @@
 	justify-items: right;
 }
 
-.userIcon {
-	width: 40px;
-	height: 40px;
-	margin-right: 40px;
-
-	cursor: pointer;
-	transition-duration: 300ms;
-
-	border-radius: 9999px;
-	background: var(--primary);
-}
-
-.userIcon:active {
-	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-
-	filter: brightness(0.9);
-}
-
-@media (min-width: 1024px) {
-	.userIcon:hover {
-		transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-
-		filter: brightness(0.9);
-	}
-}
-
 @media (max-width: 580px) {
 	.header {
 		padding: 12px 0;
-	}
-
-	.userIcon {
-		width: 30px;
-		height: 30px;
-		margin-right: 20px;
 	}
 }
