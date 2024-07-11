@@ -2,6 +2,7 @@ import styles from './ProfilePage.module.css';
 import { useRouter } from 'next/router';
 import { useTelegram } from '../../layout/TelegramProvider';
 import { ProfileInfo } from '../../components/ProfileComponents/ProfileInfo/ProfileInfo';
+import { ProfileButtons } from '../../components/ProfileComponents/ProfileButtons/ProfileButtons';
 
 
 export const ProfilePage = (): JSX.Element => {
@@ -9,17 +10,20 @@ export const ProfilePage = (): JSX.Element => {
   const { webApp } = useTelegram();
 
   if (webApp) {
-    const BackButton = webApp?.BackButton;
-    BackButton.show();
-    BackButton.onClick(function() {
+    if (!webApp?.BackButton.isVisible) {
+      webApp?.BackButton.show();
+    }
+
+    webApp?.BackButton.onClick(function() {
       router.push('/');
-      BackButton.hide();
+      webApp?.BackButton.hide();
     });
   }
 
   return (
     <div className={styles.wrapper}>
       <ProfileInfo />
+      <ProfileButtons />
     </div>
   );
 };

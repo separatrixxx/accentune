@@ -1,0 +1,54 @@
+.button {
+	display: grid;
+	align-items: center;
+
+	width: 90%;
+	height: fit-content;
+	padding: 10px;
+
+	cursor: pointer;
+	transition-duration: 300ms;
+	text-align: left;
+
+	border: none;
+	border-radius: 10px;
+	background: var(--tg-theme-section-bg-color);
+	box-shadow: 0 1px 1px rgb(0 0 0 / 0.03), 0 1px 1px rgb(0 0 0 / 0.05);
+	grid-template-columns: auto 1fr;
+	gap: 10px;
+	justify-items: left;
+}
+
+.button:hover,
+.button:active {
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+	filter: brightness(0.99);
+}
+
+.buttonTextDiv {
+	display: grid;
+	align-items: center;
+	justify-items: left;
+	gap: 5px;
+}
+
+.text {
+	font-weight: 600;
+}
+
+.description {
+	color: var(--tg-theme-subtitle-text-color);
+}
+
+.icon {
+	width: 60px;
+	height: 60px;
+}
+
+@media (max-width: 580px) {
+	.icon {
+		width: 30px;
+		height: 30px;
+	}
+}

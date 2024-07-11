@@ -5,7 +5,7 @@ import { ITelegramUser, IWebApp } from "../types/telegram";
 
 export interface ITelegramContext {
   webApp?: IWebApp;
-  user?: ITelegramUser;
+  tgUser?: ITelegramUser;
 }
 
 export const TelegramContext = createContext<ITelegramContext>({});
@@ -30,7 +30,7 @@ export const TelegramProvider = ({
       ? {
           webApp,
           unsafeData: webApp.initDataUnsafe,
-          user: webApp.initDataUnsafe.user,
+          tgUser: webApp.initDataUnsafe.user,
         }
       : {};
   }, [webApp]);

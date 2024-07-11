@@ -7,15 +7,15 @@ import cn from 'classnames';
 
 
 export const UserIcon = ({ isHeader }: UserIconProps): JSX.Element => {
-    const { user } = useTelegram();
+    const { tgUser } = useTelegram();
     
-    if (user && user.photo_url) {
+    if (tgUser && tgUser.photo_url) {
         return (
             <Image className={cn(styles.userIcon, {
                 [styles.isHeader]: isHeader,
             })} draggable='false'
-                loader={() => user ? user.photo_url : ''}
-                src={user ? user.photo_url : ''}
+                loader={() => tgUser && tgUser.photo_url ? tgUser.photo_url : ''}
+                src={tgUser && tgUser.photo_url ? tgUser.photo_url : ''}
                 alt='image'
                 width={1}
                 height={1}
