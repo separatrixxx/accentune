@@ -31,10 +31,8 @@ export const ProfileButtons = (): JSX.Element => {
                     onClick={() => subscribe(setLocale(router.locale).subscribe_to_paid_content + '?', webApp, dispatch)} />
                 <Button icon='point_emoji.webp' text={setLocale(router.locale).statistics}
                     description={setLocale(router.locale).first_part_tasks}
-                    onClick={() => webApp?.showPopup({ title: `${setLocale(router.locale).statistics}
-                        ${setLocale(router.locale).first_part_tasks.toLowerCase()}`,
-                        message: `${setLocale(router.locale).tasks_solved}: ${solvedCount} ${setLocale(router.locale).of}
-                        ${tasksCount} ${setLocale(router.locale).points_gained}: ${pointsCount}`})} />
+                    onClick={() => webApp?.showPopup({ title: `${setLocale(router.locale).statistics} ${setLocale(router.locale).first_part_tasks.toLowerCase()}`,
+                        message: `${setLocale(router.locale).tasks_solved}: ${solvedCount} ${setLocale(router.locale).of} ${tasksCount} ${setLocale(router.locale).points_gained}: ${pointsCount}`})} />
             </div>
         );
     } else {
@@ -42,16 +40,12 @@ export const ProfileButtons = (): JSX.Element => {
             <div className={styles.profileButtons}>
                 <Button icon='point_emoji.webp' text={setLocale(router.locale).statistics}
                     description={setLocale(router.locale).first_part_tasks}
-                    onClick={() => webApp?.showPopup({ title: `${setLocale(router.locale).statistics}
-                        ${setLocale(router.locale).first_part_tasks.toLowerCase()}`,
-                        message: `${setLocale(router.locale).tasks_solved}: ${solvedCount} ${setLocale(router.locale).of}
-                        ${tasksCount} ${setLocale(router.locale).points_gained}: ${pointsCount}`})} />
+                    onClick={() => webApp?.showPopup({ title: `${setLocale(router.locale).statistics} ${setLocale(router.locale).first_part_tasks.toLowerCase()}`,
+                        message: `${setLocale(router.locale).tasks_solved}: ${solvedCount} ${setLocale(router.locale).of} ${tasksCount} ${setLocale(router.locale).points_gained}: ${pointsCount}`})} />
                 <Button icon='victory_emoji.webp' text={setLocale(router.locale).statistics}
                     description={setLocale(router.locale).second_part_tasks}
-                    onClick={() => webApp?.showPopup({ title: `${setLocale(router.locale).statistics}
-                        ${setLocale(router.locale).second_part_tasks.toLowerCase()}`,
-                        message: `${setLocale(router.locale).tasks_solved}: ${solvedCount} ${setLocale(router.locale).of}
-                        ${tasksCount} ${setLocale(router.locale).points_gained}: ${pointsCount}`})} />
+                    onClick={() => webApp?.showPopup({ title: `${setLocale(router.locale).statistics} ${setLocale(router.locale).second_part_tasks.toLowerCase()}`,
+                        message: `${setLocale(router.locale).tasks_solved}: ${solvedCount} ${setLocale(router.locale).of} ${tasksCount} ${setLocale(router.locale).points_gained}: ${pointsCount}`})} />
                 <Button icon='cross_emoji.webp' text={setLocale(router.locale).cancel_subscription}
                     description={setLocale(router.locale).subscription_canceled_instantly}
                     onClick={() => subscribe(setLocale(router.locale).cancel_subscription + '?', webApp, dispatch)} />
