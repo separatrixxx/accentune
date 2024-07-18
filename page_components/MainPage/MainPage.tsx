@@ -2,6 +2,8 @@ import styles from './MainPage.module.css';
 import { Header } from '../../components/Common/Header/Header';
 import { useTelegram } from '../../layout/TelegramProvider';
 import { Htag } from '../../components/Common/Htag/Htag';
+import { MainButtons } from '../../components/MainComponents/MainButtons/MainButtons';
+import { SubjectsForm } from '../../components/MainComponents/SubjectsForm/SubjectsForm';
 
 
 export const MainPage = (): JSX.Element => {
@@ -10,10 +12,8 @@ export const MainPage = (): JSX.Element => {
   return (
     <div className={styles.wrapper}>
       <Header />
-      <br />
-      <Htag tag='l'>
-        {tgUser ? `Добро пожаловать, ${tgUser.username}` : ':('}
-      </Htag>
+      <SubjectsForm />
+      <MainButtons />
     </div>
   );
 };

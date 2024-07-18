@@ -25,4 +25,17 @@ export const ru = {
     tasks_solved: "Решено задач",
     points_gained: "Набрано баллов",
     of: "из",
+    check_yourself: "Проверить себя",
+    first_part: "Первая часть",
+    second_part: "Вторая часть",
+    quick_variant: "Быстрый вариант",
+    random_tasks: "Случайные задания",
+    webinars: "Вебинары",
+    available_by_subscription: "Доступны по подписке",
+    subjects: {
+        social: "Обществознание",
+        math: "Математика",
+        russian: "Русский язык",
+    },
+    subscribe_to_access: "Оформите подписку, чтобы получить доступ к этому разделу",
 };

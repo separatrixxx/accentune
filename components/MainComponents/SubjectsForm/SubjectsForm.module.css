@@ -1,0 +1,100 @@
+.subjectsForm {
+	position: relative;
+
+	display: grid;
+
+	width: fit-content;
+	margin-top: 20px;
+	margin-left: 5%;
+
+	cursor: pointer;
+	transition-duration: 300ms;
+	justify-self: left;
+}
+
+.currentSubjectDiv {
+	display: grid;
+	align-items: center;
+
+	width: fit-content;
+
+	transition-duration: 300ms;
+	grid-template-columns: auto 1fr;
+	gap: 10px;
+}
+
+.currentSubjectName {
+	user-select: none;
+
+	color: var(--tg-theme-text-color);
+
+	font-weight: 600;
+}
+
+.currentSubjectDiv > svg {
+	height: 10px;
+	fill: var(--tg-theme-subtitle-text-color);
+
+	margin-top: 4px;
+
+	transition-duration: 300ms;
+}
+
+.subjectsForm:hover > .currentSubjectDiv > svg,
+.subjectsForm:active > .currentSubjectDiv > svg {
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+	transform: rotate(90deg);
+}
+
+.subjectsList {
+	position: absolute;
+	z-index: 5;
+	top: 100%;
+
+	display: none;
+
+	width: fit-content;
+	padding: 10px 30px 10px 10px;
+
+	border-radius: 10px;
+	background: var(--tg-theme-section-bg-color);
+	box-shadow: 0 1px 1px rgb(0 0 0 / 0.03), 0 1px 1px rgb(0 0 0 / 0.05);
+	gap: 5px;
+}
+
+.subjectsForm:hover > .subjectsList,
+.subjectsForm:active > .subjectsList {
+	display: grid;
+
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.subjectsForm:not(:active) > .subjectsList {
+	display: none;
+}
+
+.subjectName {
+	cursor: pointer;
+	user-select: none;
+	transition-duration: 300ms;
+
+	color: var(--tg-theme-subtitle-text-color);
+
+	font-weight: 600;
+}
+
+.currentSubjectDiv:hover,
+.currentSubjectDiv:active,
+.subjectName:hover,
+.subjectName:active {
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+	filter: brightness(0.9);
+}
+
+@media (max-width: 600px) {
+	.currentSubjectDiv > svg {
+		margin-top: 3px;
+	}
+}

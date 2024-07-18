@@ -4,6 +4,7 @@ import { UserInterface } from '../../interfaces/user.interface';
 
 const userData: UserInterface = {
     isSubscriptionActive: false,
+    subject: 'social',
 };
 
 export const userSlice = createSlice({
@@ -18,9 +19,12 @@ export const userSlice = createSlice({
     toggleSubscription: (state) => {
       state.user.isSubscriptionActive = !state.user.isSubscriptionActive;
     },
+    chooseSubject: (state, action) => {
+      state.user.subject = action.payload;
+    },
   },
-})
+});
 
-export const { setUser, toggleSubscription } = userSlice.actions
+export const { setUser, toggleSubscription, chooseSubject } = userSlice.actions
 
 export default userSlice.reducer;
