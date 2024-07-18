@@ -66,12 +66,6 @@
 .subjectsForm:hover > .subjectsList,
 .subjectsForm:active > .subjectsList {
 	display: grid;
-
-	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.subjectsForm:not(:active) > .subjectsList {
-	display: none;
 }
 
 .subjectName {
@@ -96,5 +90,9 @@
 @media (max-width: 600px) {
 	.currentSubjectDiv > svg {
 		margin-top: 3px;
+	}
+
+	.subjectsForm:active .subjectsList.active {
+		display: none;
 	}
 }
