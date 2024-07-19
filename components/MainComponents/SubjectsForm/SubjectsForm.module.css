@@ -4,8 +4,7 @@
 	display: grid;
 
 	width: fit-content;
-	margin-top: 20px;
-	margin-left: 5%;
+	margin-left: 20px;
 
 	cursor: pointer;
 	transition-duration: 300ms;
@@ -28,7 +27,7 @@
 
 	color: var(--tg-theme-text-color);
 
-	font-weight: 600;
+	font-weight: 600 !important;
 }
 
 .currentSubjectDiv > svg {
@@ -55,12 +54,12 @@
 	display: none;
 
 	width: fit-content;
-	padding: 10px 30px 10px 10px;
+	padding: 15px 30px 15px 15px;
 
 	border-radius: 10px;
 	background: var(--tg-theme-section-bg-color);
 	box-shadow: 0 1px 1px rgb(0 0 0 / 0.03), 0 1px 1px rgb(0 0 0 / 0.05);
-	gap: 5px;
+	gap: 7px;
 }
 
 .subjectsForm:hover > .subjectsList,
@@ -89,7 +88,7 @@
 
 @media (max-width: 600px) {
 	.currentSubjectDiv > svg {
-		margin-top: 3px;
+		margin-top: 2px;
 	}
 
 	.subjectsForm:active .subjectsList.active {

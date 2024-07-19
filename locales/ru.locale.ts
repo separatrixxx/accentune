@@ -42,6 +42,7 @@ export const ru = {
     by_themes: "По темам",
     by_tasks: "По типам задач",
     task: "Задача",
+    wrong_answer: "Неправильный ответ",
     try_one_more: "Попробовать ещё раз",
     change_your_answer: "У вас будет возможность изменить свой ответ",
     next_task: "Следующая задача",

@@ -20,7 +20,7 @@ export const SubjectsForm = (): JSX.Element => {
     return (
         <div className={styles.subjectsForm}>
             <div className={styles.currentSubjectDiv}>
-                <Htag tag='xl' className={styles.currentSubjectName} onClick={() => {}}>
+                <Htag tag='l' className={styles.currentSubjectName} onClick={() => {}}>
                     {setLocale(router.locale).subjects[user.subject]}
                 </Htag>
                 <Arrow />
