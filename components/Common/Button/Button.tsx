@@ -1,6 +1,6 @@
-import { useState, useEffect } from 'react';
 import { ButtonProps } from './Button.props';
 import styles from './Button.module.css';
+import { useState, useEffect } from 'react';
 import { Htag } from '../Htag/Htag';
 import Image from 'next/image';
 import { useSelector } from 'react-redux';
