@@ -10,9 +10,7 @@ export const ProfilePage = (): JSX.Element => {
   const { webApp } = useTelegram();
 
   if (webApp) {
-    if (!webApp?.BackButton.isVisible) {
-      webApp?.BackButton.show();
-    }
+    webApp?.BackButton.show();
 
     webApp?.BackButton.onClick(function() {
       router.push('/');

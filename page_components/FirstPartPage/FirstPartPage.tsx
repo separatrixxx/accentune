@@ -21,20 +21,18 @@ export const FirstPartPage = (): JSX.Element => {
     const firstPart = useSelector((state: AppState) => state.firstPart.firstPart);
 
     if (webApp) {
-      if (!webApp?.BackButton.isVisible) {
         webApp?.BackButton.show();
-      }
   
-      webApp?.BackButton.onClick(function() {
-        router.push('/');
-        webApp?.BackButton.hide();
-        
-        dispatch(setFirstPart({
-            blockId: '',
-            isThemes: true,
-            sortName: '',
-        }));
-      });
+        webApp?.BackButton.onClick(function() {
+            router.push('/');
+            webApp?.BackButton.hide();
+            
+            dispatch(setFirstPart({
+                blockId: '',
+                isThemes: true,
+                sortName: '',
+            }));
+        });
     }
 
     if (firstPart.blockId === '') {
