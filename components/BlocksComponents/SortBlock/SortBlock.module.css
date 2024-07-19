@@ -1,0 +1,17 @@
+.sortBlock {
+	display: grid;
+
+	width: 100%;
+	margin: 20px 0;
+	justify-items: center;
+	gap: 10px;
+}
+
+.sortToggleDiv {
+	display: grid;
+
+	width: 95%;
+	margin-bottom: 10px;
+	justify-items: center;
+	grid-template-columns: 50% 50%;
+}

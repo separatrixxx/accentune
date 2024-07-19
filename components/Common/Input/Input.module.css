@@ -1,0 +1,40 @@
+.input {
+	width: calc(90% - 30px);
+	height: fit-content;
+	padding: 10px 15px;
+
+	cursor: text;
+
+	transition-duration: 300ms;
+
+	color: var(--primary);
+	border: 2px solid var(--tg-theme-subtitle-text-color);
+	border-radius: 10px;
+	outline: none;
+	background: var(--tg-theme-section-bg-color);
+
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.input::placeholder {
+	color: var(--tg-theme-subtitle-text-color);
+}
+
+.input::-ms-input-placeholder {
+	color: var(--tg-theme-subtitle-text-color);
+}
+
+.input:active,
+.input:hover,
+.input:focus {
+	border-color: var(--primary);
+}
+
+@media (max-width: 580px) {
+	.input {
+		padding: 7 10px;
+
+		font-size: 14px;
+	}
+}

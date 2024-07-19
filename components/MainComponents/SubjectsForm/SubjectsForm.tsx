@@ -1,6 +1,4 @@
 import styles from './SubjectsForm.module.css';
-import { Button } from '../../Common/Button/Button';
-import { useTelegram } from '../../../layout/TelegramProvider';
 import { useRouter } from 'next/router';
 import { setLocale } from '../../../helpers/locale.helper';
 import { useDispatch, useSelector } from 'react-redux';

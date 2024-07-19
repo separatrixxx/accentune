@@ -1,0 +1,8 @@
+.blocksList {
+	display: grid;
+
+	width: 100%;
+	margin: 20px 0;
+	justify-items: center;
+	gap: 10px;
+}

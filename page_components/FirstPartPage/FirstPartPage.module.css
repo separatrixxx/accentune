@@ -1,0 +1,16 @@
+.wrapper {
+	display: grid;
+
+	width: 100%;
+	justify-items: center;
+}
+
+.selectBlockTitle {
+	margin-top: 20px;
+	margin-left: 5%;
+
+	color: var(--tg-theme-text-color);
+
+	font-weight: 600;
+	justify-self: left;
+}
