@@ -48,7 +48,7 @@ export const ru = {
     next_task: "Следующая задача",
     move_next_task: "Вы перейдёте к следующей задаче, сохранив ответ",
     enter_answer: "Введите ответ и нажмите кнопку ввода",
-    what_you_want: "Что вы хотите сделать?",
+    what_you_want: "Что вы хотите сделать",
     view_resolved_variants: "Посмотреть решённые варианты",
     solve_variant: "Решить вариант",
     complete_test: "Завершить тест",
