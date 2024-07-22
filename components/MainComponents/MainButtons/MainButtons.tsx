@@ -38,13 +38,13 @@ export const MainButtons = (): JSX.Element => {
                     onClick={() => router.push('/part1')} />
                 <Button icon='memo_emoji.webp' text={setLocale(router.locale).check_yourself}
                     description={setLocale(router.locale).second_part}
-                    onClick={() => {}} />
+                    onClick={() => router.push('/part2')} />
                 <Button icon='memo_emoji.webp' text={setLocale(router.locale).quick_variant}
                     description={setLocale(router.locale).random_tasks}
-                    onClick={() => {}} />
+                    onClick={() => router.push('/quick')} />
                 <Button icon='calendar_emoji.webp' text={setLocale(router.locale).webinars}
                     description={setLocale(router.locale).available_by_subscription}
-                    onClick={() => {}} />
+                    onClick={() => router.push('/webinars')} />
             </div>
         );
     }

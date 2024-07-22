@@ -3,3 +3,12 @@ export interface FirstPartInterface {
     isThemes: boolean,
     sortName: string,
 }
+
+export interface SecondPartInterface {
+    blockId: string,
+    type: string,
+}
+
+export interface QuickInterface {
+    type: '' | 'solve' | 'view',
+}

@@ -6,10 +6,9 @@ import { BlocksList } from '../../components/BlocksComponents/BlocksList/BlocksL
 import { setLocale } from '../../helpers/locale.helper';
 import { Htag } from '../../components/Common/Htag/Htag';
 import { AppState } from '../../features/store/store';
-import { setFirstPart } from '../../features/firstPart/firstPart';
+import { chooseFirstBlockId, chooseSortName, setFirstPart } from '../../features/firstPart/firstPartSlice';
 import { SortBlock } from '../../components/BlocksComponents/SortBlock/SortBlock';
 import { TaskBlock } from '../../components/BlocksComponents/TaskBlock/TaskBlock';
-import { Button } from '../../components/Common/Button/Button';
 import { TaskButtons } from '../../components/BlocksComponents/TaskButtons/TaskButtons';
 import { useState } from 'react';
 
@@ -79,16 +78,16 @@ export const FirstPartPage = (): JSX.Element => {
     if (firstPart.blockId === '') {
         return (
             <div className={styles.wrapper}>
-                <Htag tag='xl' className={styles.selectBlockTitle} onClick={() => {}}>
+                <Htag tag='xl' className={styles.selectBlockTitle}>
                     {setLocale(router.locale).select_block + ":"}
                 </Htag>
-                <BlocksList />
+                <BlocksList chooseBlockId={chooseFirstBlockId} />
             </div>
         );
     } else if (firstPart.sortName === '') {
         return (
             <div className={styles.wrapper}>
-                <SortBlock />
+                <SortBlock firstPart={firstPart} chooseSortName={chooseSortName} />
             </div>
         );
     } else {

@@ -1,7 +1,9 @@
 import { configureStore, ThunkAction, Action } from "@reduxjs/toolkit";
 import { createWrapper } from "next-redux-wrapper";
 import userSlice from "../user/userSlice";
-import firstPartSlice from "../firstPart/firstPart";
+import firstPartSlice from "../firstPart/firstPartSlice";
+import secondPartSlice from "../secondPart/secondPartSlice";
+import quickSlice from "../quick/quickSlice";
 
 
 const makeStore = () =>
@@ -9,6 +11,8 @@ const makeStore = () =>
     reducer: {
       user: userSlice,
       firstPart: firstPartSlice,
+      secondPart: secondPartSlice,
+      quick: quickSlice,
     },
     devTools: true,
 });

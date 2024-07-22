@@ -17,7 +17,7 @@ export const firstPartSlice = createSlice({
     setFirstPart: (state, actions) => {
       state.firstPart = actions.payload
     },
-    chooseBlockId: (state, action) => {
+    chooseFirstBlockId: (state, action) => {
       state.firstPart.blockId = action.payload;
     },
     toggleTheme: (state) => {
@@ -29,6 +29,6 @@ export const firstPartSlice = createSlice({
   },
 });
 
-export const { setFirstPart, chooseBlockId, toggleTheme, chooseSortName } = firstPartSlice.actions
+export const { setFirstPart, chooseFirstBlockId, toggleTheme, chooseSortName } = firstPartSlice.actions
 
 export default firstPartSlice.reducer;

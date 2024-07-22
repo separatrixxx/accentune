@@ -1,17 +1,15 @@
+import { SortBlockProps } from './SortBlock.props';
 import styles from './SortBlock.module.css';
 import { Button } from '../../Common/Button/Button';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../../features/store/store';
+import { useDispatch } from 'react-redux';
 import { setLocale } from '../../../helpers/locale.helper';
 import { useRouter } from 'next/router';
-import { chooseSortName, toggleTheme } from '../../../features/firstPart/firstPart';
+import { toggleTheme } from '../../../features/firstPart/firstPartSlice';
 
 
-export const SortBlock = (): JSX.Element => {
+export const SortBlock = ({ firstPart, chooseSortName }: SortBlockProps): JSX.Element => {
     const router = useRouter();
     const dispatch = useDispatch();
-
-    const firstPart = useSelector((state: AppState) => state.firstPart.firstPart);
 
     const themes = ["1.1. Человек как результат биологической и социокультурной эволюции. Влияние социокультурных факторов на формирование личности",
         "1.2. Мировоззрение, его роль в жизнедеятельности человека. Общественное и индивидуальное сознание. Самосознание и социальное поведение",
@@ -24,14 +22,18 @@ export const SortBlock = (): JSX.Element => {
 
     return (
         <div className={styles.sortBlock}>
-            <div className={styles.sortToggleDiv}>
-                <Button text={setLocale(router.locale).by_themes} isActive={firstPart.isThemes}
-                    onClick={() => dispatch(toggleTheme())}/>
-                <Button text={setLocale(router.locale).by_tasks} isActive={!firstPart.isThemes}
-                    onClick={() => dispatch(toggleTheme())}/>
-            </div>
             {
-                firstPart.isThemes ?
+                firstPart ?
+                    <div className={styles.sortToggleDiv}>
+                        <Button text={setLocale(router.locale).by_themes} isActive={firstPart.isThemes}
+                            onClick={() => dispatch(toggleTheme())}/>
+                        <Button text={setLocale(router.locale).by_tasks} isActive={!firstPart.isThemes}
+                            onClick={() => dispatch(toggleTheme())}/>
+                    </div>
+                : <></>
+            }
+            {
+                firstPart && firstPart.isThemes ?
                     themes.map(t => (
                         <Button key={t} description={t} onClick={() => dispatch(chooseSortName(t))}/>
                     ))

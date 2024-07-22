@@ -21,7 +21,7 @@ export const TaskBlock = ({ isFault, taskText, answer, setAnswer, handleKeyPress
             {
                 !isFault ?
                     <Input text={setLocale(router.locale).enter_answer} value={answer}
-                        onChange={(e) => setAnswer(e.target.value)} onKeyPress={handleKeyPress} />
+                        onChange={(e) => setAnswer(e.target.value)} onKeyPress={handleKeyPress ? handleKeyPress : () => {}} />
                 : <></>
             }
         </div>
