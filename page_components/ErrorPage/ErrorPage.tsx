@@ -1,13 +1,21 @@
 import { ErrorPageProps } from "./ErrorPage.props";
 import styles from './ErrorPage.module.css';
 import Link from "next/link";
-import { useRouter } from "next/router";
 import { setLocale } from "../../helpers/locale.helper";
 import { Htag } from "../../components/Common/Htag/Htag";
+import { useSetup } from "../../hooks/useSetup";
 
 
 export const ErrorPage = ({ error }: ErrorPageProps): JSX.Element => {
-    const router = useRouter();
+    const { router, webApp } = useSetup();
+
+    if (webApp) {
+        webApp?.BackButton.show();
+
+        webApp?.BackButton.onClick(function() {
+            router.push('/');
+        });
+    }
 
     let errorText = "";
 

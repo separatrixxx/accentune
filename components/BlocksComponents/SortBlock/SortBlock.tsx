@@ -1,24 +1,27 @@
 import { SortBlockProps } from './SortBlock.props';
 import styles from './SortBlock.module.css';
 import { Button } from '../../Common/Button/Button';
-import { useDispatch } from 'react-redux';
 import { setLocale } from '../../../helpers/locale.helper';
-import { useRouter } from 'next/router';
 import { toggleTheme } from '../../../features/firstPart/firstPartSlice';
+import { useEffect, useState } from 'react';
+import { ThemesTypesInterface } from '../../../interfaces/firstPart.interface';
+import { getThemesTypes } from '../../../helpers/firstPart.helper';
+import { Spinner } from '../../Common/Spinner/Spinner';
+import { useSetup } from '../../../hooks/useSetup';
 
 
-export const SortBlock = ({ firstPart, chooseSortName }: SortBlockProps): JSX.Element => {
-    const router = useRouter();
-    const dispatch = useDispatch();
+export const SortBlock = ({ chooseSortId }: SortBlockProps): JSX.Element => {
+    const { router, dispatch, firstPart } = useSetup();
 
-    const themes = ["1.1. Человек как результат биологической и социокультурной эволюции. Влияние социокультурных факторов на формирование личности",
-        "1.2. Мировоззрение, его роль в жизнедеятельности человека. Общественное и индивидуальное сознание. Самосознание и социальное поведение",
-        "1.3. Деятельность и её структура. Мотивация деятельности. Многообразие видов деятельности. Свобода и необходимость в деятельности",
-        "1.4. Познание мира. Чувственное и рациональное познание. Мышление, его формы и методы. Знание как результат познавательной деятельности",
-        "1.5. Понятие истины, её критерии. Абсолютная, относительная истина"
-    ];
+    const [themesTypes, setThemesTypes] = useState<ThemesTypesInterface | null>(null);
 
-    const tasksType = ["Задачи типа 1", "Задачи типа 5", "Задачи типа 6", "Задачи типа 7"];
+    useEffect(() => {
+        getThemesTypes(firstPart.blockId, setThemesTypes)
+    }, [firstPart, setThemesTypes]);
+
+    if (!themesTypes) {
+        return <Spinner />
+    }
 
     return (
         <div className={styles.sortBlock}>
@@ -33,14 +36,20 @@ export const SortBlock = ({ firstPart, chooseSortName }: SortBlockProps): JSX.El
                 : <></>
             }
             {
-                firstPart && firstPart.isThemes ?
-                    themes.map(t => (
-                        <Button key={t} description={t} onClick={() => dispatch(chooseSortName(t))}/>
+                firstPart ? firstPart.isThemes ?
+                    Object.keys(themesTypes.themes).map(t => (
+                        <Button 
+                            key={t} 
+                            description={themesTypes.themes[t]} 
+                            onClick={() => dispatch(chooseSortId(t))}
+                        />
                     ))
                 :
-                    tasksType.map(t=> (
-                        <Button key={t} description={t} onClick={() => dispatch(chooseSortName(t))}/>
+                    themesTypes.types.map(t => (
+                        <Button key={t} description={setLocale(router.locale).tasks_of_the_type + ' ' + t}
+                            onClick={() => dispatch(chooseSortId(String(t)))}/>
                     ))
+                : <></>
             }
         </div>
     );

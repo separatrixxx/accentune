@@ -1,23 +1,15 @@
 import styles from './QuickPage.module.css';
-import { useRouter } from 'next/router';
-import { useTelegram } from '../../layout/TelegramProvider';
-import { useDispatch, useSelector } from 'react-redux';
 import { setLocale } from '../../helpers/locale.helper';
 import { Htag } from '../../components/Common/Htag/Htag';
-import { AppState } from '../../features/store/store';
-import { TaskBlock } from '../../components/BlocksComponents/TaskBlock/TaskBlock';
-import { useState } from 'react';
-import { setQuick } from '../../features/quick/quickSlice';
-import { QuickButtons } from '../../components/BlocksComponents/QuickButtons/QuickButtons';
+import { chooseQuickType, setQuickDefault } from '../../features/quick/quickSlice';
 import { Button } from '../../components/Common/Button/Button';
+import { QuickBlock } from '../../components/QuickComponents/QuickBlock/QuickBlock';
+import { useSetup } from '../../hooks/useSetup';
+import { SolvedBlock } from '../../components/SolvedComponents/SolvedBlock/SolvedBlock';
 
 
 export const QuickPage = (): JSX.Element => {
-    const router = useRouter();
-    const dispatch = useDispatch();
-    const { webApp } = useTelegram();
-
-    const quick = useSelector((state: AppState) => state.quick.quick);
+    const { router, dispatch, webApp, quick } = useSetup();
 
     if (webApp) {
         webApp?.BackButton.show();
@@ -25,26 +17,9 @@ export const QuickPage = (): JSX.Element => {
         webApp?.BackButton.onClick(function() {
             router.push('/');
 
-            dispatch(setQuick({ type: '' }))
+            dispatch(setQuickDefault());
         });
     }
-
-    const taskTextHC = `Ниже приведён перечень терминов. Все они, за исключением двух, относятся к понятию «налоговая политика».
-
-        \n1) доход, \n2) ставка, \n3) рынок, \n4) платежи, \n5) льготы, \n6) конкуренция.
-
-        \nНайдите два термина, «выпадающих» из общего ряда, и запишите в таблицу цифры, под которыми они указаны.
-        \nВведите ваш ответ:
-    `;
-
-    const [answer, setAnswer] = useState<string>('');
-    const [isButtons, setIsButtons] = useState<boolean>(false);
-
-    const handleKeyPress = async (e: React.KeyboardEvent<HTMLInputElement>) => {
-        if (e.key === 'Enter' && answer.trim() !== '') {
-            setIsButtons(true);
-        }
-    };
 
     if (quick.type === '') {
         return (
@@ -53,27 +28,23 @@ export const QuickPage = (): JSX.Element => {
                     {setLocale(router.locale).what_you_want + "?"}
                 </Htag>
                 <div className={styles.typeDiv}>
-                    <Button text={setLocale(router.locale).view_resolved_variants}
-                        onClick={() => dispatch(setQuick({ type: 'view' }))}/>
-                    <Button text={setLocale(router.locale).solve_variant}
-                        onClick={() => dispatch(setQuick({ type: 'solve' }))}/>
+                    <Button description={setLocale(router.locale).view_resolved_variants}
+                        onClick={() => dispatch(chooseQuickType('view'))}/>
+                    <Button description={setLocale(router.locale).solve_variant}
+                        onClick={() => dispatch(chooseQuickType('solve'))}/>
                 </div>
             </div>
         );
     } else if (quick.type === 'solve') {
         return (
             <div className={styles.wrapper}>
-                <TaskBlock taskText={taskTextHC} answer={answer} setAnswer={setAnswer} handleKeyPress={handleKeyPress} />
-                {
-                    isButtons ?
-                        <QuickButtons />
-                    : <></>
-                }
+                <QuickBlock />
             </div>
         );
     } else {
         return (
             <div className={styles.wrapper}>
+                <SolvedBlock />
             </div>
         );
     }

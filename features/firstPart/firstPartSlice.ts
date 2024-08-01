@@ -1,11 +1,11 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { FirstPartInterface } from '../../interfaces/tasks.interface';
+import { FirstPartInterface } from '../../interfaces/firstPart.interface';
 
 
 const firstPartData: FirstPartInterface = {
-    blockId: '',
-    isThemes: true,
-    sortName: '',
+  blockId: '',
+  isThemes: true,
+  sortId: '',
 };
 
 export const firstPartSlice = createSlice({
@@ -14,21 +14,25 @@ export const firstPartSlice = createSlice({
     firstPart: firstPartData,
   },
   reducers: {
-    setFirstPart: (state, actions) => {
-      state.firstPart = actions.payload
-    },
     chooseFirstBlockId: (state, action) => {
       state.firstPart.blockId = action.payload;
     },
     toggleTheme: (state) => {
       state.firstPart.isThemes = !state.firstPart.isThemes;
     },
-    chooseSortName: (state, action) => {
-      state.firstPart.sortName = action.payload;
+    chooseSortId: (state, action) => {
+      state.firstPart.sortId = action.payload;
+    },
+    setFirstPartDefault: (state) => {
+      state.firstPart = {
+        blockId: '',
+        isThemes: true,
+        sortId: '',
+      }
     },
   },
 });
 
-export const { setFirstPart, chooseFirstBlockId, toggleTheme, chooseSortName } = firstPartSlice.actions
+export const { chooseFirstBlockId, toggleTheme, chooseSortId, setFirstPartDefault } = firstPartSlice.actions;
 
 export default firstPartSlice.reducer;

@@ -1,13 +1,14 @@
 import styles from './ProfilePage.module.css';
-import { useRouter } from 'next/router';
-import { useTelegram } from '../../layout/TelegramProvider';
 import { ProfileInfo } from '../../components/ProfileComponents/ProfileInfo/ProfileInfo';
 import { ProfileButtons } from '../../components/ProfileComponents/ProfileButtons/ProfileButtons';
+import { Htag } from '../../components/Common/Htag/Htag';
+import { setLocale } from '../../helpers/locale.helper';
+import { useSetup } from '../../hooks/useSetup';
+import { Spinner } from '../../components/Common/Spinner/Spinner';
 
 
 export const ProfilePage = (): JSX.Element => {
-  const router = useRouter();
-  const { webApp } = useTelegram();
+  const { router, webApp, user } = useSetup();
 
   if (webApp) {
     webApp?.BackButton.show();
@@ -17,10 +18,27 @@ export const ProfilePage = (): JSX.Element => {
     });
   }
 
+  if (user.privileges === null) {
+    return (
+      <div className={styles.wrapper}>
+        <Spinner />
+      </div>
+    );
+  }
+
   return (
     <div className={styles.wrapper}>
-      <ProfileInfo />
-      <ProfileButtons />
+      {
+        user.privileges !== 'unregistered_user' ?
+          <>
+            <ProfileInfo />
+            <ProfileButtons />
+          </>
+        :
+          <Htag tag='l' className={styles.registerInBot}>
+            {setLocale(router.locale).register_in_bot}
+          </Htag>
+      }
     </div>
   );
 };

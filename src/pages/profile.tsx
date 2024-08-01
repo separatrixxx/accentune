@@ -1,11 +1,19 @@
 import { ProfilePage } from "../../page_components/ProfilePage/ProfilePage";
 import Head from 'next/head';
-import { useRouter } from "next/router";
 import { setLocale } from "../../helpers/locale.helper";
+import { useEffect } from "react";
+import { getUser } from "../../helpers/user.helper";
+import { useSetup } from "../../hooks/useSetup";
 
 
 function Profile(): JSX.Element {
-  const router = useRouter();
+  const { router, dispatch, tgUser } = useSetup();
+
+  useEffect(() => {
+    if (tgUser) {
+      getUser(tgUser?.id, dispatch);
+    }
+  }, [tgUser, dispatch]);
 
   return (
     <>

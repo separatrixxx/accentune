@@ -1,24 +1,19 @@
 import { BlockListProps } from './BlocksList.props';
 import styles from './BlocksList.module.css';
 import { Button } from '../../Common/Button/Button';
-import { useDispatch } from 'react-redux';
+import { useSetup } from '../../../hooks/useSetup';
 
 
-export const BlocksList = ({ chooseBlockId }: BlockListProps): JSX.Element => {
-    const dispatch = useDispatch();
-
-    const blocks = ["Человек в обществе / Духовная культура / Введение в социальную психологию / Введение в социальную философию",
-        "Экономическая жизнь общества / Введение в экономику", "Социальная сфера / Введение в социологию",
-        "Политическая сфера / Введение в политологию",
-        "Правовое регулирование общественных отношений в Российской Федерации / Введение в правоведение"];
+export const BlocksList = ({ blocks, chooseBlockId }: BlockListProps): JSX.Element => {
+    const { dispatch } = useSetup();
 
     return (
         <div className={styles.blocksList}>
-            {
-                blocks.map(b => (
-                    <Button key={b} description={b} onClick={() => dispatch(chooseBlockId(b))}/>
-                ))
-            }
+            {Object.keys(blocks).map(b => (
+                <Button key={b} description={blocks[b]}
+                    onClick={() => dispatch(chooseBlockId(b))}
+                />
+            ))}
         </div>
     );
 };

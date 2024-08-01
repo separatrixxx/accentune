@@ -1,0 +1,12 @@
+.wrapper {
+	display: grid;
+
+	width: 100%;
+	justify-items: center;
+}
+
+.havenotSolvedTasks {
+	margin-top: 40px;
+
+	color: var(--tg-theme-text-color);
+}

@@ -3,15 +3,14 @@ import styles from './Button.module.css';
 import { useState, useEffect } from 'react';
 import { Htag } from '../Htag/Htag';
 import Image from 'next/image';
-import { useSelector } from 'react-redux';
-import { AppState } from '../../../features/store/store';
+import { useSetup } from '../../../hooks/useSetup';
 import cn from 'classnames';
 
 
-export const Button = ({ icon, text, description, isActive, onClick }: ButtonProps): JSX.Element => {   
+export const Button = ({ icon, text, description, isActive, onClick }: ButtonProps): JSX.Element => { 
+    const { user, firstPart, secondPart, quick } = useSetup();
+      
     const [isAnimated, setIsAnimated] = useState(true);
-
-    const user = useSelector((state: AppState) => state.user.user);
 
     useEffect(() => {
         setIsAnimated(true);
@@ -21,7 +20,7 @@ export const Button = ({ icon, text, description, isActive, onClick }: ButtonPro
         }, 3000);
 
         return () => clearTimeout(timer);
-    }, [user.isSubscriptionActive]);
+    }, [user, firstPart, secondPart, quick]);
 
     return (
         <button className={cn(styles.button, {

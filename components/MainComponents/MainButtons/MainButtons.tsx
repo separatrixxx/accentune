@@ -1,19 +1,13 @@
 import styles from './MainButtons.module.css';
 import { Button } from '../../Common/Button/Button';
-import { useRouter } from 'next/router';
 import { setLocale } from '../../../helpers/locale.helper';
-import { useSelector } from 'react-redux';
-import { AppState } from '../../../features/store/store';
-import { useTelegram } from '../../../layout/TelegramProvider';
+import { useSetup } from '../../../hooks/useSetup';
 
 
 export const MainButtons = (): JSX.Element => { 
-    const router = useRouter();
-    const { webApp } = useTelegram();
+    const { router, webApp, user } = useSetup();
 
-    const user = useSelector((state: AppState) => state.user.user);
-
-    if (!user.isSubscriptionActive) {
+    if (user.privileges !== "paid_user") {
         return (
             <div className={styles.mainButtons}>
                 <Button icon='memo_emoji.webp' text={setLocale(router.locale).check_yourself}
@@ -21,7 +15,7 @@ export const MainButtons = (): JSX.Element => {
                     onClick={() => router.push('/part1')} />
                 <Button icon='memo_emoji.webp' text={setLocale(router.locale).quick_variant}
                     description={setLocale(router.locale).random_tasks}
-                    onClick={() => {}} />
+                    onClick={() => router.push('/quick')} />
                 <Button icon='lock_emoji.webp' text={setLocale(router.locale).check_yourself}
                     description={setLocale(router.locale).second_part}
                     onClick={() => webApp?.showAlert(setLocale(router.locale).subscribe_to_access)} />

@@ -1,21 +1,17 @@
 import styles from './WebinarsPage.module.css';
-import { Header } from '../../components/Common/Header/Header';
-import { MainButtons } from '../../components/MainComponents/MainButtons/MainButtons';
-import { useTelegram } from '../../layout/TelegramProvider';
-import { useRouter } from 'next/router';
 import { Button } from '../../components/Common/Button/Button';
 import { setLocale } from '../../helpers/locale.helper';
+import { useSetup } from '../../hooks/useSetup';
 
 
 export const WebinarsPage = (): JSX.Element => {
-    const router = useRouter();
-    const { webApp } = useTelegram();
-
+    const { router, webApp } = useSetup();
+    
     if (webApp) {
         webApp?.BackButton.show();
 
         webApp?.BackButton.onClick(function() {
-        router.push('/');
+            router.push('/');
         });
     }
 

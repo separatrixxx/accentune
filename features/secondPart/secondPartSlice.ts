@@ -1,10 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { SecondPartInterface } from '../../interfaces/tasks.interface';
+import { SecondPartInterface } from '../../interfaces/secondPart.interface';
 
 
 const secondPartData: SecondPartInterface = {
     blockId: '',
-    type: '',
+    typeId: '',
 };
 
 export const secondPartSlice = createSlice({
@@ -13,18 +13,21 @@ export const secondPartSlice = createSlice({
     secondPart: secondPartData,
   },
   reducers: {
-    setsecondPart: (state, actions) => {
-      state.secondPart = actions.payload
-    },
     chooseSecondBlockId: (state, action) => {
       state.secondPart.blockId = action.payload;
     },
-    chooseType: (state, action) => {
-      state.secondPart.type = action.payload;
+    chooseSecondTypeId: (state, action) => {
+      state.secondPart.typeId = action.payload;
+    },
+    setSecondPartDefault: (state) => {
+      state.secondPart = {
+        blockId: '',
+        typeId: '',
+      }
     },
   },
 });
 
-export const { setsecondPart, chooseSecondBlockId, chooseType } = secondPartSlice.actions
+export const { chooseSecondBlockId, chooseSecondTypeId, setSecondPartDefault } = secondPartSlice.actions;
 
 export default secondPartSlice.reducer;

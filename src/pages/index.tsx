@@ -1,17 +1,23 @@
 import { MainPage } from "../../page_components/MainPage/MainPage";
 import Head from 'next/head';
-import { useRouter } from "next/router";
 import { setLocale } from "../../helpers/locale.helper";
-import { useTelegram } from "../../layout/TelegramProvider";
+import { useEffect } from "react";
+import { getUser } from "../../helpers/user.helper";
+import { useSetup } from "../../hooks/useSetup";
 
 
 function Main(): JSX.Element {
-  const router = useRouter();
-  const { webApp } = useTelegram();
+  const { router, dispatch, webApp, tgUser } = useSetup();
 
   if (webApp) {
     webApp.expand();
   }
+
+  useEffect(() => {
+    if (tgUser) {
+      getUser(tgUser?.id, dispatch);
+    }
+  }, [tgUser, dispatch]);
 
   return (
     <>

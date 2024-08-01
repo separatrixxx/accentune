@@ -4,6 +4,9 @@ import userSlice from "../user/userSlice";
 import firstPartSlice from "../firstPart/firstPartSlice";
 import secondPartSlice from "../secondPart/secondPartSlice";
 import quickSlice from "../quick/quickSlice";
+import firstStatisticsSlice from "../firstStatistics/firstStatisticsSlice";
+import solvedSlice from "../solved/solvedSlice";
+import variantStatsSlice from "../variantStats/variantStatsSlice";
 
 
 const makeStore = () =>
@@ -13,6 +16,9 @@ const makeStore = () =>
       firstPart: firstPartSlice,
       secondPart: secondPartSlice,
       quick: quickSlice,
+      firstStatistics: firstStatisticsSlice,
+      solved: solvedSlice,
+      variantStats: variantStatsSlice,
     },
     devTools: true,
 });

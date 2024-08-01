@@ -3,8 +3,20 @@ import { UserInterface } from '../../interfaces/user.interface';
 
 
 const userData: UserInterface = {
-    isSubscriptionActive: false,
-    subject: 'social',
+  user_name: null,
+  email: null,
+  privileges: null,
+  user_role: null,
+  tasks_first_part_solved_today: 0,
+  subscription_type: null,
+  date_paid_sub_end: null,
+  first_part_small_stat: {
+    solved_task_count: 0,
+    pts_total: 0
+  },
+  second_part_small_stat: "not_paid_user",
+  demo_used: false,
+  cource_picked: false
 };
 
 export const userSlice = createSlice({
@@ -13,18 +25,12 @@ export const userSlice = createSlice({
     user: userData,
   },
   reducers: {
-    setUser: (state, actions) => {
-        state.user = actions.payload
-    },
-    toggleSubscription: (state) => {
-      state.user.isSubscriptionActive = !state.user.isSubscriptionActive;
-    },
-    chooseSubject: (state, action) => {
-      state.user.subject = action.payload;
+    setUser: (state, action) => {
+        state.user = action.payload
     },
   },
 });
 
-export const { setUser, toggleSubscription, chooseSubject } = userSlice.actions
+export const { setUser } = userSlice.actions;
 
 export default userSlice.reducer;

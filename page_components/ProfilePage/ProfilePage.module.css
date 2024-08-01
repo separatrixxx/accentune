@@ -4,3 +4,9 @@
 	width: 100%;
 	justify-items: center;
 }
+
+.registerInBot {
+	margin-top: 40px;
+
+	color: var(--tg-theme-text-color);
+}

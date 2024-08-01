@@ -1,0 +1,39 @@
+.secondTaskBlock {
+	display: grid;
+	align-items: center;
+
+	width: 100%;
+	height: fit-content;
+	padding: 20px 0;
+
+	background: var(--tg-theme-section-bg-color);
+	justify-items: center;
+	gap: 10px;
+}
+
+.secondTaskTitle {
+	margin-left: 5%;
+
+	color: var(--tg-theme-text-color);
+
+	font-weight: 600;
+	justify-self: left;
+}
+
+.secondTaskText {
+	display: grid;
+
+	width: 90%;
+	justify-items: left;
+
+	color: var(--tg-theme-text-color);
+}
+
+.secondButtonDiv {
+	display: grid;
+
+	width: 100%;
+	margin: 20px 0;
+	justify-items: center;
+	gap: 10px;
+}

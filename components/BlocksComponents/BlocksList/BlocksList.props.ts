@@ -1,7 +1,9 @@
 import { DetailedHTMLProps, HTMLAttributes } from 'react';
 import { UnknownAction } from '@reduxjs/toolkit';
+import { Blocks } from '../../../interfaces/firstPart.interface';
 
 
 export interface BlockListProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
-    chooseBlockId: (e: any) => UnknownAction,
+    blocks: Blocks,
+    chooseBlockId: (e: string) => UnknownAction,
 }

@@ -1,0 +1,48 @@
+.firstStatsBlock {
+	display: grid;
+	align-items: center;
+
+	width: 100%;
+	height: fit-content;
+	padding: 20px 0;
+
+	background: var(--tg-theme-section-bg-color);
+	justify-items: center;
+	gap: 10px;
+}
+
+.tasksSolvedText,
+.blockStatisticsText,
+.lightText {
+	margin-left: 5%;
+	justify-self: left;
+}
+
+.tasksSolvedText {
+	color: var(--tg-theme-text-color);
+
+	font-weight: 600;
+}
+
+.blockStatisticsText {
+	margin-top: 20px;
+
+	color: var(--tg-theme-text-color);
+
+	font-weight: 600;
+}
+
+.lightText {
+	color: var(--tg-theme-subtitle-text-color);
+
+	font-weight: 500;
+}
+
+.chartDiv {
+	display: grid;
+
+	width: 100%;
+	margin: 20px 0;
+	justify-items: center;
+	gap: 10px;
+}
