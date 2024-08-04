@@ -17,7 +17,7 @@ export const FirstStatisticsBlock = (): JSX.Element => {
         <>
             <div className={styles.firstStatsBlock}>
                 <Htag tag='xl' className={styles.tasksSolvedText}>
-                    {setLocale(router.locale).tasks_solved + " " + firstStatistics.overall_stats.solved_task_count
+                    {setLocale(router.locale).tasks_solved + ' ' + firstStatistics.overall_stats.solved_task_count
                         + ' ' + setLocale(router.locale).of + ' ' + firstStatistics.overall_stats.total_task_count}
                 </Htag>
                 {
@@ -27,10 +27,14 @@ export const FirstStatisticsBlock = (): JSX.Element => {
                                 {setLocale(router.locale).block_statistics}
                             </Htag>
                             <Htag tag='s' className={styles.lightText}>
-                                {setLocale(router.locale).select_block_to_see_more}
+                                {setLocale(router.locale).select_block_to_see_more + '. '
+                                    + setLocale(router.locale).hover_or_hold}
                             </Htag>
                         </>
-                    : <></>
+                    : 
+                        <Htag tag='s' className={styles.lightText}>
+                            {setLocale(router.locale).hover_or_hold}
+                        </Htag>
                 }
             </div>
             {

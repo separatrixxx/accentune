@@ -12,7 +12,9 @@ export const useHelpStates = () => {
     const [answer, setAnswer] = useState<string>('');
     const [date, setDate] = useState<string | null>(null);
     const [index, setIndex] = useState<number | null>(null);
-
+    const [completed, setCompleted] = useState<'completed' | 'unsubmitted' | null>(null);
+    const [taskId, setTaskId] = useState<string | null>(null);
+    
     return {
         firstTask,
         secondTask,
@@ -22,6 +24,8 @@ export const useHelpStates = () => {
         answer,
         date,
         index,
+        completed,
+        taskId,
         setFirstTask,
         setSecondTask,
         setIsCorrect,
@@ -30,5 +34,7 @@ export const useHelpStates = () => {
         setAnswer,
         setDate,
         setIndex,
+        setCompleted,
+        setTaskId,
     };
 };

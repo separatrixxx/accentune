@@ -6,4 +6,5 @@ import { Blocks } from '../../../interfaces/firstPart.interface';
 export interface BlockListProps extends DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement> {
     blocks: Blocks,
     chooseBlockId: (e: string) => UnknownAction,
+    chooseBlockName: (e: string) => UnknownAction,
 }

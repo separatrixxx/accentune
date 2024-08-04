@@ -1,0 +1,24 @@
+.secondCompleteItem {
+	display: grid;
+
+	width: 100%;
+	height: fit-content;
+	padding: 20px 0;
+
+	background: var(--tg-theme-section-bg-color);
+	gap: 10px;
+}
+
+.text {
+	margin-left: 5%;
+
+	font-weight: 600;
+	justify-self: left;
+}
+
+.markdown {
+	margin-left: 5%;
+
+	color: var(--tg-theme-text-color);
+	justify-self: left;
+}

@@ -16,6 +16,8 @@ export const useSetup = () => {
     const firstStatistics = useSelector((state: AppState) => state.firstStatistics.firstStatistics);
     const solved = useSelector((state: AppState) => state.solved.solved);
     const variantStats = useSelector((state: AppState) => state.variantStats.variantStats);
+    const completedTasks = useSelector((state: AppState) => state.completedTasks.completedTasks);
+    const subscribe = useSelector((state: AppState) => state.subscribe.subscribe);
 
     return {
         router,
@@ -29,5 +31,7 @@ export const useSetup = () => {
         firstStatistics,
         solved,
         variantStats,
+        completedTasks,
+        subscribe,
     };
 };

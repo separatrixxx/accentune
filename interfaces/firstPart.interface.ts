@@ -1,5 +1,6 @@
 export interface FirstPartInterface {
     blockId: string,
+    blockName: string,
     isThemes: boolean,
     sortId: string,
 };

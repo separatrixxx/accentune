@@ -71,4 +71,5 @@ export interface IWebApp {
   showPopup: (params: IPopUpParams, callback?: (buttonId: string) => void) => void,
   showAlert: (message: string, callback?: () => void) => void,
   showConfirm: (message: string, callback?: (confirmed: boolean) => void) => void,
+  openLink: (url: string) => void,
 }

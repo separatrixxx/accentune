@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import { SecondPartInterface, SolvedSecondTaskData, TypesInterface } from "../interfaces/secondPart.interface";
+import { SecondPartInterface, SecondTaskInterface, SolvedSecondTaskData, TypesInterface } from "../interfaces/secondPart.interface";
 
 
 export async function getTypes(blockId: string, setTypes: (e: TypesInterface) => void) {
@@ -14,16 +14,20 @@ export async function getTypes(blockId: string, setTypes: (e: TypesInterface) =>
 }
 
 export async function getSecondTask(blockId: string, typeId: string, userId: number | undefined,
-    setSecondTask: (e: any) => void, setIsDecided: (e: boolean) => void) {
+    setSecondTask: (e: any) => void, setIsDecided: (e: boolean) => void, setTaskId?: (e: string) => void) {
     try {
-        const { data : response }: AxiosResponse<SecondPartInterface> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
+        const { data : response }: AxiosResponse<SecondTaskInterface> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
             '/get_task_second_part?block_id=' + blockId
             + '&type_id=' + typeId
             + '&user_id=' + userId);
 
             setSecondTask(response);
+            
+            if (setTaskId) {
+                setTaskId(response.task_id);
+            }
     } catch (err: any) {
-        if (err.response.data.error === 'No task found') {
+        if (err.response && err.response.data.error === 'No task found') {
             setIsDecided(true);
         }
 

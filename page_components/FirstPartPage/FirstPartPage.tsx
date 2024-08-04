@@ -5,7 +5,7 @@ import { setLocale } from '../../helpers/locale.helper';
 import { Htag } from '../../components/Common/Htag/Htag';
 import { SortBlock } from '../../components/BlocksComponents/SortBlock/SortBlock';
 import { TaskBlock } from '../../components/BlocksComponents/TaskBlock/TaskBlock';
-import { chooseFirstBlockId, chooseSortId, setFirstPartDefault } from '../../features/firstPart/firstPartSlice';
+import { chooseFirstBlockId, chooseFirstBlockName, chooseSortId, setFirstPartDefault } from '../../features/firstPart/firstPartSlice';
 import { Spinner } from '../../components/Common/Spinner/Spinner';
 import { useSetup } from '../../hooks/useSetup';
 
@@ -29,19 +29,24 @@ export const FirstPartPage = ({ blocks }: FirstPartPageProps): JSX.Element => {
                 firstPart.blockId === '' ?
                     <>
                         <Htag tag='xl' className={styles.selectBlockTitle}>
-                            {setLocale(router.locale).select_block + ":"}
+                            {setLocale(router.locale).select_block + ':'}
                         </Htag>
                         {
                             blocks['1'] ? 
-                                <BlocksList blocks={blocks} chooseBlockId={chooseFirstBlockId} />
+                                <BlocksList blocks={blocks} chooseBlockId={chooseFirstBlockId}
+                                    chooseBlockName={chooseFirstBlockName} />
                             : <Spinner />
                         }
                     </>
                 : firstPart.sortId === '' ?
-                    <SortBlock chooseSortId={chooseSortId} />
+                    <>
+                        <Htag tag='xl' className={styles.selectBlockTitle}>
+                            {firstPart.blockName}
+                        </Htag>
+                        <SortBlock chooseSortId={chooseSortId} />
+                    </>
                 : 
                     <TaskBlock  />
-
             }
         </div>
     );

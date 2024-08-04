@@ -10,7 +10,8 @@ export async function getUser(userId: number | undefined, dispatch: any) {
 
         dispatch(setUser(response));
     } catch (err: any) {
-        if (err.response.data.error === 'User not found') {
+        console.log(err)
+        if (err.response && err.response.data.error === 'User not found') {
             registerNewUser(userId, dispatch);
         }
 

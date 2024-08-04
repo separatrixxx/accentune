@@ -3,6 +3,7 @@ import { Header } from '../../components/Common/Header/Header';
 import { MainButtons } from '../../components/MainComponents/MainButtons/MainButtons';
 import { useSetup } from '../../hooks/useSetup';
 import { Spinner } from '../../components/Common/Spinner/Spinner';
+import { PromoSlider } from '../../components/PromoComponents/PromoSlider/PromoSlider';
 
 
 export const MainPage = (): JSX.Element => {
@@ -24,6 +25,7 @@ export const MainPage = (): JSX.Element => {
     <div className={styles.wrapper}>
       <Header />
       <MainButtons />
+      <PromoSlider />
     </div>
   );
 };

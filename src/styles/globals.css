@@ -40,6 +40,10 @@ a {
 	text-decoration: none;
 }
 
+.swiper-pagination-bullet-active {
+	background: var(--primary) !important;
+}
+
 @media (max-width: 480px) {
 	::-webkit-scrollbar {
 		width: 5px;

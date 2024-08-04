@@ -1,0 +1,14 @@
+.secondStatisticsBlockButtons {
+	display: grid;
+
+	width: 100%;
+	margin: 20px 0;
+	justify-items: center;
+	gap: 10px;
+}
+
+.havenotSolvedTasks {
+	margin: 40px 0;
+
+	color: var(--tg-theme-text-color);
+}

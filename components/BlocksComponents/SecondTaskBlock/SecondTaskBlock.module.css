@@ -12,6 +12,7 @@
 }
 
 .secondTaskTitle {
+	width: 90%;
 	margin-left: 5%;
 
 	color: var(--tg-theme-text-color);

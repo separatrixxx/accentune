@@ -4,6 +4,7 @@ import { SecondPartInterface } from '../../interfaces/secondPart.interface';
 
 const secondPartData: SecondPartInterface = {
     blockId: '',
+    blockName: '',
     typeId: '',
 };
 
@@ -16,18 +17,22 @@ export const secondPartSlice = createSlice({
     chooseSecondBlockId: (state, action) => {
       state.secondPart.blockId = action.payload;
     },
+    chooseSecondBlockName: (state, action) => {
+      state.secondPart.blockName = action.payload;
+    },
     chooseSecondTypeId: (state, action) => {
       state.secondPart.typeId = action.payload;
     },
     setSecondPartDefault: (state) => {
       state.secondPart = {
         blockId: '',
+        blockName: '',
         typeId: '',
       }
     },
   },
 });
 
-export const { chooseSecondBlockId, chooseSecondTypeId, setSecondPartDefault } = secondPartSlice.actions;
+export const { chooseSecondBlockId, chooseSecondTypeId, setSecondPartDefault, chooseSecondBlockName } = secondPartSlice.actions;
 
 export default secondPartSlice.reducer;

@@ -29,6 +29,7 @@ export const TaskBlock = (): JSX.Element => {
             checkAnswer(answer, firstTask, firstPart, tgUser.id, setAnswer, setFirstTask, setIsFault, setIsCorrect, setIsDecided);
         }
     };
+    console.log(firstTask?.answer)
 
     if (!firstTask && !isDecided) {
         return <Spinner />
@@ -39,10 +40,11 @@ export const TaskBlock = (): JSX.Element => {
             <>
                 <div className={styles.taskBlock}>
                     <Htag tag='xl' className={styles.taskTitle} onClick={() => {}}>
-                        {!isFault ? setLocale(router.locale).task + ":" : setLocale(router.locale).wrong_answer + ":"}
+                        {setLocale(router.locale)[!isFault ? 'task' : 'wrong_answer']}
                     </Htag>
                     <ReactMarkdown className={styles.taskText}>
-                        {!isFault ? firstTask.text : firstTask.explanations}
+                        {!isFault ? firstTask.text :
+                            setLocale(router.locale).explanation + ': ' + firstTask.explanations}
                     </ReactMarkdown>
                     {
                         !isFault ?

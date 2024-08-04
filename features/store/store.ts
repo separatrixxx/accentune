@@ -7,6 +7,8 @@ import quickSlice from "../quick/quickSlice";
 import firstStatisticsSlice from "../firstStatistics/firstStatisticsSlice";
 import solvedSlice from "../solved/solvedSlice";
 import variantStatsSlice from "../variantStats/variantStatsSlice";
+import completedTasksSlice from "../completedTasks/completedTasksSlice";
+import subscribeSlice from "../subscribe/subscribeSlice";
 
 
 const makeStore = () =>
@@ -19,6 +21,8 @@ const makeStore = () =>
       firstStatistics: firstStatisticsSlice,
       solved: solvedSlice,
       variantStats: variantStatsSlice,
+      completedTasks: completedTasksSlice,
+      subscribe: subscribeSlice,
     },
     devTools: true,
 });

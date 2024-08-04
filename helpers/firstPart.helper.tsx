@@ -59,7 +59,7 @@ export async function getFirstTask(blockId: string, sortId: string, isTheme: boo
 
         setFirstTask(response);
     } catch (err: any) {
-        if (err.response.data.error === 'No task found') {
+        if (err.response && err.response.data.error === 'No task found') {
             setIsDecided(true);
         }
 

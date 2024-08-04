@@ -25,6 +25,7 @@
 }
 
 .blockStatisticsText {
+	width: 90%;
 	margin-top: 20px;
 
 	color: var(--tg-theme-text-color);

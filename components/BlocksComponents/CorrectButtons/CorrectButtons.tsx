@@ -5,7 +5,7 @@ import { setLocale } from '../../../helpers/locale.helper';
 import { useSetup } from '../../../hooks/useSetup';
 
 
-export const CorrectButtons = ({ isDecided, setIsCorrect, setPartDefault }: CorrectButtonsProps): JSX.Element => {
+export const CorrectButtons = ({ isDecided, taskId, setIsCorrect, setPartDefault, setTaskId }: CorrectButtonsProps): JSX.Element => {
     const { router, dispatch } = useSetup();
 
     return (
@@ -13,13 +13,17 @@ export const CorrectButtons = ({ isDecided, setIsCorrect, setPartDefault }: Corr
             {
                 !isDecided ?
                     <Button icon='partying_emoji.webp' text={setLocale(router.locale).next_task}
-                        description={setLocale(router.locale).move_next_task} onClick={() => setIsCorrect(false)} />
+                        description={setLocale(router.locale).move_next_task} onClick={() => {
+                            if (taskId && setTaskId) {
+                                setTaskId(taskId);
+                            }
+
+                            setIsCorrect(false);
+                        }} />
                 : <></>
             }
             <Button icon='sunglasses_emoji.webp' text={setLocale(router.locale).select_block}
-                    description={setLocale(router.locale).you_will_return} onClick={() => {
-                        dispatch(setPartDefault());
-                    }} />
+                description={setLocale(router.locale).you_will_return} onClick={() => dispatch(setPartDefault())} />
         </div>
     );
 };

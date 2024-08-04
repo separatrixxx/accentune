@@ -40,7 +40,7 @@ export const SortBlock = ({ chooseSortId }: SortBlockProps): JSX.Element => {
                     Object.keys(themesTypes.themes).map(t => (
                         <Button 
                             key={t} 
-                            description={themesTypes.themes[t]} 
+                            description={t + ' ' + themesTypes.themes[t]} 
                             onClick={() => dispatch(chooseSortId(t))}
                         />
                     ))

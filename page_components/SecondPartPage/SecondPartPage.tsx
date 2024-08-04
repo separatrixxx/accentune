@@ -7,7 +7,7 @@ import { SortBlock } from '../../components/BlocksComponents/SortBlock/SortBlock
 import { TaskBlock } from '../../components/BlocksComponents/TaskBlock/TaskBlock';
 import { Spinner } from '../../components/Common/Spinner/Spinner';
 import { useSetup } from '../../hooks/useSetup';
-import { chooseSecondBlockId, chooseSecondTypeId, setSecondPartDefault } from '../../features/secondPart/secondPartSlice';
+import { chooseSecondBlockId, chooseSecondBlockName, chooseSecondTypeId, setSecondPartDefault } from '../../features/secondPart/secondPartSlice';
 import { TypesBlock } from '../../components/BlocksComponents/TypesBlock/TypesBlock';
 import { SecondTaskBlock } from '../../components/BlocksComponents/SecondTaskBlock/SecondTaskBlock';
 
@@ -35,12 +35,18 @@ export const SecondPartPage = ({ blocks }: SecondPartPageProps): JSX.Element => 
                         </Htag>
                         {
                             blocks['1'] ? 
-                                <BlocksList blocks={blocks} chooseBlockId={chooseSecondBlockId} />
+                                <BlocksList blocks={blocks} chooseBlockId={chooseSecondBlockId}
+                                    chooseBlockName={chooseSecondBlockName} />
                             : <Spinner />
                         }
                     </>
                 : secondPart.typeId === '' ?
-                    <TypesBlock chooseSecondTypeId={chooseSecondTypeId} />
+                    <>
+                        <Htag tag='xl' className={styles.selectBlockTitle}>
+                            {secondPart.blockName}
+                        </Htag>
+                        <TypesBlock chooseSecondTypeId={chooseSecondTypeId} />
+                    </>
                 : 
                     <SecondTaskBlock  />
 

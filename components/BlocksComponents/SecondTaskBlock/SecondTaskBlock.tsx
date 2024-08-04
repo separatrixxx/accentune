@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown';
 import { setLocale } from '../../../helpers/locale.helper';
 import { Htag } from '../../Common/Htag/Htag';
 import { Input } from '../../Common/Input/Input';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { Spinner } from '../../Common/Spinner/Spinner';
 import { Icon } from '../../Common/Icon/Icon';
 import { CorrectButtons } from '../CorrectButtons/CorrectButtons';
@@ -18,9 +18,10 @@ export const SecondTaskBlock = (): JSX.Element => {
     const { router, tgUser, secondPart } = useSetup();
 
     const { secondTask, isCorrect, isDecided, answer, setSecondTask, setIsCorrect, setIsDecided, setAnswer } = useHelpStates();
+    const [taskId, setTaskId] = useState<string>('');
 
     useEffect(() => {
-        getSecondTask(secondPart.blockId, secondPart.typeId, tgUser?.id, setSecondTask, setIsDecided);
+        getSecondTask(secondPart.blockId, secondPart.typeId, tgUser?.id, setSecondTask, setIsDecided, setTaskId);
     }, [secondPart, tgUser, setIsDecided, setSecondTask]);
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
@@ -55,18 +56,21 @@ export const SecondTaskBlock = (): JSX.Element => {
                 </div>
             </>
         );
-    } else {
+    } else if (secondTask) {
         return (
             <>
                 <div className={styles.secondTaskBlock}>
                     <Htag tag='xl' className={styles.secondTaskTitle} onClick={() => {}}>
-                        {!isDecided ? setLocale(router.locale).answer_recorded
-                            : setLocale(router.locale).variant_completed}
+                        {setLocale(router.locale)[!isDecided ? 'answer_recorded' : 'variant_completed']
+                            .replace('$$$', taskId)}
                     </Htag>
                     <Icon icon='popper_emoji.webp' />
                 </div>
-                <CorrectButtons isDecided={isDecided} setIsCorrect={setIsCorrect} setPartDefault={setSecondPartDefault} />
+                <CorrectButtons isDecided={isDecided} taskId={secondTask.task_id}
+                    setIsCorrect={setIsCorrect} setPartDefault={setSecondPartDefault} setTaskId={setTaskId} />
             </>
         );
+    } else {
+        return <></>
     }
 };

@@ -57,8 +57,8 @@ export const QuickBlock = (): JSX.Element => {
             <>
                 <div className={styles.quickBlock}>
                     <Htag tag='xl' className={styles.quickTaskTitle} onClick={() => {}}>
-                        {quick.num + 1 <= quick.variant.length ? setLocale(router.locale).answer_recorded
-                            : setLocale(router.locale).variant_completed}
+                        {setLocale(router.locale)[quick.num + 1 <= quick.variant.length ? 'answer_recorded' : 'variant_completed']
+                            .replace('$$$', quick.variant[quick.num - 1].task_id)}
                     </Htag>
                     <Icon icon='popper_emoji.webp' />
                 </div>

@@ -1,5 +1,6 @@
 export interface SecondPartInterface {
     blockId: string,
+    blockName: string,
     typeId: string,
 };
 
