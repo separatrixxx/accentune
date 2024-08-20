@@ -106,4 +106,5 @@ export const ru = {
     rubles_for_days: "$$$ рублей за ### дней",
     subscription_successfully_canceled: "Подписка успешно отменена",
     subscription_will_be_cancelled_on: "Подписка будет отменена $$$",
+    failed_activate_demo: "Не удалось активировать демо-подписку",
 };

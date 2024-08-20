@@ -3,12 +3,12 @@ import { getUser } from "./user.helper";
 import { SubscribeItemInterface, TransactionData } from "../interfaces/subscribe.interface";
 import { setSubscribeMultiplayer, setSubscribeGroup, changeStatus } from "../features/subscribe/subscribeSlice";
 import { setLocale } from "./locale.helper";
-import { CancelSubscribeArguments, DemoSubscribeArguments, SubscribeArguments } from "../interfaces/refactor.helper";
+import { DemoSubscribeArguments, SubscribeArguments } from "../interfaces/refactor.helper";
 import { formatDate } from "./date.helper";
 
 
 export async function demoSubscribe(args: DemoSubscribeArguments) {
-    const { userId, text, webApp, dispatch, setIsLoading } = args;
+    const { userId, text, webApp, router, dispatch, setIsLoading } = args;
 
     webApp?.showConfirm(text, async function(isOk: boolean) {
         if (isOk && userId) {
@@ -21,6 +21,8 @@ export async function demoSubscribe(args: DemoSubscribeArguments) {
                     });
             } catch (error) {
                 setIsLoading(false);
+                webApp.showAlert(setLocale(router.locale).failed_activate_demo);
+
                 console.error(error);
             }
         }
@@ -102,7 +104,7 @@ export async function createTransaction(args: SubscribeArguments, transactionDat
     }
 }
 
-export async function cancelSubscribe(args: CancelSubscribeArguments) {
+export async function cancelSubscribe(args: DemoSubscribeArguments) {
     const { userId, text, webApp, router, dispatch, setIsLoading } = args;
 
     webApp?.showConfirm(text, async function(isOk: boolean) {

@@ -15,10 +15,7 @@ export interface DemoSubscribeArguments {
     userId: number | undefined,
     text: string,
     webApp: IWebApp | undefined,
+    router: any,
     dispatch: any,
     setIsLoading: (e: boolean) => void,
-}
-
-export interface CancelSubscribeArguments extends DemoSubscribeArguments {
-    router: any,
 }
