@@ -49,7 +49,6 @@ export const SecondPartPage = ({ blocks }: SecondPartPageProps): JSX.Element => 
                     </>
                 : 
                     <SecondTaskBlock  />
-
             }
         </div>
     );

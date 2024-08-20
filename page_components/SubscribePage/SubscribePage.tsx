@@ -35,7 +35,7 @@ export const SubscribePage = (): JSX.Element => {
             {subscribe.multiplayer.concat(subscribe.group).map(s => (
                 <Button key={s.id} text={s.name}
                     description={setLocale(router.locale).rubles_for_days
-                        .replace('$$$', String(s.amount))
+                        .replace('$$$', String(s.amount / 100))
                         .replace('###', String(s.duration))
                     }
                     onClick={() => createPretransaction({

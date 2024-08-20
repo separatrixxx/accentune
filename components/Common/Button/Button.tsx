@@ -5,12 +5,13 @@ import { Htag } from '../Htag/Htag';
 import Image from 'next/image';
 import { useSetup } from '../../../hooks/useSetup';
 import cn from 'classnames';
+import { Spinner } from '../Spinner/Spinner';
 
 
-export const Button = ({ icon, text, description, isActive, onClick }: ButtonProps): JSX.Element => { 
+export const Button = ({ icon, text, description, isActive, isLoading, onClick }: ButtonProps): JSX.Element => { 
     const { user, firstPart, secondPart, quick } = useSetup();
       
-    const [isAnimated, setIsAnimated] = useState(true);
+    const [isAnimated, setIsAnimated] = useState<boolean>(true);
 
     useEffect(() => {
         setIsAnimated(true);
@@ -27,7 +28,7 @@ export const Button = ({ icon, text, description, isActive, onClick }: ButtonPro
             [styles.active]: isActive,
         })} onClick={onClick}>
             {
-                icon ? 
+                icon && !isLoading ? 
                     <Image className={styles.icon} draggable='false'
                         loader={() => isAnimated ? '/emoji/' + icon : '/emoji/static/static_' + icon}
                         src={isAnimated ? '/emoji/' + icon : '/emoji/static/static_' + icon}
@@ -37,6 +38,8 @@ export const Button = ({ icon, text, description, isActive, onClick }: ButtonPro
                         unoptimized={true}
                         priority={true}
                     />
+                : isLoading ?
+                    <div className={styles.spinner} />
                 : <></>
             }
             <div className={cn(styles.buttonTextDiv, {

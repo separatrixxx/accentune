@@ -1,21 +1,26 @@
 import axios, { AxiosResponse } from "axios";
-import { IWebApp } from "../types/telegram";
 import { getUser } from "./user.helper";
 import { SubscribeItemInterface, TransactionData } from "../interfaces/subscribe.interface";
 import { setSubscribeMultiplayer, setSubscribeGroup, changeStatus } from "../features/subscribe/subscribeSlice";
 import { setLocale } from "./locale.helper";
-import { SubscribeArguments } from "../interfaces/refactor.helper";
+import { CancelSubscribeArguments, DemoSubscribeArguments, SubscribeArguments } from "../interfaces/refactor.helper";
+import { formatDate } from "./date.helper";
 
 
-export async function demoSubscribe(userId: number | undefined, text: string, webApp: IWebApp | undefined, dispatch: any) {
+export async function demoSubscribe(args: DemoSubscribeArguments) {
+    const { userId, text, webApp, dispatch, setIsLoading } = args;
+
     webApp?.showConfirm(text, async function(isOk: boolean) {
         if (isOk && userId) {
             try {
+                setIsLoading(true);
+
                 await axios.post(process.env.NEXT_PUBLIC_DOMAIN +
                     '/subscribe_demo?user_id=' + userId).then(() => {
-                        getUser(userId, dispatch);
+                        getUser(userId, dispatch).then(() => setIsLoading(false));
                     });
             } catch (error) {
+                setIsLoading(false);
                 console.error(error);
             }
         }
@@ -95,4 +100,41 @@ export async function createTransaction(args: SubscribeArguments, transactionDat
 
         console.error(err);
     }
+}
+
+export async function cancelSubscribe(args: CancelSubscribeArguments) {
+    const { userId, text, webApp, router, dispatch, setIsLoading } = args;
+
+    webApp?.showConfirm(text, async function(isOk: boolean) {
+        if (isOk && userId) {
+            try {
+                setIsLoading(true);
+
+                await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
+                    '/cancel_subscription?user_id=' + userId).then(r => {
+                        if (r.data && r.data.message) {
+                            const message = r.data.message;
+                        
+                            if (message.indexOf('cancelled immediately') !== -1) {
+                                getUser(userId, dispatch).then(() => {
+                                    setIsLoading(false);
+                                    webApp.showAlert(setLocale(router.locale).subscription_successfully_canceled);
+                                });
+                            } else {
+                                const dateMatch = message.match(/on (\d{4}-\d{2}-\d{2})/);
+                                const cancellationDate = dateMatch ? dateMatch[1] : 'неизвестная дата';
+                        
+                                webApp.showAlert(setLocale(router.locale).subscription_will_be_cancelled_on
+                                    .replace('$$$', formatDate(cancellationDate)));
+
+                                setIsLoading(false);
+                            }
+                        }
+                    });
+            } catch (error) {
+                setIsLoading(false);
+                console.error(error);
+            }
+        }
+    });
 }

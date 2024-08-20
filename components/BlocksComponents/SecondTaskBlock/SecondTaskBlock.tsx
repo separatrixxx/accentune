@@ -71,6 +71,16 @@ export const SecondTaskBlock = (): JSX.Element => {
             </>
         );
     } else {
-        return <></>
+        return (
+            <>
+                <div className={styles.secondTaskBlock}>
+                    <Htag tag='xl' className={styles.secondTaskTitle} onClick={() => {}}>
+                        {!isDecided ? setLocale(router.locale).correct_answer : setLocale(router.locale).all_tasks_completed}
+                    </Htag>
+                    <Icon icon='popper_emoji.webp' />
+                </div>
+                <CorrectButtons isDecided={isDecided} setIsCorrect={setIsCorrect} setPartDefault={setSecondPartDefault} />
+            </>
+        );
     }
 };

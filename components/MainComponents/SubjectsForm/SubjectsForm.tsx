@@ -1,18 +1,14 @@
 import styles from './SubjectsForm.module.css';
-import { useRouter } from 'next/router';
 import { setLocale } from '../../../helpers/locale.helper';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppState } from '../../../features/store/store';
 import { Htag } from '../../Common/Htag/Htag';
 import Arrow from './arrow.svg';
 import { Subject } from '../../../interfaces/user.interface';
+import { useSetup } from '../../../hooks/useSetup';
+import { setSubject } from '../../../features/subject/subjectSlice';
 
 
-export const SubjectsForm = (): JSX.Element => { 
-    const router = useRouter();
-    const dispatch = useDispatch();
-
-    const user = useSelector((state: AppState) => state.user.user);
+export const SubjectsForm = (): JSX.Element => {
+    const { router, dispatch, subject } = useSetup();
 
     const subjectsList: Subject[] = ['social', 'math', 'russian'];
     
@@ -20,20 +16,19 @@ export const SubjectsForm = (): JSX.Element => {
         <div className={styles.subjectsForm}>
             <div className={styles.currentSubjectDiv}>
                 <Htag tag='l' className={styles.currentSubjectName} onClick={() => {}}>
-                    {/* {setLocale(router.locale).subjects[user.subject]} */}
-                    {""}
+                    {setLocale(router.locale).subjects[subject as 'social']}
                 </Htag>
                 <Arrow />
             </div>
-            {/* <div className={styles.subjectsList}>
+            <div className={styles.subjectsList}>
                 {
-                    subjectsList.filter(s => s !== user.subject).map(s => (
-                        <Htag key={s} tag='s' className={styles.subjectName} onClick={() => dispatch(chooseSubject(s))}>
+                    subjectsList.filter(s => s !== subject).map(s => (
+                        <Htag key={s} tag='s' className={styles.subjectName} onClick={() => dispatch(setSubject(s))}>
                             {setLocale(router.locale).subjects[s]}
                         </Htag>
                     ))
                 }
-            </div> */}
+            </div>
         </div>
     );
 };

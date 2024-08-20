@@ -1,5 +1,5 @@
 import { IWebApp } from "../types/telegram";
-import { SubscribeItemInterface, TransactionData } from "./subscribe.interface";
+import { SubscribeItemInterface } from "./subscribe.interface";
 
 
 export interface SubscribeArguments {
@@ -9,4 +9,16 @@ export interface SubscribeArguments {
     email: string | null,
     router: any,
     dispatch: any,
+}
+
+export interface DemoSubscribeArguments {
+    userId: number | undefined,
+    text: string,
+    webApp: IWebApp | undefined,
+    dispatch: any,
+    setIsLoading: (e: boolean) => void,
+}
+
+export interface CancelSubscribeArguments extends DemoSubscribeArguments {
+    router: any,
 }

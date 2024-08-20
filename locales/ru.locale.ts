@@ -21,7 +21,7 @@ export const ru = {
     second_part_tasks: "По задачам второй части",
     cancel_subscription: "Отменить подписку",
     subscription_canceled: "Подписка отменена",
-    subscription_canceled_instantly: "Подписка отменится мгновенно",
+    this_action_cannot_undone: "Это действие нельзя будет отменить",
     tasks_solved: "Решено задач",
     points_gained: "Набрано баллов",
     of: "из",
@@ -104,4 +104,6 @@ export const ru = {
     points_received: "Получено баллов за задание",
     from: "От",
     rubles_for_days: "$$$ рублей за ### дней",
+    subscription_successfully_canceled: "Подписка успешно отменена",
+    subscription_will_be_cancelled_on: "Подписка будет отменена $$$",
 };
