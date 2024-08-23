@@ -21,7 +21,7 @@ export const AllCoursesBlock = (): JSX.Element => {
                 <Button icon='calendar_emoji.webp' text={setLocale(router.locale).sign_for_webinar}
                     description={setLocale(router.locale).view_available_webinars}
                     onClick={() => setWebinarsType('courses')} />
-                <Button icon='television_emoji.webp' text={setLocale(router.locale).about_webinar_program}
+                <Button icon='question_emoji.webp' text={setLocale(router.locale).about_webinar_program}
                     onClick={() => setWebinarsType('about')} />
             </div>
         );
