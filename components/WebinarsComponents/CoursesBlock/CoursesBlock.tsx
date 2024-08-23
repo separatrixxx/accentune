@@ -12,7 +12,7 @@ export const CoursesBlock = ({ setWebinarsType }: CoursesBlockProps): JSX.Elemen
 
     useEffect(() => {
         getAvailableCourses(setAvailableCourses);
-    });
+    }, [setAvailableCourses]);
 
     if (!availableCourses) {
         return <Spinner />
