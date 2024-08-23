@@ -1,0 +1,7 @@
+.wrapper {
+	display: grid;
+
+	width: 100%;
+	justify-items: center;
+	gap: 10px;
+}

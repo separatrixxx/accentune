@@ -1,11 +1,15 @@
 import styles from './WebinarsPage.module.css';
-import { Button } from '../../components/Common/Button/Button';
-import { setLocale } from '../../helpers/locale.helper';
 import { useSetup } from '../../hooks/useSetup';
+import { useEffect, useState } from 'react';
+import { getUserCourse } from '../../helpers/webinars.helper';
+import { MyCourseBlock } from '../../components/WebinarsComponents/MyCourseBlock/MyCourseBlock';
+import { Spinner } from '../../components/Common/Spinner/Spinner';
+import { AllCoursesBlock } from '../../components/WebinarsComponents/AllCoursesBlock/AllCoursesBlock';
 
 
 export const WebinarsPage = (): JSX.Element => {
-    const { router, webApp } = useSetup();
+    const { router, dispatch, webApp, tgUser } = useSetup();
+    const [coursesBlockype, setCoursesBlockType] = useState<'all' | 'my' | null>(null);
     
     if (webApp) {
         webApp?.BackButton.show();
@@ -15,19 +19,23 @@ export const WebinarsPage = (): JSX.Element => {
         });
     }
 
-    const webinarsCount = 0;
+    useEffect(() => {
+        getUserCourse({
+            userId: tgUser?.id,
+            setCoursesBlockType: setCoursesBlockType,
+            dispatch: dispatch,
+        });
+    });
 
     return (
         <div className={styles.wrapper}>
-            <Button icon='file_folder_emoji.webp' text={setLocale(router.locale).my_webinars}
-                description={setLocale(router.locale).you_registered_webinars.replace('%%%', String(webinarsCount))}
-                onClick={() => {}} />
-            <Button icon='calendar_emoji.webp' text={setLocale(router.locale).sign_for_webinar}
-                description={setLocale(router.locale).view_available_webinars}
-                onClick={() => {}} />
-            <Button icon='television_emoji.webp' text={setLocale(router.locale).webinar_recordings}
-                description={setLocale(router.locale).view__past_webinars}
-                onClick={() => {}} />
+            {
+                coursesBlockype === 'all' ?
+                    <AllCoursesBlock />
+                : coursesBlockype === 'my' ?
+                    <MyCourseBlock />
+                : <Spinner />
+            }
         </div>
     );
 };

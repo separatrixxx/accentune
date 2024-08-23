@@ -3,14 +3,13 @@ import { Button } from '../../Common/Button/Button';
 import { setLocale } from '../../../helpers/locale.helper';
 import { cancelSubscribe, demoSubscribe } from '../../../helpers/subscription.helper';
 import { useSetup } from '../../../hooks/useSetup';
-import { useState } from 'react';
-import { DemoSubscribeArguments } from '../../../interfaces/refactor.helper';
+import { DemoSubscribeArguments } from '../../../interfaces/refactor.interface';
+import { useHelpStates } from '../../../hooks/useHelpStates';
 
 
 export const ProfileButtons = (): JSX.Element => { 
     const { router, dispatch, webApp, tgUser, user } = useSetup();
-
-    const [isLoading, setIsLoading] = useState<boolean>(false);
+    const { isLoading, setIsLoading } = useHelpStates();
 
     const price = 350;
 

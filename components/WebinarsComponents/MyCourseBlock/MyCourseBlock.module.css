@@ -1,0 +1,32 @@
+.myCourseBlock {
+	display: grid;
+	align-items: center;
+
+	width: 100%;
+	height: fit-content;
+	margin: -20px 0 10px 0;
+	padding: 20px 0;
+
+	background: var(--tg-theme-section-bg-color);
+	justify-items: center;
+	gap: 10px;
+}
+
+.myCourseTitle {
+	width: 90% !important;
+	margin-left: 5% !important;
+
+	color: var(--tg-theme-text-color) !important;
+
+	font-weight: 600 !important;
+	justify-self: left !important;
+}
+
+.myCourseText {
+	display: grid;
+
+	width: 90%;
+	justify-items: left;
+
+	color: var(--tg-theme-text-color);
+}

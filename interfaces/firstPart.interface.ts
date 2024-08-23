@@ -6,16 +6,16 @@ export interface FirstPartInterface {
 };
 
 export type Blocks = {
-    [key: string]: string;
+    [key: string]: string,
 };
 
 export interface ThemesTypesInterface {
-    types: number[];
-    themes: Theme;
+    types: number[],
+    themes: Theme,
 };
 
 export type Theme = {
-    [key: string]: string;
+    [key: string]: string,
 };
 
 export interface FirstTaskInterface {
@@ -24,5 +24,5 @@ export interface FirstTaskInterface {
     answer: string,
     explanations: string,
     pts_total: number,
-    strict_bool: boolean
+    strict_bool: boolean,
 };

@@ -16,7 +16,6 @@ const userData: UserInterface = {
   },
   second_part_small_stat: "not_paid_user",
   demo_used: false,
-  cource_picked: false
 };
 
 export const userSlice = createSlice({

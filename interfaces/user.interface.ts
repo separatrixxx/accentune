@@ -14,5 +14,4 @@ export interface UserInterface {
     },
     second_part_small_stat: string,
     demo_used: boolean,
-    cource_picked: boolean,
 }

@@ -3,7 +3,7 @@ import { getUser } from "./user.helper";
 import { SubscribeItemInterface, TransactionData } from "../interfaces/subscribe.interface";
 import { setSubscribeMultiplayer, setSubscribeGroup, changeStatus } from "../features/subscribe/subscribeSlice";
 import { setLocale } from "./locale.helper";
-import { DemoSubscribeArguments, SubscribeArguments } from "../interfaces/refactor.helper";
+import { DemoSubscribeArguments, SubscribeArguments } from "../interfaces/refactor.interface";
 import { formatDate } from "./date.helper";
 
 
@@ -17,7 +17,10 @@ export async function demoSubscribe(args: DemoSubscribeArguments) {
 
                 await axios.post(process.env.NEXT_PUBLIC_DOMAIN +
                     '/subscribe_demo?user_id=' + userId).then(() => {
-                        getUser(userId, dispatch).then(() => setIsLoading(false));
+                        getUser(userId, dispatch).then(() => {
+                            setIsLoading(false);
+                            webApp.showAlert(setLocale(router.locale).demo_successfully_activated);
+                        });
                     });
             } catch (error) {
                 setIsLoading(false);

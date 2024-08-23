@@ -10,6 +10,7 @@ import variantStatsSlice from "../variantStats/variantStatsSlice";
 import completedTasksSlice from "../completedTasks/completedTasksSlice";
 import subscribeSlice from "../subscribe/subscribeSlice";
 import subjectSlice from "../subject/subjectSlice";
+import userCourseSlice from "../userCourse/userCourseSlice";
 
 
 const makeStore = () =>
@@ -25,6 +26,7 @@ const makeStore = () =>
       completedTasks: completedTasksSlice,
       subscribe: subscribeSlice,
       subject: subjectSlice,
+      userCourse: userCourseSlice,
     },
     devTools: true,
 });

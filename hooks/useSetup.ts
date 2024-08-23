@@ -19,6 +19,7 @@ export const useSetup = () => {
     const completedTasks = useSelector((state: AppState) => state.completedTasks.completedTasks);
     const subscribe = useSelector((state: AppState) => state.subscribe.subscribe);
     const subject = useSelector((state: AppState) => state.subject.subject);
+    const userCourse = useSelector((state: AppState) => state.userCourse.userCourse);
 
     return {
         router,
@@ -35,5 +36,6 @@ export const useSetup = () => {
         completedTasks,
         subscribe,
         subject,
+        userCourse,
     };
 };
