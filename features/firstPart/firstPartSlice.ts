@@ -28,12 +28,7 @@ export const firstPartSlice = createSlice({
       state.firstPart.sortId = action.payload;
     },
     setFirstPartDefault: (state) => {
-      state.firstPart = {
-        blockId: '',
-        blockName: '',
-        isThemes: true,
-        sortId: '',
-      }
+      state.firstPart = firstPartData;
     },
   },
 });

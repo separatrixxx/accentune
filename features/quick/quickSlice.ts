@@ -31,15 +31,7 @@ export const quickSlice = createSlice({
       state.quick.num += 1
     },
     setQuickDefault: (state) => {
-      state.quick = {
-        type: '',
-        num: 0,
-        len: 0,
-        variant: [],
-        solved: {
-          solved_variant: [],
-        },
-      }
+      state.quick = quickData;
     },
     updateQuickSolved: (state, action) => {
       state.quick.solved.solved_variant.push(action.payload);

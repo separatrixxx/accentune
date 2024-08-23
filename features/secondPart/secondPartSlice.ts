@@ -24,11 +24,7 @@ export const secondPartSlice = createSlice({
       state.secondPart.typeId = action.payload;
     },
     setSecondPartDefault: (state) => {
-      state.secondPart = {
-        blockId: '',
-        blockName: '',
-        typeId: '',
-      }
+      state.secondPart = secondPartData;
     },
   },
 });

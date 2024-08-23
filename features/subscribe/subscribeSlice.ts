@@ -24,11 +24,7 @@ export const subscribeSlice = createSlice({
       state.subscribe.status = action.payload;
     },
     setSubscribeDefault: (state) => {
-      state.subscribe = {
-        status: -1,
-        multiplayer: [],
-        group: [],
-      };
+      state.subscribe = subscribeData;
     },
   },
 });

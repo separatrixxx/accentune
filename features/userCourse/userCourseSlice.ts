@@ -23,16 +23,7 @@ export const userCourseSlice = createSlice({
       state.userCourse = action.payload
     },
     setUserCourseDefault: (state) => {
-      state.userCourse = {
-        course_id: '',
-        course_name: '',
-        date_start: '',
-        date_end: '',
-        teacher_name: '',
-        course_description: '',
-        course_status: '',
-        course_plan: '',
-      };
+      state.userCourse = userCourseData;
     },
   },
 });
