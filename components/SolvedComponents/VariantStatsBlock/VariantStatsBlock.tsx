@@ -20,7 +20,7 @@ export const VariantStatsBlock = ({ date, index }: VariantStatsBlockProps): JSX.
 
     return (
         <div className={styles.variantStatsBlock}>
-            {variantStats.data.map(v => (
+            {variantStats.data.map((v: any) => (
                 <VariantStatsItem key={v.task_id} item={v} />
             ))}
         </div>
