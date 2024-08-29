@@ -1,6 +1,6 @@
 import { IWebApp } from "../types/telegram";
 import { SubscribeItemInterface } from "./subscribe.interface";
-import { CoursesInterface } from "./webinars.interface";
+import { CoursesInterface, WebinarInfoData } from "./webinars.interface";
 
 
 export interface SubscribeArguments {
@@ -12,12 +12,15 @@ export interface SubscribeArguments {
     dispatch: any,
 }
 
-export interface DemoSubscribeArguments {
+export interface BaseArguments {
     userId: number | undefined,
-    text: string,
     webApp: IWebApp | undefined,
+    text: string,
     router: any,
     dispatch: any,
+}
+
+export interface DemoSubscribeArguments extends BaseArguments {
     setIsLoading: (e: boolean) => void,
 }
 
@@ -38,4 +41,12 @@ export interface UserCourseArguments {
     userId: number | undefined,
     setCoursesBlockType: (e: 'all' | 'my' | null) => void,
     dispatch: any,
+}
+
+export interface WebinarInfoArguments {
+    webinarId: string,
+    webApp: IWebApp | undefined,
+    text: string,
+    setWebinarId: (e: string | null) => void,
+    setWebinarInfo: (e: WebinarInfoData | null) => void,
 }

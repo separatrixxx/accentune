@@ -1,7 +1,8 @@
 import axios, { AxiosResponse } from "axios";
-import { CourseInfoInterface, CoursesData, CoursesInterface, UserCourseInterface } from "../interfaces/webinars.interface";
-import { CourseSubscribeArguments, CourseUnsubscribeArguments, UserCourseArguments } from "../interfaces/refactor.interface";
+import { CourseInfoInterface, CoursesData, CoursesInterface, UserCourseInterface, WebinarInfoInterface } from "../interfaces/webinars.interface";
+import { BaseArguments, CourseSubscribeArguments, CourseUnsubscribeArguments, UserCourseArguments, WebinarInfoArguments } from "../interfaces/refactor.interface";
 import { setUserCourse, setUserCourseDefault } from "../features/userCourse/userCourseSlice";
+import { setUserWebinars } from "../features/userWebinars/userWebinarsSlice";
 
 
 export async function getUserCourse(args: UserCourseArguments) {
@@ -81,6 +82,41 @@ export async function unsubscribeForCourse(args: CourseUnsubscribeArguments) {
             });
     } catch (err: any) {
         setIsLoading(false);
+        console.error(err);
+    }
+}
+
+export async function getUserWebinars(args: BaseArguments) {
+    const { userId, webApp, text, router, dispatch } = args;
+
+    try {
+        const { data : response }: AxiosResponse<UserCourseInterface> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
+            '/user_webinars?user_id=' + userId);
+
+        dispatch(setUserWebinars(response.data));
+    } catch (err: any) {
+        webApp?.showAlert(text, async function() {
+            dispatch(setUserCourseDefault());
+            router.push('/webinars');
+        }); 
+
+        console.error(err);
+    }
+}
+
+export async function getWebinarData(args: WebinarInfoArguments) {
+    const { webinarId, webApp, text, setWebinarId, setWebinarInfo } = args;
+
+    try {
+        const { data : response }: AxiosResponse<WebinarInfoInterface> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
+            '/webinar?webinar_id=' + webinarId);
+
+            setWebinarInfo(response.data);
+    } catch (err: any) {
+        webApp?.showAlert(text, async function() {
+            setWebinarId(null);
+        }); 
+
         console.error(err);
     }
 }

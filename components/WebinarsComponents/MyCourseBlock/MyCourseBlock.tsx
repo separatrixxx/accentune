@@ -29,7 +29,7 @@ export const MyCourseBlock = (): JSX.Element => {
                 </ReactMarkdown>
             </div>
             <Button description={setLocale(router.locale).schedule_of_classes}
-                onClick={() => {}} />
+                onClick={() => router.push('/schedule')} />
             <Button description={setLocale(router.locale).homework}
                 onClick={() => {}} />
             <Button description={setLocale(router.locale).unsubscribe_course} isLoading={isLoading}

@@ -3,14 +3,14 @@ import { UserCourseData } from '../../interfaces/webinars.interface';
 
 
 const userCourseData: UserCourseData = {
-    course_id: '',
-    course_name: '',
-    date_start: '',
-    date_end: '',
-    teacher_name: '',
-    course_description: '',
-    course_status: '',
-    course_plan: '',
+  course_id: '',
+  course_name: '',
+  date_start: '',
+  date_end: '',
+  teacher_name: '',
+  course_description: '',
+  course_status: '',
+  course_plan: '',
 };
 
 export const userCourseSlice = createSlice({

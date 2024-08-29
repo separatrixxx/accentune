@@ -1,0 +1,8 @@
+.webinarRecording {
+	overflow: hidden;
+
+	width: 90%;
+	height: 270px;
+
+	border-radius: 10px;
+}

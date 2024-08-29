@@ -11,6 +11,7 @@ import completedTasksSlice from "../completedTasks/completedTasksSlice";
 import subscribeSlice from "../subscribe/subscribeSlice";
 import subjectSlice from "../subject/subjectSlice";
 import userCourseSlice from "../userCourse/userCourseSlice";
+import userWebinarsSlice from "../userWebinars/userWebinarsSlice";
 
 
 const makeStore = () =>
@@ -27,6 +28,7 @@ const makeStore = () =>
       subscribe: subscribeSlice,
       subject: subjectSlice,
       userCourse: userCourseSlice,
+      userWebinars: userWebinarsSlice,
     },
     devTools: true,
 });

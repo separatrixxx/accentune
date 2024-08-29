@@ -1,0 +1,17 @@
+.scheduleListDiv {
+	display: grid;
+
+	width: 100%;
+	justify-items: center;
+	gap: 10px;
+}
+
+.dateTitle {
+	width: 90%;
+	margin: 20px 0 10px 5%;
+
+	color: var(--tg-theme-text-color);
+
+	font-weight: 600;
+	justify-self: left;
+}

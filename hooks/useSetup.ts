@@ -20,6 +20,7 @@ export const useSetup = () => {
     const subscribe = useSelector((state: AppState) => state.subscribe.subscribe);
     const subject = useSelector((state: AppState) => state.subject.subject);
     const userCourse = useSelector((state: AppState) => state.userCourse.userCourse);
+    const userWebinars = useSelector((state: AppState) => state.userWebinars.userWebinars);
 
     return {
         router,
@@ -37,5 +38,6 @@ export const useSetup = () => {
         subscribe,
         subject,
         userCourse,
+        userWebinars,
     };
 };

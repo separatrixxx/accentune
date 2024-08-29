@@ -27,18 +27,20 @@ export interface UserWebinarData {
 
 export interface WebinarInfoInterface {
     status: string,
-    data: {
-        webinar_id: string,
-        webinar_name: string,
-        theme: string,
-        date: number,
-        passed: boolean,
-        description: string,
-        topics: string[],
-        recording_url: string,
-        program: {
-            [key: string]: string,
-        }
+    data: WebinarInfoData,
+};
+
+export interface WebinarInfoData {
+    webinar_id: string,
+    webinar_name: string,
+    theme: string,
+    date: number,
+    passed: boolean,
+    description: string,
+    topics: string[],
+    recording_url: string,
+    program: {
+        [key: string]: string,
     }
 };
 

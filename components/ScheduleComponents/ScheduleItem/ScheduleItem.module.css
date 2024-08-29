@@ -1,0 +1,50 @@
+.scheduleItemBlock {
+	display: grid;
+	align-items: center;
+
+	width: 100%;
+	height: fit-content;
+	margin-bottom: 10px;
+	padding: 20px 0;
+
+	background: var(--tg-theme-section-bg-color);
+	justify-items: center;
+	gap: 10px;
+}
+
+.scheduleItemBlock > h1 {
+	width: 90% !important;
+	margin-left: 5% !important;
+
+	color: var(--tg-theme-text-color);
+
+	font-weight: 600 !important;
+	justify-self: left !important;
+}
+
+.scheduleItemText {
+	display: grid;
+
+	width: 90%;
+	justify-items: left;
+
+	color: var(--tg-theme-text-color);
+}
+
+.webinarRecordingTitle {
+	margin-top: 20px;
+}
+
+.link {
+	cursor: pointer;
+	transition-duration: 300ms;
+
+	color: var(--primary) !important;
+}
+
+.link:hover,
+.link:active {
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+	filter: brightness(0.99);
+}

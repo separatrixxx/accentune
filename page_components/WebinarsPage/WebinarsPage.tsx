@@ -25,7 +25,7 @@ export const WebinarsPage = (): JSX.Element => {
             setCoursesBlockType: setCoursesBlockType,
             dispatch: dispatch,
         });
-    });
+    }, [tgUser, setCoursesBlockType]);
 
     return (
         <div className={styles.wrapper}>
