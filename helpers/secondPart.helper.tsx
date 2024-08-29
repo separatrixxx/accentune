@@ -1,20 +1,29 @@
 import axios, { AxiosResponse } from "axios";
-import { SecondPartInterface, SecondTaskInterface, SolvedSecondTaskData, TypesInterface } from "../interfaces/secondPart.interface";
+import { SecondTaskInterface, SolvedSecondTaskData, TypesInterface } from "../interfaces/secondPart.interface";
+import { setLocale } from "./locale.helper";
+import { CheckSecondTaskArguments, ErrorArguments, SecondTaskArguments } from "../interfaces/refactor.interface";
 
 
-export async function getTypes(blockId: string, setTypes: (e: TypesInterface) => void) {
+export async function getTypes(args: ErrorArguments, blockId: string, setTypes: (e: TypesInterface) => void) {
+    const { webApp, router } = args;
+
     try {
         const { data : response }: AxiosResponse<TypesInterface> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
             '/types_for_block_second_part?block_id=' + blockId);
 
             setTypes(response);
     } catch (err) {
+        webApp?.showAlert(setLocale(router.locale).errors.get_types_error, async function() {
+            router.push('/');
+        }); 
+
         console.error(err);
     }
 }
 
-export async function getSecondTask(blockId: string, typeId: string, userId: number | undefined,
-    setSecondTask: (e: any) => void, setIsDecided: (e: boolean) => void, setTaskId?: (e: string) => void) {
+export async function getSecondTask(args: SecondTaskArguments) {
+    const { userId, webApp, router, blockId, typeId, setIsDecided, setSecondTask, setTaskId } = args;
+
     try {
         const { data : response }: AxiosResponse<SecondTaskInterface> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
             '/get_task_second_part?block_id=' + blockId
@@ -29,33 +38,54 @@ export async function getSecondTask(blockId: string, typeId: string, userId: num
     } catch (err: any) {
         if (err.response && err.response.data.error === 'No task found') {
             setIsDecided(true);
+        } else {
+            webApp?.showAlert(setLocale(router.locale).errors.get_task_error, async function() {
+                router.push('/');
+            }); 
         }
 
         console.error(err);
     }
 }
 
-export function checkSecondAnswer(secondPart: SecondPartInterface, userId: number | undefined, task_id: string, answer: string,
-    setAnswer: (e: string) => void, setIsCorrect: (e: boolean) => void, setSecondTask: (e: any) => void,
-    setIsDecided: (e: boolean) => void) {    
+export function checkSecondAnswer(args: CheckSecondTaskArguments) {
+    const { userId, webApp, router, blockId, typeId, answer, task_id,
+        setIsDecided, setAnswer, setIsCorrect, setSecondTask, setTaskId } = args;
+
     if (answer.trim() !== '') {
         setSecondTask(null);
         setIsCorrect(true);
         setAnswer('');
-        getSecondTask(secondPart.blockId, secondPart.typeId, userId, setSecondTask, setIsDecided);
+        getSecondTask({
+            userId: userId,
+            webApp: webApp,
+            router: router,
+            blockId: blockId,
+            typeId: typeId,
+            setIsDecided: setIsDecided,
+            setSecondTask: setSecondTask,
+            setTaskId: setTaskId,
+        });
 
-        sendSecondAnswer(userId, {
+        sendSecondAnswer({
+            webApp: webApp,
+            router: router,
+        }, userId, {
             task_id: task_id,
             user_answer: answer,
         });        
     }
 }
 
-export async function sendSecondAnswer(userId: number | undefined, solved: SolvedSecondTaskData) {
+export async function sendSecondAnswer(args: ErrorArguments, userId: number | undefined, solved: SolvedSecondTaskData) {
+    const { webApp, router } = args;
+
     try {
         await axios.post(process.env.NEXT_PUBLIC_DOMAIN +
             '/save_user_answer_for_task_second_part?user_id=' + userId, solved);
     } catch (err: any) {
+        webApp?.showAlert(setLocale(router.locale).errors.send_variant_error);
+
         console.error(err);
     }
 }

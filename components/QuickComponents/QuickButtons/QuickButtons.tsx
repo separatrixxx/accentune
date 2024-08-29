@@ -8,7 +8,7 @@ import { useSetup } from '../../../hooks/useSetup';
 
 
 export const QuickButtons = ({ isDecided, setIsCorrect }: QuickButtonsProps): JSX.Element => {
-    const { router, dispatch, tgUser, quick } = useSetup();
+    const { router, dispatch, webApp, tgUser, quick } = useSetup();
 
     return (
         <div className={styles.quickButtons}>
@@ -22,7 +22,12 @@ export const QuickButtons = ({ isDecided, setIsCorrect }: QuickButtonsProps): JS
                 description={!isDecided ? setLocale(router.locale).answers_will_not_saved
                     : setLocale(router.locale).save_answers} onClick={() => {
                         if (isDecided && tgUser) {
-                            sendQuickVariant(tgUser?.id, quick.solved);
+                            sendQuickVariant({
+                                userId: tgUser?.id,
+                                webApp: webApp,
+                                router: router,
+                                solved: quick.solved,
+                            });
                         }
 
                         dispatch(setQuickDefault());

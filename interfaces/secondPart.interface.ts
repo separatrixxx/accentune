@@ -14,6 +14,6 @@ export interface SecondTaskInterface {
 };
 
 export interface SolvedSecondTaskData {
-    task_id: string,
+    task_id?: string,
     user_answer: string,
 };

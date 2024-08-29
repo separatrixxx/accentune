@@ -8,10 +8,11 @@ import { TaskBlock } from '../../components/BlocksComponents/TaskBlock/TaskBlock
 import { chooseFirstBlockId, chooseFirstBlockName, chooseSortId, setFirstPartDefault } from '../../features/firstPart/firstPartSlice';
 import { Spinner } from '../../components/Common/Spinner/Spinner';
 import { useSetup } from '../../hooks/useSetup';
+import { MainLink } from '../../components/Common/MainLink/MainLink';
 
 
 export const FirstPartPage = ({ blocks }: FirstPartPageProps): JSX.Element => {
-    const { router, dispatch, webApp, firstPart } = useSetup();
+    const { router, dispatch, webApp, tgUser, firstPart } = useSetup();
 
     if (webApp) {
         webApp?.BackButton.show();
@@ -21,6 +22,14 @@ export const FirstPartPage = ({ blocks }: FirstPartPageProps): JSX.Element => {
 
             dispatch(setFirstPartDefault());
         });
+    }
+
+    if (!tgUser) {
+        return (
+            <div className={styles.wrapper}>
+                <MainLink />
+            </div>
+        );
     }
 
     return (

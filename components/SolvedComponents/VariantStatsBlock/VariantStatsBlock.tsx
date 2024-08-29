@@ -8,11 +8,18 @@ import { VariantStatsItem } from '../VariantStatsItem/VariantStatsItem';
 
 
 export const VariantStatsBlock = ({ date, index }: VariantStatsBlockProps): JSX.Element => {
-    const { dispatch, tgUser, variantStats } = useSetup();
+    const { router, dispatch, webApp, tgUser, variantStats } = useSetup();
 
     useEffect(() => {
-        getVariantStats(tgUser?.id, date, index, dispatch);
-    }, [tgUser, date, index, dispatch]);
+        getVariantStats({
+            userId: tgUser?.id,
+            webApp: webApp,
+            router: router,
+            dispatch: dispatch,
+            date: date,
+            index: index,
+        });
+    }, [router, webApp, tgUser, date, index, dispatch]);
 
     if (variantStats.status !== 'success') {
         return <Spinner />

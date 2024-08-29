@@ -11,13 +11,16 @@ import { useSetup } from '../../../hooks/useSetup';
 
 
 export const SortBlock = ({ chooseSortId }: SortBlockProps): JSX.Element => {
-    const { router, dispatch, firstPart } = useSetup();
+    const { router, dispatch, webApp, firstPart } = useSetup();
 
     const [themesTypes, setThemesTypes] = useState<ThemesTypesInterface | null>(null);
 
     useEffect(() => {
-        getThemesTypes(firstPart.blockId, setThemesTypes)
-    }, [firstPart, setThemesTypes]);
+        getThemesTypes({
+            webApp: webApp,
+            router: router,
+        }, firstPart.blockId, setThemesTypes)
+    }, [router, webApp, firstPart, setThemesTypes]);
 
     if (!themesTypes) {
         return <Spinner />

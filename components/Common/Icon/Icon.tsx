@@ -24,6 +24,5 @@ export const Icon = ({ icon }: IconProps): JSX.Element => {
         width={1}
         height={1}
         unoptimized={true}
-        priority={true}
     />
 };

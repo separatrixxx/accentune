@@ -11,12 +11,17 @@ import { setLocale } from '../../../helpers/locale.helper';
 
 
 export const SolvedBlock = (): JSX.Element => {
-    const { router, dispatch, tgUser, solved } = useSetup();
+    const { router, dispatch, webApp, tgUser, solved } = useSetup();
     const { date, index, setDate, setIndex } = useHelpStates();
 
     useEffect(() => {
-        getSolved(tgUser?.id, dispatch);
-    }, [tgUser, dispatch]);
+        getSolved({
+            userId: tgUser?.id,
+            webApp: webApp,
+            router: router,
+            dispatch: dispatch,
+        });
+    }, [router, webApp, tgUser, dispatch]);
 
     if (solved.status !== 'success') {
         return <Spinner />

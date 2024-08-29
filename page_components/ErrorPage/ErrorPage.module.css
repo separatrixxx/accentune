@@ -12,6 +12,10 @@
 .errorText {
 	cursor: pointer;
 	transition-duration: 300ms;
+
+	color: var(--primary) !important;
+
+	font-weight: 600 !important;
 }
 
 .errorText:active {

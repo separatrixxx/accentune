@@ -15,9 +15,14 @@ function Main(): JSX.Element {
 
   useEffect(() => {
     if (tgUser) {
-      getUser(tgUser?.id, dispatch);
+      getUser({
+        userId: tgUser?.id,
+        webApp: webApp,
+        text: setLocale(router.locale).errors.get_user_error,
+        dispatch: dispatch,
+      });
     }
-  }, [tgUser, dispatch]);
+  }, [router, tgUser, webApp, dispatch]);
 
   return (
     <>

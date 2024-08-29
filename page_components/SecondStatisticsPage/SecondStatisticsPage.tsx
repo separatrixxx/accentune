@@ -5,10 +5,11 @@ import { Button } from '../../components/Common/Button/Button';
 import { setLocale } from '../../helpers/locale.helper';
 import { SecondStatisticsBlock } from '../../components/StatisticksComponents/SecondStatisticsBlock/SecondStatisticsBlock';
 import { setDefault } from '../../features/completedTasks/completedTasksSlice';
+import { MainLink } from '../../components/Common/MainLink/MainLink';
 
 
 export const SecondStatisticsPage = (): JSX.Element => {
-    const { router, dispatch, webApp } = useSetup();
+    const { router, dispatch, webApp, tgUser } = useSetup();
     const { completed, setCompleted } = useHelpStates();
         
     if (webApp) {
@@ -20,6 +21,14 @@ export const SecondStatisticsPage = (): JSX.Element => {
 
             webApp?.BackButton.hide();
         });
+    }
+
+    if (!tgUser) {
+        return (
+            <div className={styles.wrapper}>
+                <MainLink />
+            </div>
+        );
     }
     
     if (!completed) {

@@ -3,17 +3,16 @@ import styles from './SecondPartPage.module.css';
 import { BlocksList } from '../../components/BlocksComponents/BlocksList/BlocksList';
 import { setLocale } from '../../helpers/locale.helper';
 import { Htag } from '../../components/Common/Htag/Htag';
-import { SortBlock } from '../../components/BlocksComponents/SortBlock/SortBlock';
-import { TaskBlock } from '../../components/BlocksComponents/TaskBlock/TaskBlock';
 import { Spinner } from '../../components/Common/Spinner/Spinner';
 import { useSetup } from '../../hooks/useSetup';
 import { chooseSecondBlockId, chooseSecondBlockName, chooseSecondTypeId, setSecondPartDefault } from '../../features/secondPart/secondPartSlice';
 import { TypesBlock } from '../../components/BlocksComponents/TypesBlock/TypesBlock';
 import { SecondTaskBlock } from '../../components/BlocksComponents/SecondTaskBlock/SecondTaskBlock';
+import { MainLink } from '../../components/Common/MainLink/MainLink';
 
 
 export const SecondPartPage = ({ blocks }: SecondPartPageProps): JSX.Element => {
-    const { router, dispatch, webApp, secondPart } = useSetup();
+    const { router, dispatch, webApp, tgUser, secondPart } = useSetup();
 
     if (webApp) {
         webApp?.BackButton.show();
@@ -23,6 +22,14 @@ export const SecondPartPage = ({ blocks }: SecondPartPageProps): JSX.Element => 
 
             dispatch(setSecondPartDefault());
         });
+    }
+    
+    if (!tgUser) {
+        return (
+            <div className={styles.wrapper}>
+                <MainLink />
+            </div>
+        );
     }
 
     return (

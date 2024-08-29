@@ -10,21 +10,25 @@ import { formatDate } from "./date.helper";
 export async function demoSubscribe(args: DemoSubscribeArguments) {
     const { userId, text, webApp, router, dispatch, setIsLoading } = args;
 
-    webApp?.showConfirm(text, async function(isOk: boolean) {
+    webApp?.showConfirm(text, async function (isOk: boolean) {
         if (isOk && userId) {
             try {
                 setIsLoading(true);
 
                 await axios.post(process.env.NEXT_PUBLIC_DOMAIN +
                     '/subscribe_demo?user_id=' + userId).then(() => {
-                        getUser(userId, dispatch).then(() => {
+                        getUser({
+                            userId: userId,
+                            dispatch: dispatch,
+                        }).then(() => {
                             setIsLoading(false);
                             webApp.showAlert(setLocale(router.locale).demo_successfully_activated);
                         });
                     });
             } catch (error) {
-                setIsLoading(false);
-                webApp.showAlert(setLocale(router.locale).failed_activate_demo);
+                webApp?.showAlert(setLocale(router.locale).errors.activate_demo_error, async function() {
+                    setIsLoading(false);
+                }); 
 
                 console.error(error);
             }
@@ -34,7 +38,7 @@ export async function demoSubscribe(args: DemoSubscribeArguments) {
 
 export async function getPrices(dispatch: any) {
     try {
-        const { data : response }: AxiosResponse<SubscribeItemInterface[]> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
+        const { data: response }: AxiosResponse<SubscribeItemInterface[]> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
             '/get_prices_by_type?sub_type=multiplayer');
 
         dispatch(setSubscribeMultiplayer(response));
@@ -43,7 +47,7 @@ export async function getPrices(dispatch: any) {
     }
 
     try {
-        const { data : response }: AxiosResponse<SubscribeItemInterface[]> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
+        const { data: response }: AxiosResponse<SubscribeItemInterface[]> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
             '/get_prices_by_type?sub_type=group');
 
         dispatch(setSubscribeGroup(response));
@@ -57,19 +61,21 @@ export async function getPrices(dispatch: any) {
 export async function createPretransaction(args: SubscribeArguments) {
     const { webApp, userId, subscribe, router, dispatch } = args;
 
-    webApp?.showConfirm(setLocale(router.locale).activate_subscription + '?', async function(isOk: boolean) {
+    webApp?.showConfirm(setLocale(router.locale).activate_subscription + '?', async function (isOk: boolean) {
         if (isOk) {
             try {
                 dispatch(changeStatus(-1));
-                
+
                 await axios.post(process.env.NEXT_PUBLIC_DOMAIN +
                     `/create_pretransaction?user_id=${userId}&price_id=${subscribe.id}`)
-                        .then(r => {
-                            createTransaction(args, r.data.transaction_data);
-                        });
+                    .then(r => {
+                        createTransaction(args, r.data.transaction_data);
+                    });
             } catch (err) {
-                dispatch(changeStatus(1));
-
+                webApp?.showAlert(setLocale(router.locale).errors.create_pretransaction_error, async function() {
+                    dispatch(changeStatus(1));
+                }); 
+            
                 console.error(err);
             }
         }
@@ -77,31 +83,33 @@ export async function createPretransaction(args: SubscribeArguments) {
 }
 
 export async function createTransaction(args: SubscribeArguments, transactionData: TransactionData) {
-    const { webApp, subscribe, email, dispatch } = args;
+    const { webApp, subscribe, email, router, dispatch } = args;
 
     try {
         await axios.post(process.env.NEXT_PUBLIC_DOMAIN +
-            '/create_transaction', { 
-                Amount: +transactionData.amount,
-                OrderId: String(transactionData.order_id),
-                Description: subscribe.description,
-                CustomerKey: transactionData.user_id,
-                Email: email,
-                Items: [
-                    {
-                        name: subscribe.name,
-                        price: +transactionData.amount,
-                        quantity: 1,
-                        amount: +transactionData.amount
-                    }
-                ]
-            })
+            '/create_transaction', {
+            Amount: +transactionData.amount,
+            OrderId: String(transactionData.order_id),
+            Description: subscribe.description,
+            CustomerKey: transactionData.user_id,
+            Email: email,
+            Items: [
+                {
+                    name: subscribe.name,
+                    price: +transactionData.amount,
+                    quantity: 1,
+                    amount: +transactionData.amount
+                }
+            ]
+        })
             .then(r => {
                 dispatch(changeStatus(1));
                 webApp?.openLink(r.data.payment_url);
             });
     } catch (err) {
-        dispatch(changeStatus(1));
+        webApp?.showAlert(setLocale(router.locale).errors.create_transaction_error, async function() {
+            dispatch(changeStatus(1));
+        }); 
 
         console.error(err);
     }
@@ -110,7 +118,7 @@ export async function createTransaction(args: SubscribeArguments, transactionDat
 export async function cancelSubscribe(args: DemoSubscribeArguments) {
     const { userId, text, webApp, router, dispatch, setIsLoading } = args;
 
-    webApp?.showConfirm(text, async function(isOk: boolean) {
+    webApp?.showConfirm(text, async function (isOk: boolean) {
         if (isOk && userId) {
             try {
                 setIsLoading(true);
@@ -119,16 +127,19 @@ export async function cancelSubscribe(args: DemoSubscribeArguments) {
                     '/cancel_subscription?user_id=' + userId).then(r => {
                         if (r.data && r.data.message) {
                             const message = r.data.message;
-                        
+
                             if (message.indexOf('cancelled immediately') !== -1) {
-                                getUser(userId, dispatch).then(() => {
+                                getUser({
+                                    userId: userId,
+                                    dispatch: dispatch,
+                                }).then(() => {
                                     setIsLoading(false);
                                     webApp.showAlert(setLocale(router.locale).subscription_successfully_canceled);
                                 });
                             } else {
                                 const dateMatch = message.match(/on (\d{4}-\d{2}-\d{2})/);
                                 const cancellationDate = dateMatch ? dateMatch[1] : 'неизвестная дата';
-                        
+
                                 webApp.showAlert(setLocale(router.locale).subscription_will_be_cancelled_on
                                     .replace('$$$', formatDate(cancellationDate)));
 
@@ -137,7 +148,10 @@ export async function cancelSubscribe(args: DemoSubscribeArguments) {
                         }
                     });
             } catch (error) {
-                setIsLoading(false);
+                webApp?.showAlert(setLocale(router.locale).errors.cancel_subscribe_error, async function() {
+                    setIsLoading(false);
+                }); 
+
                 console.error(error);
             }
         }

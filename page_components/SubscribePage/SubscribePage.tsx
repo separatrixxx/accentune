@@ -5,6 +5,7 @@ import { Button } from '../../components/Common/Button/Button';
 import { setLocale } from '../../helpers/locale.helper';
 import { setSubscribeDefault } from '../../features/subscribe/subscribeSlice';
 import { createPretransaction } from '../../helpers/subscription.helper';
+import { MainLink } from '../../components/Common/MainLink/MainLink';
 
 
 export const SubscribePage = (): JSX.Element => {
@@ -20,6 +21,14 @@ export const SubscribePage = (): JSX.Element => {
 
             webApp?.BackButton.hide();
         });
+    }
+
+    if (!tgUser) {
+        return (
+            <div className={styles.wrapper}>
+                <MainLink />
+            </div>
+        );
     }
 
     if (subscribe.status === -1) {

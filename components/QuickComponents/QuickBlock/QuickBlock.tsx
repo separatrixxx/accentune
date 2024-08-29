@@ -10,21 +10,34 @@ import { checkQuickAnswer, getQuickVariant } from '../../../helpers/quick.helper
 import { Button } from '../../Common/Button/Button';
 import { QuickButtons } from '../QuickButtons/QuickButtons';
 import { useSetup } from '../../../hooks/useSetup';
+import { CheckQuickArguments } from '../../../interfaces/refactor.interface';
+import { useHelpStates } from '../../../hooks/useHelpStates';
 
 
 export const QuickBlock = (): JSX.Element => {
-    const { router, dispatch, tgUser, quick } = useSetup();
+    const { router, dispatch, webApp, tgUser, quick } = useSetup();
+    const { answer, isCorrect, setAnswer, setIsCorrect } = useHelpStates();
 
     useEffect(() => {
-        getQuickVariant(tgUser?.id, dispatch);
-    }, [tgUser, dispatch]);
+        getQuickVariant({
+            userId: tgUser?.id,
+            webApp: webApp,
+            router: router,
+            dispatch: dispatch,
+        });
+    }, [router, webApp, tgUser, dispatch]);
 
-    const [answer, setAnswer] = useState<string>('');
-    const [isCorrect, setIsCorrect] = useState<boolean>(false);
+    const checkQuickAnswerArgs: CheckQuickArguments = {
+        answer: answer,
+        setAnswer: setAnswer,
+        setIsCorrect: setIsCorrect,
+        quick: quick,
+        dispatch: dispatch,
+    };
 
     const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
         if (e.key === 'Enter') {
-            checkQuickAnswer(quick, answer, setAnswer, setIsCorrect, dispatch);
+            checkQuickAnswer(checkQuickAnswerArgs);
         }
     };
 
@@ -48,7 +61,7 @@ export const QuickBlock = (): JSX.Element => {
                 <div className={styles.quickButtonDiv}>
                     <Button icon='sunglasses_emoji.webp' text={setLocale(router.locale).submit_answer}
                         description={setLocale(router.locale).click_to_submit_answer}
-                        onClick={() => checkQuickAnswer(quick, answer, setAnswer, setIsCorrect, dispatch)} />
+                        onClick={() => checkQuickAnswer(checkQuickAnswerArgs)} />
                 </div>
             </>
         );

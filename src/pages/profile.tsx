@@ -7,13 +7,18 @@ import { useSetup } from "../../hooks/useSetup";
 
 
 function Profile(): JSX.Element {
-  const { router, dispatch, tgUser } = useSetup();
+  const { router, dispatch, webApp, tgUser } = useSetup();
 
   useEffect(() => {
     if (tgUser) {
-      getUser(tgUser?.id, dispatch);
+      getUser({
+        userId: tgUser?.id,
+        webApp: webApp,
+        text: setLocale(router.locale).errors.get_user_error,
+        dispatch: dispatch,
+      });
     }
-  }, [tgUser, dispatch]);
+  }, [router, tgUser, webApp, dispatch]);
 
   return (
     <>

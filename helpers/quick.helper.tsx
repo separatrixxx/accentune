@@ -1,9 +1,13 @@
 import axios, { AxiosResponse } from "axios";
 import { setQuickVariant, setQuickVariantLength, toggleQuickNum, updateQuickSolved } from "../features/quick/quickSlice";
-import { QuickInterface, QuickVariantInterface, SolvedQuickTask, SolvedQuickTaskData } from "../interfaces/quick.interface";
+import { QuickVariantInterface, SolvedQuickTask } from "../interfaces/quick.interface";
+import { CheckQuickArguments, GetQuickArguments, SendQuickArguments } from "../interfaces/refactor.interface";
+import { setLocale } from "./locale.helper";
 
 
-export async function getQuickVariant(userId: number | undefined, dispatch: any) {
+export async function getQuickVariant(args: GetQuickArguments) {
+    const { userId, webApp, router, dispatch } = args;
+
     try {
         const { data : response }: AxiosResponse<QuickVariantInterface[]> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
             '/get_variant?user_id=' + userId);
@@ -11,12 +15,17 @@ export async function getQuickVariant(userId: number | undefined, dispatch: any)
             dispatch(setQuickVariantLength(response.length));
             dispatch(setQuickVariant(response.filter(task => task !== null)));
     } catch (err: any) {
+        webApp?.showAlert(setLocale(router.locale).errors.get_variant_error, async function() {
+            router.push('/');
+        }); 
+
         console.error(err);
     }
 }
 
-export function checkQuickAnswer(quick: QuickInterface, answer: string, setAnswer: (e: string) => void,
-    setIsCorrect: (e: boolean) => void, dispatch: any) {
+export function checkQuickAnswer(args: CheckQuickArguments) {
+    const { answer, setAnswer, setIsCorrect, quick, dispatch } = args;
+
     const newSolvedTask: SolvedQuickTask = {
         answer: quick.variant[quick.num].answer,
         task_id: quick.variant[quick.num].task_id,
@@ -31,11 +40,15 @@ export function checkQuickAnswer(quick: QuickInterface, answer: string, setAnswe
     }
 }
 
-export async function sendQuickVariant(userId: number, solved: SolvedQuickTaskData) {
+export async function sendQuickVariant(args: SendQuickArguments) {
+    const { userId, webApp, router, solved } = args;
+
     try {
         await axios.post(process.env.NEXT_PUBLIC_DOMAIN +
             '/save_solved_variant?user_id=' + userId, solved);
     } catch (err: any) {
+        webApp?.showAlert(setLocale(router.locale).errors.send_variant_error); 
+
         console.error(err);
     }
 }

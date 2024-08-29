@@ -5,6 +5,7 @@ import { getUserCourse } from '../../helpers/webinars.helper';
 import { MyCourseBlock } from '../../components/WebinarsComponents/MyCourseBlock/MyCourseBlock';
 import { Spinner } from '../../components/Common/Spinner/Spinner';
 import { AllCoursesBlock } from '../../components/WebinarsComponents/AllCoursesBlock/AllCoursesBlock';
+import { MainLink } from '../../components/Common/MainLink/MainLink';
 
 
 export const WebinarsPage = (): JSX.Element => {
@@ -30,7 +31,9 @@ export const WebinarsPage = (): JSX.Element => {
     return (
         <div className={styles.wrapper}>
             {
-                coursesBlockype === 'all' ?
+                !tgUser ?
+                    <MainLink />
+                : coursesBlockype === 'all' ?
                     <AllCoursesBlock />
                 : coursesBlockype === 'my' ?
                     <MyCourseBlock />

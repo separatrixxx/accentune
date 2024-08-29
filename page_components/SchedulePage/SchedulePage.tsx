@@ -7,6 +7,7 @@ import { setLocale } from '../../helpers/locale.helper';
 import { Spinner } from '../../components/Common/Spinner/Spinner';
 import { ScheduleList } from '../../components/ScheduleComponents/ScheduleList/ScheduleList';
 import { ScheduleItem } from '../../components/ScheduleComponents/ScheduleItem/ScheduleItem';
+import { MainLink } from '../../components/Common/MainLink/MainLink';
 
 
 export const SchedulePage = (): JSX.Element => {
@@ -39,7 +40,9 @@ export const SchedulePage = (): JSX.Element => {
     return (
         <div className={styles.wrapper}>
             {
-                userWebinars.status === 'success' ?
+                !tgUser ?
+                    <MainLink />
+                : userWebinars.status === 'success' ?
                     !webinarId ?
                         <ScheduleList setWebinarId={setWebinarId} />
                     : <ScheduleItem webinarId={webinarId} setWebinarId={setWebinarId} />

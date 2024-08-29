@@ -5,16 +5,20 @@ import { setLocale } from "../../helpers/locale.helper";
 import { useEffect, useState } from 'react';
 import { getBlocks } from '../../helpers/firstPart.helper';
 import { Blocks } from '../../interfaces/firstPart.interface';
+import { useSetup } from '../../hooks/useSetup';
 
 
 function Part2(): JSX.Element {
-  const router = useRouter();
+  const { router, webApp } = useSetup();
 
   const [blocks, setBlocks] = useState<Blocks>({});
 
   useEffect(() => {
-    getBlocks(setBlocks)
-  }, [setBlocks]);
+    getBlocks({
+      webApp: webApp,
+      router: router,
+    }, setBlocks)
+  }, [router, webApp, setBlocks]);
 
   return (
     <>

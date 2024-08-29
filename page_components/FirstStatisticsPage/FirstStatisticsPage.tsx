@@ -4,10 +4,11 @@ import { Htag } from '../../components/Common/Htag/Htag';
 import { setLocale } from '../../helpers/locale.helper';
 import { FirstStatisticsBlock } from '../../components/StatisticksComponents/FirstStatisticsBlock/FirstStatisticsBlock';
 import { Spinner } from '../../components/Common/Spinner/Spinner';
+import { MainLink } from '../../components/Common/MainLink/MainLink';
 
 
 export const FirstStatisticsPage = (): JSX.Element => {
-    const { router, webApp, firstStatistics } = useSetup();
+    const { router, webApp, tgUser, firstStatistics } = useSetup();
         
     if (webApp) {
         webApp?.BackButton.hide();
@@ -23,7 +24,9 @@ export const FirstStatisticsPage = (): JSX.Element => {
     return (
         <div className={styles.wrapper}>
             {
-                firstStatistics.overall_stats.solved_task_count === -1 ?
+                !tgUser ?
+                    <MainLink />
+                : firstStatistics.overall_stats.solved_task_count === -1 ?
                     <Spinner />
                 : firstStatistics.overall_stats.solved_task_count !== 0 ?
                     <FirstStatisticsBlock />

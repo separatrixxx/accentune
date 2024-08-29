@@ -4,28 +4,30 @@ import { MainButtons } from '../../components/MainComponents/MainButtons/MainBut
 import { useSetup } from '../../hooks/useSetup';
 import { Spinner } from '../../components/Common/Spinner/Spinner';
 import { PromoSlider } from '../../components/PromoComponents/PromoSlider/PromoSlider';
+import { MainLink } from '../../components/Common/MainLink/MainLink';
 
 
 export const MainPage = (): JSX.Element => {
-  const { webApp, user } = useSetup();
+  const { webApp, tgUser, user } = useSetup();
 
   if (webApp) {
       webApp?.BackButton.hide();
   }
 
-  if (user.privileges === null) {
-    return (
-      <div className={styles.wrapper}>
-        <Spinner />
-      </div>
-    );
-  }
-
   return (
     <div className={styles.wrapper}>
-      <Header />
-      <MainButtons />
-      <PromoSlider />
+      {
+        !tgUser ?
+          <MainLink />
+        : !user.privileges ?
+          <Spinner />
+        : 
+          <>
+            <Header />
+            <MainButtons />
+            <PromoSlider />
+          </>
+      }
     </div>
   );
 };

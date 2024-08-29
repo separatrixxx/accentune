@@ -11,7 +11,7 @@ import { Button } from '../../Common/Button/Button';
 
 
 export const SecondCompletedItem = ({ completed, taskId, setCompleted }: SecondCompletedItemProps): JSX.Element => {
-    const { router, dispatch, tgUser, completedTasks } = useSetup();
+    const { router, dispatch, webApp, tgUser, completedTasks } = useSetup();
 
     useEffect(() => {
         if (completed === 'completed') {
@@ -74,7 +74,10 @@ export const SecondCompletedItem = ({ completed, taskId, setCompleted }: SecondC
                 </div>
                 <Button description={setLocale(router.locale).cancel_solution} onClick={() => {
                     setCompleted(null);
-                    cancelSolution(tgUser?.id, taskId);
+                    cancelSolution({
+                        webApp: webApp,
+                        router: router,
+                    }, tgUser?.id, taskId);
                 }} />
             </>
         );

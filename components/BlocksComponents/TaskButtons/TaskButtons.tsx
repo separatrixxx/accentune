@@ -1,14 +1,13 @@
 import { TaskButtonsProps } from './TaskButtons.props';
 import styles from './TaskButtons.module.css';
 import { Button } from '../../Common/Button/Button';
-import { useRouter } from 'next/router';
 import { setLocale } from '../../../helpers/locale.helper';
 import { checkAnswer, nextTask } from '../../../helpers/firstPart.helper';
+import { useSetup } from '../../../hooks/useSetup';
 
 
-export const TaskButtons = ({ answer, task, firstPart, userId, isFault, setAnswer, setTask, setIsFault,
-    setIsCorrect, setIsDecided }: TaskButtonsProps): JSX.Element => {
-    const router = useRouter();
+export const TaskButtons = ({ checkAnswerArgs, isFault, setTask }: TaskButtonsProps): JSX.Element => {
+    const { router, webApp, tgUser, firstPart } = useSetup();
 
     return (
         <div className={styles.taskButtons}>
@@ -16,17 +15,25 @@ export const TaskButtons = ({ answer, task, firstPart, userId, isFault, setAnswe
                 !isFault ?
                     <Button icon='sunglasses_emoji.webp' text={setLocale(router.locale).submit_answer}
                         description={setLocale(router.locale).click_to_submit_answer}
-                        onClick={() => checkAnswer(answer, task, firstPart, userId, setAnswer,
-                            setTask, setIsFault, setIsCorrect, setIsDecided)} />
+                        onClick={() => checkAnswer(checkAnswerArgs)} />
                 :
                     <Button icon='downcast_emoji.webp' text={setLocale(router.locale).try_one_more}
                         description={setLocale(router.locale).change_your_answer} onClick={() => {
-                            setIsFault(false);
+                            checkAnswerArgs.setIsFault(false);
                         }} />
             }
             <Button icon='partying_emoji.webp' text={setLocale(router.locale).next_task}
                 description={setLocale(router.locale).move_next_task}
-                onClick={() => nextTask(firstPart, userId, setAnswer, setTask, setIsFault, setIsDecided)} />
+                onClick={() => nextTask({
+                    userId: tgUser?.id,
+                    webApp: webApp,
+                    router: router,
+                    firstPart: firstPart,
+                    setAnswer: checkAnswerArgs.setAnswer,
+                    setIsFault: checkAnswerArgs.setIsFault,
+                    setIsDecided: checkAnswerArgs.setIsDecided,
+                    setTask,
+                })} />
         </div>
     );
 };

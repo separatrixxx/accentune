@@ -1,6 +1,8 @@
 import axios, { AxiosResponse } from "axios";
 import { CompletedItemInterface, SecondPartCompletedInterface, UnsubmittedItemInterface } from "../interfaces/completed.interface";
 import { setCompleted, setCompletedError, setCompletedTasks, setUnsubmitted } from "../features/completedTasks/completedTasksSlice";
+import { ErrorArguments } from "../interfaces/refactor.interface";
+import { setLocale } from "./locale.helper";
 
 
 export async function getUnsubmittedTasks(userId: number | undefined, dispatch: any) {
@@ -51,11 +53,15 @@ export async function getCompletedItem(userId: number | undefined, taskId: strin
     }
 }
 
-export async function cancelSolution(userId: number | undefined, taskId: string) {
+export async function cancelSolution(args: ErrorArguments, userId: number | undefined, taskId: string) {
+    const { webApp, router } = args;
+
     try {
         await axios.post(process.env.NEXT_PUBLIC_DOMAIN +
             '/cancel_solution?user_id=' + userId + '&task_id=' + taskId);
-    } catch (err) {       
+    } catch (err) {
+        webApp?.showAlert(setLocale(router.locale).errors.cancel_solution_error); 
+        
         console.log(err);
     }
 }

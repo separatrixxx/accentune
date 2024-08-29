@@ -1,0 +1,43 @@
+.link {
+	position: absolute;
+	top: 35%;
+
+	display: grid;
+
+	width: 100%;
+	justify-items: center;
+	gap: 40px;
+}
+
+.mainTitle {
+	width: 80%;
+
+	transition-duration: 300ms;
+	text-align: center;
+
+	color: var(--primary);
+
+	font-weight: 600;
+}
+
+.logo {
+	display: grid;
+	align-items: center;
+
+	width: 120px;
+	height: 120px;
+
+	transition-duration: 300ms;
+
+	border-radius: 9999px;
+	justify-items: center;
+}
+
+.mainTitle:hover,
+.mainTitle:active,
+.logo:hover,
+.logo:active {
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+	filter: brightness(0.9);
+}

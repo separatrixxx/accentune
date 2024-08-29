@@ -1,37 +1,64 @@
 import axios, { AxiosResponse } from "axios";
-import { Blocks, FirstPartInterface, FirstTaskInterface, ThemesTypesInterface } from "../interfaces/firstPart.interface";
+import { Blocks, FirstTaskInterface, ThemesTypesInterface } from "../interfaces/firstPart.interface";
+import { setLocale } from "./locale.helper";
+import { CheckFirstAnswerArguments, ErrorArguments, FirstTaskArguments, NextTaskArguments,
+    UpdateTaskArguments } from "../interfaces/refactor.interface";
 
 
-export async function getBlocks(setBlocks: (e: Blocks) => void) {
+export async function getBlocks(args: ErrorArguments, setBlocks: (e: Blocks) => void) {
+    const { webApp, router } = args;
+
     try {
         const { data : response }: AxiosResponse<Blocks> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
             '/blocks');
 
         setBlocks(response);
     } catch (err) {
+        webApp?.showAlert(setLocale(router.locale).errors.get_blocks_error); 
+
         console.error(err);
     }
 }
 
-export async function getThemesTypes(blockId: string, setThemesTypes: (e: ThemesTypesInterface) => void) {
+export async function getThemesTypes(args: ErrorArguments, blockId: string, setThemesTypes: (e: ThemesTypesInterface) => void) {
+    const { webApp, router } = args;
+
     try {
         const { data : response }: AxiosResponse<ThemesTypesInterface> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
             '/themes_and_types_for_block?block_id=' + blockId);
 
         setThemesTypes(response);
     } catch (err) {
+        webApp?.showAlert(setLocale(router.locale).errors.get_themes_types_error, async function() {
+            router.push('/');
+        }); 
+
         console.error(err);
     }
 }
 
-export function checkAnswer(answer: string, task: FirstTaskInterface, firstPart: FirstPartInterface, userId: number | undefined,
-    setAnswer: (e: string) => void, setFirstTask: (e: FirstTaskInterface | null) => void, setIsFault: (e: boolean) => void,
-    setIsCorrect: (e: boolean) => void, setIsDecided: (e: boolean) => void) {
+export function checkAnswer(args: CheckFirstAnswerArguments) {
+    const { userId, webApp, router, answer, task, firstPart, setAnswer, setFirstTask, setIsFault, setIsCorrect, setIsDecided } = args;
+
     if (answer.trim() === task?.answer) {
         setFirstTask(null);
         setIsCorrect(true);
-        updateSolvedTask(userId, task.task_id);
-        getFirstTask(firstPart.blockId, firstPart.sortId, firstPart.isThemes, userId, setFirstTask, setIsDecided);
+        updateSolvedTask({
+            userId: userId,
+            webApp: webApp,
+            router: router,
+            taskId: task.task_id,
+        });
+        getFirstTask({
+            userId: userId,
+            webApp: webApp,
+            router: router,
+            blockId: firstPart.blockId,
+            sortId: firstPart.sortId,
+            isTheme: firstPart.isThemes,
+            setIsDecided: setIsDecided,
+            setFirstTask: setFirstTask,
+        });
     } else {
         setIsFault(true);
     }
@@ -39,17 +66,27 @@ export function checkAnswer(answer: string, task: FirstTaskInterface, firstPart:
     setAnswer('');
 }
 
-export function nextTask(firstPart: FirstPartInterface, userId: number | undefined,
-    setAnswer: (e: string) => void, setTask: (e: FirstTaskInterface | null) => void,
-    setIsFault: (e: boolean) => void, setIsDecided: (e: boolean) => void) {
+export function nextTask(args: NextTaskArguments) {
+    const { userId, webApp, router, firstPart, setAnswer, setIsFault, setIsDecided, setTask } = args;
+
     setIsFault(false);
     setTask(null);
     setAnswer('');
-    getFirstTask(firstPart.blockId, firstPart.sortId, firstPart.isThemes, userId, setTask, setIsDecided);
+    getFirstTask({
+        userId: userId,
+        webApp: webApp,
+        router: router,
+        blockId: firstPart.blockId,
+        sortId: firstPart.sortId,
+        isTheme: firstPart.isThemes,
+        setIsDecided: setIsDecided,
+        setFirstTask: setTask,
+    });
 }
 
-export async function getFirstTask(blockId: string, sortId: string, isTheme: boolean, userId: number | undefined,
-    setFirstTask: (e: FirstTaskInterface) => void, setIsDecided: (e: boolean) => void) {
+export async function getFirstTask(args: FirstTaskArguments) {
+    const { userId, webApp, router, blockId, sortId, isTheme, setIsDecided, setFirstTask } = args;
+
     try {
         const { data : response }: AxiosResponse<FirstTaskInterface> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
             '/get_task?block_id=' + blockId
@@ -61,18 +98,26 @@ export async function getFirstTask(blockId: string, sortId: string, isTheme: boo
     } catch (err: any) {
         if (err.response && err.response.data.error === 'No task found') {
             setIsDecided(true);
+        } else {
+            webApp?.showAlert(setLocale(router.locale).errors.get_task_error, async function() {
+                router.push('/');
+            }); 
         }
 
         console.error(err);
     }
 }
 
-export async function updateSolvedTask(userId: number | undefined, taskId: string,) {
+export async function updateSolvedTask(args: UpdateTaskArguments) {
+    const { userId, webApp, router, taskId } = args;
+
     try {
         await axios.post(process.env.NEXT_PUBLIC_DOMAIN +
             '/update_solved_task?user_id=' + userId
             + '&task_id=' + taskId);
     } catch (err) {
+        webApp?.showAlert(setLocale(router.locale).errors.update_task_error); 
+
         console.error(err);
     }
 }
