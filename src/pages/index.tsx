@@ -23,13 +23,13 @@ function Main(): JSX.Element {
         text: setLocale(router.locale).errors.get_user_error,
         dispatch: dispatch,
       });
-    }
 
-    getPromo({
-      webApp: webApp,
-      subject: subject,
-      router: router,
-    }, dispatch)
+      getPromo({
+        webApp: webApp,
+        subject: subject,
+        router: router,
+      }, dispatch);
+    }
   }, [router, tgUser, webApp, subject, dispatch]);
 
   return (
