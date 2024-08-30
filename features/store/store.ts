@@ -12,6 +12,7 @@ import subscribeSlice from "../subscribe/subscribeSlice";
 import subjectSlice from "../subject/subjectSlice";
 import userCourseSlice from "../userCourse/userCourseSlice";
 import userWebinarsSlice from "../userWebinars/userWebinarsSlice";
+import promoSlice  from "../promo/promoSlice";
 
 
 const makeStore = () =>
@@ -29,9 +30,10 @@ const makeStore = () =>
       subject: subjectSlice,
       userCourse: userCourseSlice,
       userWebinars: userWebinarsSlice,
+      promo: promoSlice,
     },
     devTools: true,
-});
+  });
 
 export type AppStore = ReturnType<typeof makeStore>;
 export type AppState = ReturnType<AppStore["getState"]>;

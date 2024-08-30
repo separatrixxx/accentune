@@ -15,17 +15,18 @@ import { useHelpStates } from '../../../hooks/useHelpStates';
 
 
 export const QuickBlock = (): JSX.Element => {
-    const { router, dispatch, webApp, tgUser, quick } = useSetup();
+    const { router, dispatch, webApp, tgUser, quick, subject } = useSetup();
     const { answer, isCorrect, setAnswer, setIsCorrect } = useHelpStates();
 
     useEffect(() => {
         getQuickVariant({
             userId: tgUser?.id,
             webApp: webApp,
+            subject: subject,
             router: router,
             dispatch: dispatch,
         });
-    }, [router, webApp, tgUser, dispatch]);
+    }, [router, webApp, tgUser, subject, dispatch]);
 
     const checkQuickAnswerArgs: CheckQuickArguments = {
         answer: answer,

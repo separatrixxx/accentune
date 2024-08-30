@@ -1,8 +1,9 @@
 .promoSlide {
 	display: grid;
+	overflow: hidden;
 	align-items: center;
 
-	height: 200px;
+	height: fit-content;
 
 	border: 2px solid var(--tg-theme-section-bg-color);
 	border-radius: 10px;
@@ -11,6 +12,14 @@
 	justify-items: center;
 }
 
-.title {
-	color: var(--tg-theme-subtitle-text-color);
+.promoPhoto {
+	display: grid;
+	align-items: center;
+
+	width: 100%;
+	height: 100%;
+
+	transition-duration: 300ms;
+
+	justify-items: center;
 }

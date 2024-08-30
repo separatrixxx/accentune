@@ -11,7 +11,7 @@ import { MainLink } from '../../components/Common/MainLink/MainLink';
 
 
 export const SchedulePage = (): JSX.Element => {
-    const { router, dispatch, webApp, tgUser, userWebinars } = useSetup();
+    const { router, dispatch, webApp, tgUser, userWebinars, subject } = useSetup();
 
     if (webApp) {
         webApp?.BackButton.hide();
@@ -29,6 +29,7 @@ export const SchedulePage = (): JSX.Element => {
         getUserWebinars({
             userId: tgUser?.id,
             webApp: webApp,
+            subject: subject,
             text: setLocale(router.locale).errors.user_webinars_error,
             router: router,
             dispatch: dispatch,

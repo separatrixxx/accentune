@@ -10,13 +10,13 @@ import { setSubject } from '../../../features/subject/subjectSlice';
 export const SubjectsForm = (): JSX.Element => {
     const { router, dispatch, subject } = useSetup();
 
-    const subjectsList: Subject[] = ['social', 'math', 'russian'];
+    const subjectsList: Subject[] = ['obj', 'rus'];
     
     return (
         <div className={styles.subjectsForm}>
             <div className={styles.currentSubjectDiv}>
                 <Htag tag='l' className={styles.currentSubjectName} onClick={() => {}}>
-                    {setLocale(router.locale).subjects[subject as 'social']}
+                    {setLocale(router.locale).subjects[subject as 'obj']}
                 </Htag>
                 <Arrow />
             </div>

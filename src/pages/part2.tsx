@@ -9,16 +9,17 @@ import { useSetup } from '../../hooks/useSetup';
 
 
 function Part2(): JSX.Element {
-  const { router, webApp } = useSetup();
+  const { router, webApp, subject } = useSetup();
 
   const [blocks, setBlocks] = useState<Blocks>({});
 
   useEffect(() => {
     getBlocks({
       webApp: webApp,
+      subject: subject,
       router: router,
     }, setBlocks)
-  }, [router, webApp, setBlocks]);
+  }, [router, webApp, subject, setBlocks]);
 
   return (
     <>

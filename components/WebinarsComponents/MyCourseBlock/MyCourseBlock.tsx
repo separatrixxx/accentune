@@ -9,7 +9,7 @@ import { unsubscribeForCourse } from '../../../helpers/webinars.helper';
 
 
 export const MyCourseBlock = (): JSX.Element => {
-    const { router, dispatch, webApp, tgUser, userCourse } = useSetup();
+    const { router, dispatch, webApp, tgUser, userCourse, subject } = useSetup();
     const [isLoading, setIsLoading] = useState<boolean>(false);
 
     return (
@@ -39,6 +39,7 @@ export const MyCourseBlock = (): JSX.Element => {
                     text: setLocale(router.locale).you_unsubscribed_from_course
                         + ' "' + userCourse.course_name + '"',
                     webApp: webApp,
+                    subject: subject,
                     router: router,
                     dispatch: dispatch,
                     setIsLoading: setIsLoading,

@@ -16,7 +16,7 @@ import { CheckSecondTaskArguments } from '../../../interfaces/refactor.interface
 
 
 export const SecondTaskBlock = (): JSX.Element => {
-    const { router, webApp, tgUser, secondPart } = useSetup();
+    const { router, webApp, tgUser, secondPart, subject } = useSetup();
 
     const { secondTask, isCorrect, isDecided, answer, setSecondTask, setIsCorrect, setIsDecided, setAnswer } = useHelpStates();
     const [taskId, setTaskId] = useState<string>('');
@@ -25,6 +25,7 @@ export const SecondTaskBlock = (): JSX.Element => {
         getSecondTask({
             userId: tgUser?.id,
             webApp: webApp,
+            subject: subject,
             router: router,
             blockId: secondPart.blockId,
             typeId: secondPart.typeId,
@@ -32,11 +33,12 @@ export const SecondTaskBlock = (): JSX.Element => {
             setSecondTask: setSecondTask,
             setTaskId: setTaskId,
         });
-    }, [router, webApp, tgUser, secondPart, setIsDecided, setSecondTask]);
+    }, [router, webApp, tgUser, secondPart, subject, setIsDecided, setSecondTask]);
 
     const checkSecondAnswerArgs: CheckSecondTaskArguments = {
         userId: tgUser?.id,
         webApp: webApp,
+        subject: subject,
         router: router,
         blockId: secondPart.blockId,
         typeId: secondPart.typeId,

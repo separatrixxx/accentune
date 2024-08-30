@@ -8,7 +8,7 @@ import { useHelpStates } from '../../../hooks/useHelpStates';
 
 
 export const ProfileButtons = (): JSX.Element => { 
-    const { router, dispatch, webApp, tgUser, user } = useSetup();
+    const { router, dispatch, webApp, tgUser, user, subject } = useSetup();
     const { isLoading, setIsLoading } = useHelpStates();
 
     const price = 350;
@@ -17,6 +17,7 @@ export const ProfileButtons = (): JSX.Element => {
         userId: tgUser?.id,
         text: setLocale(router.locale).activate_subscription + '?',
         webApp: webApp,
+        subject: subject,
         router: router,
         dispatch: dispatch,
         setIsLoading: setIsLoading,

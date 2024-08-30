@@ -4,10 +4,11 @@ import { setLocale } from "../../helpers/locale.helper";
 import { useEffect } from "react";
 import { getUser } from "../../helpers/user.helper";
 import { useSetup } from "../../hooks/useSetup";
+import { getPromo } from "../../helpers/promo.helper";
 
 
 function Main(): JSX.Element {
-  const { router, dispatch, webApp, tgUser } = useSetup();
+  const { router, dispatch, webApp, tgUser, subject } = useSetup();
 
   if (webApp) {
     webApp.expand();
@@ -18,11 +19,18 @@ function Main(): JSX.Element {
       getUser({
         userId: tgUser?.id,
         webApp: webApp,
+        subject: subject,
         text: setLocale(router.locale).errors.get_user_error,
         dispatch: dispatch,
       });
     }
-  }, [router, tgUser, webApp, dispatch]);
+
+    getPromo({
+      webApp: webApp,
+      subject: subject,
+      router: router,
+    }, dispatch)
+  }, [router, tgUser, webApp, subject, dispatch]);
 
   return (
     <>

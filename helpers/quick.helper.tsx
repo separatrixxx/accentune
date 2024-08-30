@@ -3,13 +3,14 @@ import { setQuickVariant, setQuickVariantLength, toggleQuickNum, updateQuickSolv
 import { QuickVariantInterface, SolvedQuickTask } from "../interfaces/quick.interface";
 import { CheckQuickArguments, GetQuickArguments, SendQuickArguments } from "../interfaces/refactor.interface";
 import { setLocale } from "./locale.helper";
+import { getDomain } from "./domain.helper";
 
 
 export async function getQuickVariant(args: GetQuickArguments) {
-    const { userId, webApp, router, dispatch } = args;
+    const { userId, webApp, subject, router, dispatch } = args;
 
     try {
-        const { data : response }: AxiosResponse<QuickVariantInterface[]> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
+        const { data : response }: AxiosResponse<QuickVariantInterface[]> = await axios.get(getDomain(subject) +
             '/get_variant?user_id=' + userId);
 
             dispatch(setQuickVariantLength(response.length));
@@ -41,10 +42,10 @@ export function checkQuickAnswer(args: CheckQuickArguments) {
 }
 
 export async function sendQuickVariant(args: SendQuickArguments) {
-    const { userId, webApp, router, solved } = args;
+    const { userId, webApp, subject, router, solved } = args;
 
     try {
-        await axios.post(process.env.NEXT_PUBLIC_DOMAIN +
+        await axios.post(getDomain(subject) +
             '/save_solved_variant?user_id=' + userId, solved);
     } catch (err: any) {
         webApp?.showAlert(setLocale(router.locale).errors.send_variant_error); 

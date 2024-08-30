@@ -14,7 +14,7 @@ import { WebinarRecording } from '../WebinardRecording/WebinardRecording';
 
 
 export const ScheduleItem = ({ webinarId, setWebinarId }: ScheduleItemProps): JSX.Element => {
-    const { router, webApp } = useSetup();
+    const { router, webApp, subject } = useSetup();
 
     const [webinarInfo, setWebinarInfo] = useState<WebinarInfoData | null>(null);
 
@@ -22,11 +22,12 @@ export const ScheduleItem = ({ webinarId, setWebinarId }: ScheduleItemProps): JS
         getWebinarData({
             webinarId: webinarId,
             webApp: webApp,
+            subject: subject,
             text: setLocale(router.locale).errors.webinar_info_error,
             setWebinarId: setWebinarId,
             setWebinarInfo: setWebinarInfo,
         });
-    }, [webinarId, webApp, router, setWebinarId, setWebinarInfo]);
+    }, [webinarId, webApp, router, subject, setWebinarId, setWebinarInfo]);
 
     if (!webinarInfo) {
         return <Spinner />

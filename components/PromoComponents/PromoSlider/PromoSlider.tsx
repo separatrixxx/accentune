@@ -7,10 +7,11 @@ import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/autoplay';
 import { PromoSlide } from '../PromoSlide/PromoSlide';
+import { useSetup } from '../../../hooks/useSetup';
 
 
 export const PromoSlider = (): JSX.Element => {
-    const titles = ['promo1', 'promo2', 'promo3'];
+    const { promo } = useSetup();
 
     return (
         <Swiper className={styles.promoSLider}
@@ -26,9 +27,9 @@ export const PromoSlider = (): JSX.Element => {
             }}
         >
             {
-                titles.map(t => (
-                    <SwiperSlide key={t}>
-                        <PromoSlide title={t} />
+                promo.map(p => (
+                    <SwiperSlide key={p.promo_id}>
+                        <PromoSlide photo={p.photo_url} url={p.redirect_url} />
                     </SwiperSlide>
                 ))
             }

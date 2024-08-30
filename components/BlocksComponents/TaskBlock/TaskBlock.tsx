@@ -16,7 +16,7 @@ import { CheckFirstAnswerArguments } from '../../../interfaces/refactor.interfac
 
 
 export const TaskBlock = (): JSX.Element => {
-    const { router, webApp,  tgUser, firstPart } = useSetup();
+    const { router, webApp,  tgUser, firstPart, subject } = useSetup();
 
     const { firstTask, isCorrect, isDecided, isFault, answer,
         setFirstTask, setIsCorrect, setIsDecided, setIsFault, setAnswer } = useHelpStates();
@@ -25,6 +25,7 @@ export const TaskBlock = (): JSX.Element => {
         getFirstTask({
             userId: tgUser?.id,
             webApp: webApp,
+            subject: subject,
             router: router,
             blockId: firstPart.blockId,
             sortId: firstPart.sortId,
@@ -32,11 +33,12 @@ export const TaskBlock = (): JSX.Element => {
             setIsDecided: setIsDecided,
             setFirstTask: setFirstTask,
         });
-    }, [router, firstPart, webApp, tgUser, setIsDecided, setFirstTask]);
+    }, [router, firstPart, webApp, tgUser, subject, setIsDecided, setFirstTask]);
 
     const checkAnswerArgs: CheckFirstAnswerArguments = {
         userId: tgUser?.id,
         webApp: webApp,
+        subject: subject,
         router: router,
         answer: answer,
         task: firstTask,

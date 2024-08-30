@@ -8,7 +8,7 @@ import { useSetup } from '../../../hooks/useSetup';
 
 
 export const QuickButtons = ({ isDecided, setIsCorrect }: QuickButtonsProps): JSX.Element => {
-    const { router, dispatch, webApp, tgUser, quick } = useSetup();
+    const { router, dispatch, webApp, tgUser, quick, subject } = useSetup();
 
     return (
         <div className={styles.quickButtons}>
@@ -25,6 +25,7 @@ export const QuickButtons = ({ isDecided, setIsCorrect }: QuickButtonsProps): JS
                             sendQuickVariant({
                                 userId: tgUser?.id,
                                 webApp: webApp,
+                                subject: subject,
                                 router: router,
                                 solved: quick.solved,
                             });

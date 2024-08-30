@@ -13,16 +13,16 @@ import { SecondCompletedItem } from '../SecondCompletedItem/SecondCompletedItem'
 
 
 export const SecondStatisticsBlock = ({ completed, setCompleted }: SecondStatisticsBlockProps): JSX.Element => {
-    const { router, dispatch, tgUser, completedTasks } = useSetup();
+    const { router, dispatch, tgUser, completedTasks, subject } = useSetup();
     const { taskId, setTaskId } = useHelpStates();
 
     useEffect(() => {
         if (completed === 'completed') {
-            getCompletedTasks(tgUser?.id, dispatch);
+            getCompletedTasks(tgUser?.id, subject, dispatch);
         } else if (completed === 'unsubmitted') {
-            getUnsubmittedTasks(tgUser?.id, dispatch);
+            getUnsubmittedTasks(tgUser?.id, subject, dispatch);
         }
-    }, [tgUser, completed, dispatch]);
+    }, [tgUser, completed, subject, dispatch]);
 
     
     if (completedTasks.data.status === 'loading') {

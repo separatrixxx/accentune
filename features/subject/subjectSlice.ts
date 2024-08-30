@@ -1,7 +1,8 @@
 import { createSlice } from '@reduxjs/toolkit'
+import { Subject } from '../../interfaces/user.interface';
 
 
-const subject: string = 'social';
+const subject: Subject = 'obj';
 
 export const subjectSlice = createSlice({
   name: 'subject',

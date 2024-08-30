@@ -10,16 +10,17 @@ import { getTypes } from '../../../helpers/secondPart.helper';
 
 
 export const TypesBlock = ({ chooseSecondTypeId }: TypesBlockProps): JSX.Element => {
-    const { router, dispatch, webApp, secondPart } = useSetup();
+    const { router, dispatch, webApp, secondPart, subject } = useSetup();
 
     const [types, setTypes] = useState<TypesInterface | null>(null);
 
     useEffect(() => {
         getTypes({
             webApp: webApp,
+            subject: subject,
             router: router,
         }, secondPart.blockId, setTypes)
-    }, [router, webApp, secondPart, setTypes]);
+    }, [router, webApp, secondPart, subject, setTypes]);
 
     if (!types) {
         return <Spinner />

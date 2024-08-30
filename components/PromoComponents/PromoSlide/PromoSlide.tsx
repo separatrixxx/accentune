@@ -1,16 +1,21 @@
 import { PromoSlideProps } from './PromoSlide.props';
 import styles from './PromoSlide.module.css';
-import { Htag } from '../../Common/Htag/Htag';
 import Link from 'next/link';
+import Image from 'next/image';
 
 
-export const PromoSlide = ({ title }: PromoSlideProps): JSX.Element => {
+export const PromoSlide = ({ photo, url }: PromoSlideProps): JSX.Element => {
 	return (
-		<Link href='/'>
+		<Link href={url} target="_blank">
 			<div className={styles.promoSlide}>
-				<Htag tag='xl' className={styles.title}>
-					{title}
-				</Htag>
+				<Image className={styles.promoPhoto} draggable='false'
+					loader={() => photo}
+					src={photo}
+					alt='promo image'
+					width={1}
+					height={1}
+					unoptimized={true}
+				/>
 			</div>
 		</Link>
 	);

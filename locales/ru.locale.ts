@@ -34,9 +34,8 @@ export const ru = {
     webinars: 'Вебинары',
     available_by_subscription: 'Доступны по подписке',
     subjects: {
-        social: 'Обществознание',
-        math: 'Математика',
-        russian: 'Русский язык',
+        obj: 'Обществознание',
+        rus: 'Русский язык',
     },
     subscribe_to_access: 'Оформите подписку, чтобы получить доступ к этому разделу',
     select_block: 'Выберите блок',
@@ -138,6 +137,7 @@ export const ru = {
         get_types_error: 'Произошла ошибка при получении типов задач',
         get_stats_error: 'Произошла ошибка при получении статистики',
         cancel_solution_error: 'Произошла ошибка при отмене решения',
+        get_promo_error: 'Произошла ошибка при получении промо',
     },
     months: {
         month0: 'Январь',

@@ -1,4 +1,4 @@
-export type Subject = 'social' | 'math' | 'russian';
+export type Subject = 'obj' | 'rus';
 
 export interface UserInterface {
     user_name: string | null,

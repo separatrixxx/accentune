@@ -11,11 +11,11 @@ import { SubscribePage } from '../../page_components/SubscribePage/SubscribePage
 
 
 function Subscribe(): JSX.Element {
-const { router, dispatch } = useSetup();
+const { router, dispatch, subject } = useSetup();
 
   useEffect(() => {
-    getPrices(dispatch);
-  }, [dispatch]);
+    getPrices(subject, dispatch);
+  }, [subject, dispatch]);
 
   return (
     <>

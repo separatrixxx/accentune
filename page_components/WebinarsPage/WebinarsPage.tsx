@@ -9,7 +9,7 @@ import { MainLink } from '../../components/Common/MainLink/MainLink';
 
 
 export const WebinarsPage = (): JSX.Element => {
-    const { router, dispatch, webApp, tgUser } = useSetup();
+    const { router, dispatch, webApp, tgUser, subject } = useSetup();
     const [coursesBlockype, setCoursesBlockType] = useState<'all' | 'my' | null>(null);
     
     if (webApp) {
@@ -23,10 +23,11 @@ export const WebinarsPage = (): JSX.Element => {
     useEffect(() => {
         getUserCourse({
             userId: tgUser?.id,
+            subject: subject,
             setCoursesBlockType: setCoursesBlockType,
             dispatch: dispatch,
         });
-    }, [tgUser, setCoursesBlockType]);
+    }, [tgUser, subject, setCoursesBlockType]);
 
     return (
         <div className={styles.wrapper}>

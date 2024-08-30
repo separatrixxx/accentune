@@ -46,6 +46,7 @@ export const completedTasksSlice = createSlice({
   },
 });
 
-export const { setCompletedTasks, setDefault, setCompletedError, setUnsubmitted, setCompleted, setCompletedDefault } = completedTasksSlice.actions;
+export const { setCompletedTasks, setDefault, setCompletedError, setUnsubmitted,
+  setCompleted, setCompletedDefault } = completedTasksSlice.actions;
 
 export default completedTasksSlice.reducer;

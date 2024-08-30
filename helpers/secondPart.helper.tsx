@@ -2,13 +2,14 @@ import axios, { AxiosResponse } from "axios";
 import { SecondTaskInterface, SolvedSecondTaskData, TypesInterface } from "../interfaces/secondPart.interface";
 import { setLocale } from "./locale.helper";
 import { CheckSecondTaskArguments, ErrorArguments, SecondTaskArguments } from "../interfaces/refactor.interface";
+import { getDomain } from "./domain.helper";
 
 
 export async function getTypes(args: ErrorArguments, blockId: string, setTypes: (e: TypesInterface) => void) {
-    const { webApp, router } = args;
+    const { webApp, subject, router } = args;
 
     try {
-        const { data : response }: AxiosResponse<TypesInterface> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
+        const { data : response }: AxiosResponse<TypesInterface> = await axios.get(getDomain(subject) +
             '/types_for_block_second_part?block_id=' + blockId);
 
             setTypes(response);
@@ -22,10 +23,10 @@ export async function getTypes(args: ErrorArguments, blockId: string, setTypes: 
 }
 
 export async function getSecondTask(args: SecondTaskArguments) {
-    const { userId, webApp, router, blockId, typeId, setIsDecided, setSecondTask, setTaskId } = args;
+    const { userId, webApp, subject, router, blockId, typeId, setIsDecided, setSecondTask, setTaskId } = args;
 
     try {
-        const { data : response }: AxiosResponse<SecondTaskInterface> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
+        const { data : response }: AxiosResponse<SecondTaskInterface> = await axios.get(getDomain(subject) +
             '/get_task_second_part?block_id=' + blockId
             + '&type_id=' + typeId
             + '&user_id=' + userId);
@@ -49,7 +50,7 @@ export async function getSecondTask(args: SecondTaskArguments) {
 }
 
 export function checkSecondAnswer(args: CheckSecondTaskArguments) {
-    const { userId, webApp, router, blockId, typeId, answer, task_id,
+    const { userId, webApp, subject, router, blockId, typeId, answer, task_id,
         setIsDecided, setAnswer, setIsCorrect, setSecondTask, setTaskId } = args;
 
     if (answer.trim() !== '') {
@@ -59,6 +60,7 @@ export function checkSecondAnswer(args: CheckSecondTaskArguments) {
         getSecondTask({
             userId: userId,
             webApp: webApp,
+            subject: subject,
             router: router,
             blockId: blockId,
             typeId: typeId,
@@ -69,6 +71,7 @@ export function checkSecondAnswer(args: CheckSecondTaskArguments) {
 
         sendSecondAnswer({
             webApp: webApp,
+            subject: subject,
             router: router,
         }, userId, {
             task_id: task_id,
@@ -78,10 +81,10 @@ export function checkSecondAnswer(args: CheckSecondTaskArguments) {
 }
 
 export async function sendSecondAnswer(args: ErrorArguments, userId: number | undefined, solved: SolvedSecondTaskData) {
-    const { webApp, router } = args;
+    const { webApp, subject, router } = args;
 
     try {
-        await axios.post(process.env.NEXT_PUBLIC_DOMAIN +
+        await axios.post(getDomain(subject) +
             '/save_user_answer_for_task_second_part?user_id=' + userId, solved);
     } catch (err: any) {
         webApp?.showAlert(setLocale(router.locale).errors.send_variant_error);

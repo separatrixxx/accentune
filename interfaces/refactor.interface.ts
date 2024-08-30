@@ -1,13 +1,14 @@
 import { IWebApp } from "../types/telegram";
 import { FirstPartInterface, FirstTaskInterface } from "./firstPart.interface";
 import { QuickInterface, SolvedQuickTaskData } from "./quick.interface";
-import { SecondPartInterface } from "./secondPart.interface";
 import { SubscribeItemInterface } from "./subscribe.interface";
+import { Subject } from "./user.interface";
 import { WebinarInfoData } from "./webinars.interface";
 
 
 export interface ErrorArguments {
     webApp: IWebApp | undefined,
+    subject: Subject,
     router: any,
 }
 
@@ -30,7 +31,7 @@ export interface SendQuickArguments extends Omit<BaseArguments, 'text' | 'dispat
     solved: SolvedQuickTaskData
 }
 
-export interface CheckFirstAnswerArguments extends Pick<BaseArguments, 'userId' | 'webApp' | 'router'> {
+export interface CheckFirstAnswerArguments extends Pick<BaseArguments, 'userId' | 'subject' | 'webApp' | 'router'> {
     answer: string,
     task: FirstTaskInterface | null,
     firstPart: FirstPartInterface,
@@ -46,14 +47,14 @@ export interface CheckQuickArguments extends Pick<CheckFirstAnswerArguments, 'an
     dispatch: any,
 }
 
-export interface NextTaskArguments extends Pick<CheckFirstAnswerArguments, 'userId' | 'setAnswer' | 'setIsFault' | 'setIsDecided'> {
+export interface NextTaskArguments extends Pick<CheckFirstAnswerArguments, 'userId' | 'subject' | 'setAnswer' | 'setIsFault' | 'setIsDecided'> {
     webApp: IWebApp | undefined,
     router: any,
     firstPart: FirstPartInterface,
     setTask: (e: FirstTaskInterface | null) => void,
 }
 
-export interface FirstTaskArguments extends Pick<BaseArguments, 'userId' | 'webApp' | 'router'> {
+export interface FirstTaskArguments extends Pick<BaseArguments, 'userId' | 'webApp' | 'subject' | 'router'> {
     blockId: string,
     sortId: string,
     isTheme: boolean,
@@ -74,11 +75,11 @@ export interface CheckSecondTaskArguments extends SecondTaskArguments {
     setIsCorrect: (e: boolean) => void,
 }
 
-export interface UpdateTaskArguments extends Pick<BaseArguments, 'userId' | 'webApp' | 'router'> {
+export interface UpdateTaskArguments extends Pick<BaseArguments, 'userId' | 'webApp' | 'subject' | 'router'> {
     taskId: string,
 }
 
-export interface UserArguments extends Pick<BaseArguments, 'userId' | 'dispatch'> {
+export interface UserArguments extends Pick<BaseArguments, 'userId' | 'subject' | 'dispatch'> {
     webApp?: IWebApp | undefined,
     text?: string,
 }
@@ -101,11 +102,11 @@ export interface CourseUnsubscribeArguments extends CourseSubscribeArguments {
     dispatch: any,
 }
 
-export interface UserCourseArguments extends Pick<BaseArguments, 'userId' | 'dispatch'> {
+export interface UserCourseArguments extends Pick<BaseArguments, 'userId' | 'subject' | 'dispatch'> {
     setCoursesBlockType: (e: 'all' | 'my' | null) => void,
 }
 
-export interface WebinarInfoArguments extends Pick<BaseArguments, 'webApp' | 'text'> {
+export interface WebinarInfoArguments extends Pick<BaseArguments, 'webApp' | 'subject' | 'text'> {
     webinarId: string,
     setWebinarId: (e: string | null) => void,
     setWebinarInfo: (e: WebinarInfoData | null) => void,

@@ -11,7 +11,7 @@ import ReactMarkdown from 'react-markdown';
 
 
 export const CoursesList = ({ availableCourses, setWebinarsType }: CoursesListProps): JSX.Element => {
-    const { router, webApp, tgUser } = useSetup();
+    const { router, webApp, tgUser, subject } = useSetup();
     const { courseInfo, isFormLoading, isLoading, isCoursePlan,
         setCourseInfo, setIsFormLoading, setIsLoading, setIsCoursePlan } = useHelpStates();
 
@@ -31,7 +31,7 @@ export const CoursesList = ({ availableCourses, setWebinarsType }: CoursesListPr
                     <Button key={c.cource_id} description={c.cource_name}
                         onClick={() => {
                             setIsFormLoading(true);
-                            getCourseInfo(c.cource_id, setCourseInfo, setIsFormLoading);
+                            getCourseInfo(c.cource_id, subject, setCourseInfo, setIsFormLoading);
                         }} />
                 ))}
             </>
@@ -57,6 +57,7 @@ export const CoursesList = ({ availableCourses, setWebinarsType }: CoursesListPr
                         text: setLocale(router.locale).you_subscribed_for_course
                             + ' "' + courseInfo.data.cource_name + '"',
                         webApp: webApp,
+                        subject: subject,
                         router: router,
                         setIsLoading: setIsLoading,
                     })} />

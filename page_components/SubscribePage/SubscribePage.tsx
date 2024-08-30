@@ -9,7 +9,7 @@ import { MainLink } from '../../components/Common/MainLink/MainLink';
 
 
 export const SubscribePage = (): JSX.Element => {
-    const { router, dispatch, webApp, tgUser, user, subscribe } = useSetup();
+    const { router, dispatch, webApp, tgUser, user, subscribe, subject } = useSetup();
 
     if (webApp) {
         webApp?.BackButton.hide();
@@ -49,6 +49,7 @@ export const SubscribePage = (): JSX.Element => {
                     }
                     onClick={() => createPretransaction({
                         webApp: webApp,
+                        subject: subject,
                         userId: tgUser?.id,
                         subscribe: s, 
                         email: user?.email,

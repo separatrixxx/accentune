@@ -3,13 +3,14 @@ import { Blocks, FirstTaskInterface, ThemesTypesInterface } from "../interfaces/
 import { setLocale } from "./locale.helper";
 import { CheckFirstAnswerArguments, ErrorArguments, FirstTaskArguments, NextTaskArguments,
     UpdateTaskArguments } from "../interfaces/refactor.interface";
+import { getDomain } from "./domain.helper";
 
 
 export async function getBlocks(args: ErrorArguments, setBlocks: (e: Blocks) => void) {
-    const { webApp, router } = args;
+    const { webApp, subject, router } = args;
 
     try {
-        const { data : response }: AxiosResponse<Blocks> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
+        const { data : response }: AxiosResponse<Blocks> = await axios.get(getDomain(subject) +
             '/blocks');
 
         setBlocks(response);
@@ -21,10 +22,10 @@ export async function getBlocks(args: ErrorArguments, setBlocks: (e: Blocks) => 
 }
 
 export async function getThemesTypes(args: ErrorArguments, blockId: string, setThemesTypes: (e: ThemesTypesInterface) => void) {
-    const { webApp, router } = args;
+    const { webApp, subject, router } = args;
 
     try {
-        const { data : response }: AxiosResponse<ThemesTypesInterface> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
+        const { data : response }: AxiosResponse<ThemesTypesInterface> = await axios.get(getDomain(subject) +
             '/themes_and_types_for_block?block_id=' + blockId);
 
         setThemesTypes(response);
@@ -38,7 +39,8 @@ export async function getThemesTypes(args: ErrorArguments, blockId: string, setT
 }
 
 export function checkAnswer(args: CheckFirstAnswerArguments) {
-    const { userId, webApp, router, answer, task, firstPart, setAnswer, setFirstTask, setIsFault, setIsCorrect, setIsDecided } = args;
+    const { userId, webApp, subject, router, answer, task, firstPart,
+        setAnswer, setFirstTask, setIsFault, setIsCorrect, setIsDecided } = args;
 
     if (answer.trim() === task?.answer) {
         setFirstTask(null);
@@ -46,12 +48,14 @@ export function checkAnswer(args: CheckFirstAnswerArguments) {
         updateSolvedTask({
             userId: userId,
             webApp: webApp,
+            subject: subject,
             router: router,
             taskId: task.task_id,
         });
         getFirstTask({
             userId: userId,
             webApp: webApp,
+            subject: subject,
             router: router,
             blockId: firstPart.blockId,
             sortId: firstPart.sortId,
@@ -67,7 +71,7 @@ export function checkAnswer(args: CheckFirstAnswerArguments) {
 }
 
 export function nextTask(args: NextTaskArguments) {
-    const { userId, webApp, router, firstPart, setAnswer, setIsFault, setIsDecided, setTask } = args;
+    const { userId, webApp, subject, router, firstPart, setAnswer, setIsFault, setIsDecided, setTask } = args;
 
     setIsFault(false);
     setTask(null);
@@ -75,6 +79,7 @@ export function nextTask(args: NextTaskArguments) {
     getFirstTask({
         userId: userId,
         webApp: webApp,
+        subject: subject,
         router: router,
         blockId: firstPart.blockId,
         sortId: firstPart.sortId,
@@ -85,10 +90,10 @@ export function nextTask(args: NextTaskArguments) {
 }
 
 export async function getFirstTask(args: FirstTaskArguments) {
-    const { userId, webApp, router, blockId, sortId, isTheme, setIsDecided, setFirstTask } = args;
+    const { userId, webApp, subject, router, blockId, sortId, isTheme, setIsDecided, setFirstTask } = args;
 
     try {
-        const { data : response }: AxiosResponse<FirstTaskInterface> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
+        const { data : response }: AxiosResponse<FirstTaskInterface> = await axios.get(getDomain(subject) +
             '/get_task?block_id=' + blockId
             + (isTheme ? '&theme_id=' : '&type_id=')
             + sortId
@@ -109,10 +114,10 @@ export async function getFirstTask(args: FirstTaskArguments) {
 }
 
 export async function updateSolvedTask(args: UpdateTaskArguments) {
-    const { userId, webApp, router, taskId } = args;
+    const { userId, webApp, subject, router, taskId } = args;
 
     try {
-        await axios.post(process.env.NEXT_PUBLIC_DOMAIN +
+        await axios.post(getDomain(subject) +
             '/update_solved_task?user_id=' + userId
             + '&task_id=' + taskId);
     } catch (err) {

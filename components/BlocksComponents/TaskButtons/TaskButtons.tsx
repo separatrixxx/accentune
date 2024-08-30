@@ -7,7 +7,7 @@ import { useSetup } from '../../../hooks/useSetup';
 
 
 export const TaskButtons = ({ checkAnswerArgs, isFault, setTask }: TaskButtonsProps): JSX.Element => {
-    const { router, webApp, tgUser, firstPart } = useSetup();
+    const { router, webApp, tgUser, firstPart, subject } = useSetup();
 
     return (
         <div className={styles.taskButtons}>
@@ -27,6 +27,7 @@ export const TaskButtons = ({ checkAnswerArgs, isFault, setTask }: TaskButtonsPr
                 onClick={() => nextTask({
                     userId: tgUser?.id,
                     webApp: webApp,
+                    subject: subject,
                     router: router,
                     firstPart: firstPart,
                     setAnswer: checkAnswerArgs.setAnswer,

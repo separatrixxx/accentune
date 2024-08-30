@@ -10,7 +10,7 @@ export const MainLink = (): JSX.Element => {
     const router = useRouter();
     
     return (
-        <Link href='https://web.telegram.org/a/#7161451971' target='_blank' className={styles.link}>
+        <Link href='https://web.telegram.org/a/#-1001189097644' target='_blank' className={styles.link}>
             <Image className={styles.logo} draggable='false'
                 loader={() => '/logo.svg'}
                 src='/logo.svg'

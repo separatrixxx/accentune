@@ -3,13 +3,15 @@ import { CourseInfoInterface, CoursesData, CoursesInterface, UserCourseInterface
 import { BaseArguments, CourseSubscribeArguments, CourseUnsubscribeArguments, UserCourseArguments, WebinarInfoArguments } from "../interfaces/refactor.interface";
 import { setUserCourse, setUserCourseDefault } from "../features/userCourse/userCourseSlice";
 import { setUserWebinars } from "../features/userWebinars/userWebinarsSlice";
+import { getDomain } from "./domain.helper";
+import { Subject } from "../interfaces/user.interface";
 
 
 export async function getUserCourse(args: UserCourseArguments) {
-    const { userId, setCoursesBlockType, dispatch } = args;
+    const { userId, subject, setCoursesBlockType, dispatch } = args;
 
     try {
-        const { data : response }: AxiosResponse<UserCourseInterface> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
+        const { data : response }: AxiosResponse<UserCourseInterface> = await axios.get(getDomain(subject) +
             '/get_course_for_user?user_id=' + userId);
 
         dispatch(setUserCourse(response.data));
@@ -20,9 +22,9 @@ export async function getUserCourse(args: UserCourseArguments) {
     }
 }
 
-export async function getAvailableCourses(setAvailableCourses: (e: CoursesData[] | null) => void) {
+export async function getAvailableCourses(subject: Subject, setAvailableCourses: (e: CoursesData[] | null) => void) {
     try {
-        const { data : response }: AxiosResponse<CoursesInterface> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
+        const { data : response }: AxiosResponse<CoursesInterface> = await axios.get(getDomain(subject) +
             '/courses');
 
         setAvailableCourses(response.data);
@@ -31,10 +33,10 @@ export async function getAvailableCourses(setAvailableCourses: (e: CoursesData[]
     }
 }
 
-export async function getCourseInfo(courseId: string, setCourseInfo: (e: CourseInfoInterface | null) => void,
+export async function getCourseInfo(courseId: string, subject: Subject, setCourseInfo: (e: CourseInfoInterface | null) => void,
     setIsLoading: (e: boolean) => void) {
     try {
-        const { data : response }: AxiosResponse<CourseInfoInterface> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
+        const { data : response }: AxiosResponse<CourseInfoInterface> = await axios.get(getDomain(subject) +
             '/course?course_id=' + courseId);
 
         setCourseInfo(response);
@@ -46,12 +48,12 @@ export async function getCourseInfo(courseId: string, setCourseInfo: (e: CourseI
 }
 
 export async function subscribeForCourse(args: CourseSubscribeArguments) {
-    const { userId, courseId, text, webApp, router, setIsLoading } = args;
+    const { userId, courseId, text, webApp, subject, router, setIsLoading } = args;
 
     try {
         setIsLoading(true);
 
-        await axios.post(process.env.NEXT_PUBLIC_DOMAIN +
+        await axios.post(getDomain(subject) +
             `/subscribe_course?user_id=${userId}&course_id=${courseId}`).then(() => {
                 setIsLoading(false);
 
@@ -66,12 +68,12 @@ export async function subscribeForCourse(args: CourseSubscribeArguments) {
 }
 
 export async function unsubscribeForCourse(args: CourseUnsubscribeArguments) {
-    const { userId, courseId, text, webApp, router, dispatch, setIsLoading } = args;
+    const { userId, courseId, text, webApp, subject, router, dispatch, setIsLoading } = args;
 
     try {
         setIsLoading(true);
 
-        await axios.post(process.env.NEXT_PUBLIC_DOMAIN +
+        await axios.post(getDomain(subject) +
             `/unsubscribe_course?user_id=${userId}&course_id=${courseId}`).then(() => {
                 setIsLoading(false);
 
@@ -87,10 +89,10 @@ export async function unsubscribeForCourse(args: CourseUnsubscribeArguments) {
 }
 
 export async function getUserWebinars(args: BaseArguments) {
-    const { userId, webApp, text, router, dispatch } = args;
+    const { userId, webApp, subject, router, text, dispatch } = args;
 
     try {
-        const { data : response }: AxiosResponse<UserCourseInterface> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
+        const { data : response }: AxiosResponse<UserCourseInterface> = await axios.get(getDomain(subject) +
             '/user_webinars?user_id=' + userId);
 
         dispatch(setUserWebinars(response.data));
@@ -105,10 +107,10 @@ export async function getUserWebinars(args: BaseArguments) {
 }
 
 export async function getWebinarData(args: WebinarInfoArguments) {
-    const { webinarId, webApp, text, setWebinarId, setWebinarInfo } = args;
+    const { webinarId, webApp, subject, text, setWebinarId, setWebinarInfo } = args;
 
     try {
-        const { data : response }: AxiosResponse<WebinarInfoInterface> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
+        const { data : response }: AxiosResponse<WebinarInfoInterface> = await axios.get(getDomain(subject) +
             '/webinar?webinar_id=' + webinarId);
 
             setWebinarInfo(response.data);

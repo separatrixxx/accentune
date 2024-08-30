@@ -5,20 +5,23 @@ import { setSubscribeMultiplayer, setSubscribeGroup, changeStatus } from "../fea
 import { setLocale } from "./locale.helper";
 import { DemoSubscribeArguments, SubscribeArguments } from "../interfaces/refactor.interface";
 import { formatDate } from "./date.helper";
+import { getDomain } from "./domain.helper";
+import { Subject } from "../interfaces/user.interface";
 
 
 export async function demoSubscribe(args: DemoSubscribeArguments) {
-    const { userId, text, webApp, router, dispatch, setIsLoading } = args;
+    const { userId, text, webApp, subject, router, dispatch, setIsLoading } = args;
 
     webApp?.showConfirm(text, async function (isOk: boolean) {
         if (isOk && userId) {
             try {
                 setIsLoading(true);
 
-                await axios.post(process.env.NEXT_PUBLIC_DOMAIN +
+                await axios.post(getDomain(subject) +
                     '/subscribe_demo?user_id=' + userId).then(() => {
                         getUser({
                             userId: userId,
+                            subject: subject,
                             dispatch: dispatch,
                         }).then(() => {
                             setIsLoading(false);
@@ -36,9 +39,9 @@ export async function demoSubscribe(args: DemoSubscribeArguments) {
     });
 }
 
-export async function getPrices(dispatch: any) {
+export async function getPrices(subject: Subject, dispatch: any) {
     try {
-        const { data: response }: AxiosResponse<SubscribeItemInterface[]> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
+        const { data: response }: AxiosResponse<SubscribeItemInterface[]> = await axios.get(getDomain(subject) +
             '/get_prices_by_type?sub_type=multiplayer');
 
         dispatch(setSubscribeMultiplayer(response));
@@ -47,7 +50,7 @@ export async function getPrices(dispatch: any) {
     }
 
     try {
-        const { data: response }: AxiosResponse<SubscribeItemInterface[]> = await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
+        const { data: response }: AxiosResponse<SubscribeItemInterface[]> = await axios.get(getDomain(subject) +
             '/get_prices_by_type?sub_type=group');
 
         dispatch(setSubscribeGroup(response));
@@ -59,14 +62,14 @@ export async function getPrices(dispatch: any) {
 }
 
 export async function createPretransaction(args: SubscribeArguments) {
-    const { webApp, userId, subscribe, router, dispatch } = args;
+    const { userId, webApp, subject, router, subscribe, dispatch } = args;
 
     webApp?.showConfirm(setLocale(router.locale).activate_subscription + '?', async function (isOk: boolean) {
         if (isOk) {
             try {
                 dispatch(changeStatus(-1));
 
-                await axios.post(process.env.NEXT_PUBLIC_DOMAIN +
+                await axios.post(getDomain(subject) +
                     `/create_pretransaction?user_id=${userId}&price_id=${subscribe.id}`)
                     .then(r => {
                         createTransaction(args, r.data.transaction_data);
@@ -83,10 +86,10 @@ export async function createPretransaction(args: SubscribeArguments) {
 }
 
 export async function createTransaction(args: SubscribeArguments, transactionData: TransactionData) {
-    const { webApp, subscribe, email, router, dispatch } = args;
+    const { webApp, subject, router, subscribe, email, dispatch } = args;
 
     try {
-        await axios.post(process.env.NEXT_PUBLIC_DOMAIN +
+        await axios.post(getDomain(subject) +
             '/create_transaction', {
             Amount: +transactionData.amount,
             OrderId: String(transactionData.order_id),
@@ -116,14 +119,14 @@ export async function createTransaction(args: SubscribeArguments, transactionDat
 }
 
 export async function cancelSubscribe(args: DemoSubscribeArguments) {
-    const { userId, text, webApp, router, dispatch, setIsLoading } = args;
+    const { userId, webApp, subject, router, text, dispatch, setIsLoading } = args;
 
     webApp?.showConfirm(text, async function (isOk: boolean) {
         if (isOk && userId) {
             try {
                 setIsLoading(true);
 
-                await axios.get(process.env.NEXT_PUBLIC_DOMAIN +
+                await axios.get(getDomain(subject) +
                     '/cancel_subscription?user_id=' + userId).then(r => {
                         if (r.data && r.data.message) {
                             const message = r.data.message;
@@ -131,6 +134,7 @@ export async function cancelSubscribe(args: DemoSubscribeArguments) {
                             if (message.indexOf('cancelled immediately') !== -1) {
                                 getUser({
                                     userId: userId,
+                                    subject: subject,
                                     dispatch: dispatch,
                                 }).then(() => {
                                     setIsLoading(false);

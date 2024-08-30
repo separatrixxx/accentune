@@ -7,11 +7,11 @@ import { getFirstStatistics } from '../../helpers/statistics.helper';
 
 
 function Statistics1(): JSX.Element {
-    const { router, dispatch, tgUser } = useSetup();
+    const { router, dispatch, tgUser, subject } = useSetup();
 
     useEffect(() => {
-        getFirstStatistics(tgUser?.id, dispatch);
-    }, [tgUser, dispatch]);
+        getFirstStatistics(tgUser?.id, subject, dispatch);
+    }, [tgUser, subject, dispatch]);
 
     return (
         <>

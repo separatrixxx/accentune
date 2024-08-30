@@ -11,6 +11,8 @@ export interface TypesInterface {
 export interface SecondTaskInterface {
     task_id: string,
     text: string,
+    type_id: number[],
+    theme_id: number[],
 };
 
 export interface SolvedSecondTaskData {

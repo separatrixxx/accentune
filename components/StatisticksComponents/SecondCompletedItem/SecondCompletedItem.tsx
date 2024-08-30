@@ -11,15 +11,15 @@ import { Button } from '../../Common/Button/Button';
 
 
 export const SecondCompletedItem = ({ completed, taskId, setCompleted }: SecondCompletedItemProps): JSX.Element => {
-    const { router, dispatch, webApp, tgUser, completedTasks } = useSetup();
+    const { router, dispatch, webApp, tgUser, completedTasks, subject } = useSetup();
 
     useEffect(() => {
         if (completed === 'completed') {
-            getCompletedItem(tgUser?.id, taskId, dispatch);
+            getCompletedItem(tgUser?.id, taskId, subject, dispatch);
         } else if (completed === 'unsubmitted') {
-            getUnsubmittedItem(tgUser?.id, taskId, dispatch);
+            getUnsubmittedItem(tgUser?.id, taskId, subject, dispatch);
         }
-    }, [tgUser, completed, taskId, dispatch]);
+    }, [tgUser, completed, taskId, subject, dispatch]);
 
     if (completedTasks.completed) {
         return (
@@ -76,6 +76,7 @@ export const SecondCompletedItem = ({ completed, taskId, setCompleted }: SecondC
                     setCompleted(null);
                     cancelSolution({
                         webApp: webApp,
+                        subject: subject,
                         router: router,
                     }, tgUser?.id, taskId);
                 }} />
