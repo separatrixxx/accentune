@@ -38,3 +38,18 @@
 	justify-items: center;
 	gap: 10px;
 }
+
+.taskImage {
+	display: grid;
+	overflow: hidden;
+	align-items: center;
+
+	width: 90%;
+	height: fit-content;
+	margin: 20px 0;
+
+	border: 2px solid var(--tg-theme-section-bg-color);
+	border-radius: 10px;
+	background: var(--tg-theme-section-bg-color);
+	justify-items: center;
+}

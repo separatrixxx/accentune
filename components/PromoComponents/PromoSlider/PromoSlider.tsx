@@ -12,6 +12,7 @@ import { useSetup } from '../../../hooks/useSetup';
 
 export const PromoSlider = (): JSX.Element => {
     const { promo } = useSetup();
+    console.log(promo)
 
     return (
         <Swiper className={styles.promoSLider}

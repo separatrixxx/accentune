@@ -11,13 +11,22 @@
 	gap: 10px;
 }
 
-.taskTitle {
+.taskTitle,
+.taskDescription {
 	margin-left: 5%;
 
 	color: var(--tg-theme-text-color);
 
 	font-weight: 600;
 	justify-self: left;
+}
+
+.taskDescription {
+	margin-top: -5px;
+
+	color: var(--tg-theme-subtitle-text-color);
+
+	font-weight: 500;
 }
 
 .taskText {
@@ -27,4 +36,19 @@
 	justify-items: left;
 
 	color: var(--tg-theme-text-color);
+}
+
+.taskImage {
+	display: grid;
+	overflow: hidden;
+	align-items: center;
+
+	width: 90%;
+	height: fit-content;
+	margin: 20px 0;
+
+	border: 2px solid var(--tg-theme-section-bg-color);
+	border-radius: 10px;
+	background: var(--tg-theme-section-bg-color);
+	justify-items: center;
 }

@@ -13,6 +13,7 @@ import { checkSecondAnswer, getSecondTask } from '../../../helpers/secondPart.he
 import { Button } from '../../Common/Button/Button';
 import { setSecondPartDefault } from '../../../features/secondPart/secondPartSlice';
 import { CheckSecondTaskArguments } from '../../../interfaces/refactor.interface';
+import Image from 'next/image';
 
 
 export const SecondTaskBlock = (): JSX.Element => {
@@ -71,6 +72,18 @@ export const SecondTaskBlock = (): JSX.Element => {
                     <ReactMarkdown className={styles.secondTaskText}>
                         {secondTask.text}
                     </ReactMarkdown>
+                    {
+                        secondTask.photo_url ?
+                            <Image className={styles.taskImage} draggable='false'
+                                loader={() => secondTask.photo_url || ''}
+                                src={secondTask.photo_url}
+                                alt='task image'
+                                width={1}
+                                height={1}
+                                unoptimized={true}
+                            />
+                        : <></>
+                    }
                     <Input text={setLocale(router.locale).enter_answer} value={answer}
                         onChange={(e) => setAnswer(e.target.value)} onKeyPress={handleKeyPress} />
                 </div>

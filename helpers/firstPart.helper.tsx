@@ -42,7 +42,7 @@ export function checkAnswer(args: CheckFirstAnswerArguments) {
     const { userId, webApp, subject, router, answer, task, firstPart,
         setAnswer, setFirstTask, setIsFault, setIsCorrect, setIsDecided } = args;
 
-    if (answer.trim() === task?.answer) {
+    if (task?.answer.includes(answer.trim())) {
         setFirstTask(null);
         setIsCorrect(true);
         updateSolvedTask({

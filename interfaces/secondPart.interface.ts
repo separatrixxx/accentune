@@ -13,6 +13,7 @@ export interface SecondTaskInterface {
     text: string,
     type_id: number[],
     theme_id: number[],
+    photo_url: string | null,
 };
 
 export interface SolvedSecondTaskData {

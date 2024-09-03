@@ -157,7 +157,8 @@ export const ru = {
     back_to_my_webinars: 'Назад к моим вебинарам',
     webinar: 'Вебинар',
     date: 'Дата',
-    themes: "Темы",
-    webinar_recording: "Запись вебинара",
-    webinar_program: "Программа вебинара",
+    themes: 'Темы',
+    webinar_recording: 'Запись вебинара',
+    webinar_program: 'Программа вебинара',
+    you_better_than: 'Вы лучше, чем $$$% учеников!',
 };

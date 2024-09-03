@@ -9,13 +9,14 @@ export interface QuickInterface {
 export interface QuickVariantInterface {
     task_id: string,
     text: string,
-    answer: string,
-    explanations: string,
-    user_answer: string | null
+    answer: string[],
+    explanations: string | null,
+    user_answer: string | null,
+    photo_url: string | null,
 };
 
 export interface SolvedQuickTask {
-    answer: string,
+    answer: string[],
     task_id: string,
     user_answer: string,
 }

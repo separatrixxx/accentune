@@ -21,8 +21,10 @@ export type Theme = {
 export interface FirstTaskInterface {
     task_id: string,
     text: string,
-    answer: string,
+    answer: string[],
     explanations: string,
     pts_total: number,
     strict_bool: boolean,
+    photo_url: string | null,
+    acceptance_rate: number,
 };
