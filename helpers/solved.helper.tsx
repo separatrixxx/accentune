@@ -16,7 +16,9 @@ export async function getSolved(args: SolvedArguments) {
 
         dispatch(setSolved(response));
     } catch (err: any) {
-        webApp?.showAlert(setLocale(router.locale).errors.get_variant_error); 
+        webApp?.showAlert(setLocale(router.locale).errors.get_variant_error, async function() {
+            router.push('/');
+        }); 
         
         console.log(err);
     }
@@ -31,7 +33,9 @@ export async function getVariantStats(args: VariantStatsArguments) {
 
         dispatch(setVariantStats(response));
     } catch (err: any) {
-        webApp?.showAlert(setLocale(router.locale).errors.get_stats_error); 
+        webApp?.showAlert(setLocale(router.locale).errors.get_stats_error, async function() {
+            router.push('/');
+        }); 
 
         console.log(err);
     }

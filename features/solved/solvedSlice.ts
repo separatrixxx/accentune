@@ -3,8 +3,8 @@ import { SolvedInterface } from '../../interfaces/solved.interface';
 
 
 const solvedData: SolvedInterface = {
-    status: '',
-    data: [],
+  status: '',
+  data: [],
 };
 
 export const solvedSlice = createSlice({
@@ -14,11 +14,14 @@ export const solvedSlice = createSlice({
   },
   reducers: {
     setSolved: (state, action) => {
-        state.solved = action.payload
+      state.solved = action.payload
+    },
+    setSolvedDefault: (state) => {
+      state.solved = solvedData;
     },
   },
 });
 
-export const { setSolved } = solvedSlice.actions;
+export const { setSolved, setSolvedDefault } = solvedSlice.actions;
 
 export default solvedSlice.reducer;

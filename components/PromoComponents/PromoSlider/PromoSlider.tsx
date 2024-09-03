@@ -29,7 +29,7 @@ export const PromoSlider = (): JSX.Element => {
             {
                 promo.map(p => (
                     <SwiperSlide key={p.promo_id}>
-                        <PromoSlide photo={p.photo_url} url={p.redirect_url} />
+                        <PromoSlide promoId={p.promo_id} photo={p.photo_url} url={p.redirect_url} />
                     </SwiperSlide>
                 ))
             }

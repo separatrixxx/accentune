@@ -4,13 +4,13 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 
-export const PromoSlide = ({ photo, url }: PromoSlideProps): JSX.Element => {
+export const PromoSlide = ({ promoId, photo, url }: PromoSlideProps): JSX.Element => {
 	return (
 		<Link href={url} target="_blank">
 			<Image className={styles.promoSlide} draggable='false'
 				loader={() => photo}
 				src={photo}
-				alt='promo image'
+				alt={'promo image ' + promoId}
 				width={1}
 				height={1}
 				unoptimized={true}

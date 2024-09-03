@@ -7,6 +7,7 @@ import { QuickBlock } from '../../components/QuickComponents/QuickBlock/QuickBlo
 import { useSetup } from '../../hooks/useSetup';
 import { SolvedBlock } from '../../components/SolvedComponents/SolvedBlock/SolvedBlock';
 import { MainLink } from '../../components/Common/MainLink/MainLink';
+import { setSolvedDefault } from '../../features/solved/solvedSlice';
 
 
 export const QuickPage = (): JSX.Element => {
@@ -19,6 +20,7 @@ export const QuickPage = (): JSX.Element => {
             router.push('/');
 
             dispatch(setQuickDefault());
+            dispatch(setSolvedDefault());
         });
     }
 
