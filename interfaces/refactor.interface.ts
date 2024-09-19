@@ -111,3 +111,8 @@ export interface WebinarInfoArguments extends Pick<BaseArguments, 'webApp' | 'su
     setWebinarId: (e: string | null) => void,
     setWebinarInfo: (e: WebinarInfoData | null) => void,
 }
+
+export interface UsersStatsArguments extends Pick<BaseArguments, 'subject' | 'dispatch'> {
+    eventId: string | string[] | undefined,
+    liveId: string | string[] | undefined,
+}

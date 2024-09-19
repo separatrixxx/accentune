@@ -1,0 +1,44 @@
+.usersStats {
+	display: grid;
+	gap: 20px;
+}
+
+.resultsTable {
+	width: fit-content;
+	margin-top: 10px;
+
+	text-align: left;
+
+	border-collapse: collapse;
+}
+
+.resultsTable tr {
+	border-top: 1px solid var(--dark);
+}
+
+.resultsTable tr:nth-child(even) {
+	background-color: var(--gray-light);
+}
+
+.sortableHeader {
+	cursor: pointer;
+	user-select: none;
+}
+
+.resultsTable th,
+.resultsTable td {
+	padding: 10px;
+
+	border: 1px solid var(--gray-light);
+}
+
+.tasksList {
+	margin: 0;
+	padding: 0;
+
+	list-style: none;
+}
+
+.tasksList li {
+	padding: 3px 0;
+}

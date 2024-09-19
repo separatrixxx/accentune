@@ -17,7 +17,7 @@ function Part1(): JSX.Element {
       webApp: webApp,
       subject: subject,
       router: router,
-    }, setBlocks)
+    }, setBlocks);
   }, [router, webApp, subject, setBlocks]);
 
   return (

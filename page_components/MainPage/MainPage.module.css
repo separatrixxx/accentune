@@ -4,3 +4,15 @@
 	width: 100%;
 	justify-items: center;
 }
+
+.versionText {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+
+	margin: 0 5% 20px 0 !important;
+
+	color: var(--tg-theme-subtitle-text-color) !important;
+
+	font-weight: 600 !important;
+}

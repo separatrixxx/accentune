@@ -5,13 +5,14 @@ import { useSetup } from '../../hooks/useSetup';
 import { Spinner } from '../../components/Common/Spinner/Spinner';
 import { PromoSlider } from '../../components/PromoComponents/PromoSlider/PromoSlider';
 import { MainLink } from '../../components/Common/MainLink/MainLink';
+import { Htag } from '../../components/Common/Htag/Htag';
 
 
 export const MainPage = (): JSX.Element => {
   const { webApp, tgUser, user } = useSetup();
 
   if (webApp) {
-      webApp?.BackButton.hide();
+    webApp?.BackButton.hide();
   }
 
   return (
@@ -19,14 +20,19 @@ export const MainPage = (): JSX.Element => {
       {
         !tgUser ?
           <MainLink />
-        : !user.privileges ?
-          <Spinner />
-        : 
-          <>
-            <Header />
-            <MainButtons />
-            <PromoSlider />
-          </>
+          : !user.privileges ?
+            <>
+              <Spinner />
+              <Htag tag='s' className={styles.versionText}>
+                {process.env.NEXT_PUBLIC_VERSION}
+              </Htag>
+            </>
+          :
+            <>
+              <Header />
+              <MainButtons />
+              <PromoSlider />
+            </>
       }
     </div>
   );

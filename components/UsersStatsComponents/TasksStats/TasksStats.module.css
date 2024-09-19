@@ -1,0 +1,60 @@
+.tasksStats {
+	display: grid;
+	gap: 20px;
+}
+
+.taskInfo {
+	display: grid;
+	grid-template-columns: auto 1fr;
+	gap: 20px;
+}
+
+.taskStatsItemTitle {
+	width: fit-content;
+	padding: 10px 15px;
+
+	cursor: pointer;
+	user-select: none;
+	transition-duration: 300ms;
+
+	border: 1px solid var(--primary);
+	border-radius: 10px;
+	background: var(--white);
+}
+
+.taskStatsItemTitle:hover,
+.taskStatsItemTitle:active {
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+	filter: brightness(0.95);
+}
+
+.resultsTable {
+	width: fit-content;
+	margin-top: 10px;
+	padding-right: 10px;
+
+	text-align: left;
+
+	border-right: 1px solid var(--dark);
+}
+
+.resultsTable tr {
+	border-top: 1px solid var(--dark);
+}
+
+.resultsTable tr:nth-child(even) {
+	background-color: var(--gray-light);
+}
+
+.sortableHeader {
+	cursor: pointer;
+	user-select: none;
+}
+
+.resultsTable th,
+.resultsTable td {
+	padding: 3px 7px;
+
+	border: 1px solid var(--gray-light);
+}

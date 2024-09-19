@@ -4,14 +4,13 @@
 
 	display: grid;
 
-	width: 100%;
+	width: fit-content;
 	justify-items: center;
 	gap: 40px;
+	margin: 0 40px;
 }
 
 .mainTitle {
-	width: 80%;
-
 	transition-duration: 300ms;
 	text-align: center;
 
@@ -29,7 +28,6 @@
 
 	transition-duration: 300ms;
 
-	border-radius: 9999px;
 	justify-items: center;
 }
 
@@ -40,4 +38,10 @@
 	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
 
 	filter: brightness(0.9);
+}
+
+@media (max-width: 580px) {
+	.link {
+		margin: 0 20px;
+	}
 }

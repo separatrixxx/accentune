@@ -14,7 +14,7 @@ export const MainLink = (): JSX.Element => {
             <Image className={styles.logo} draggable='false'
                 loader={() => '/logo.svg'}
                 src='/logo.svg'
-                alt='image'
+                alt='logo image'
                 width={1}
                 height={1}
                 unoptimized={true}

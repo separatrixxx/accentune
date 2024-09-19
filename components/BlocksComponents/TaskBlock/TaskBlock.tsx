@@ -56,7 +56,6 @@ export const TaskBlock = (): JSX.Element => {
             checkAnswer(checkAnswerArgs);
         }
     };
-    console.log(firstTask?.answer)
 
     if (!firstTask && !isDecided) {
         return <Spinner />

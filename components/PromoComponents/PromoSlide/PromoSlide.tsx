@@ -6,6 +6,7 @@ import Image from 'next/image';
 
 export const PromoSlide = ({ promoId, photo, url }: PromoSlideProps): JSX.Element => {
 	return (
+
 		<Link href={url} target="_blank">
 			<Image className={styles.promoSlide} draggable='false'
 				loader={() => photo}
@@ -14,7 +15,9 @@ export const PromoSlide = ({ promoId, photo, url }: PromoSlideProps): JSX.Elemen
 				width={1}
 				height={1}
 				unoptimized={true}
+				priority
 			/>
 		</Link>
+
 	);
 };

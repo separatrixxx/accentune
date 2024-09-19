@@ -12,7 +12,6 @@ import { useSetup } from '../../../hooks/useSetup';
 
 export const PromoSlider = (): JSX.Element => {
     const { promo } = useSetup();
-    console.log(promo)
 
     return (
         <Swiper className={styles.promoSLider}
@@ -23,7 +22,7 @@ export const PromoSlider = (): JSX.Element => {
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}
             autoplay={{
-                delay: 4000,
+                delay: 400000,
                 disableOnInteraction: false,
             }}
         >

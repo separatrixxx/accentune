@@ -1,0 +1,52 @@
+.userStatsForm {
+	display: grid;
+
+	width: 90%;
+	margin: 20px 0;
+	gap: 20px;
+}
+
+.userStatsDiv {
+	display: grid;
+
+	width: fit-content;
+	grid-template-columns: repeat(3, auto);
+	gap: 40px;
+}
+
+.eventName,
+.changeType {
+	color: var(--primary);
+
+	font-weight: 600 !important;
+}
+
+.changeType {
+	cursor: pointer;
+	transition-duration: 300ms;
+
+	color: var(--dark);
+}
+
+.changeType:hover,
+.changeType:active {
+	transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+
+	color: var(--primary);
+}
+
+@media (max-width: 1024px) {
+	.userStatsDiv {
+		gap: 20px;
+	}
+}
+
+@media (max-width: 580px) {
+	.userStatsForm {
+		width: 95%;
+	}
+
+	.userStatsDiv {
+		gap: 15px;
+	}
+}

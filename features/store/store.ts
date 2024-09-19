@@ -13,6 +13,7 @@ import subjectSlice from "../subject/subjectSlice";
 import userCourseSlice from "../userCourse/userCourseSlice";
 import userWebinarsSlice from "../userWebinars/userWebinarsSlice";
 import promoSlice  from "../promo/promoSlice";
+import usersStatsSlice from "../usersStats/usersStatsSlice";
 
 
 const makeStore = () =>
@@ -31,6 +32,7 @@ const makeStore = () =>
       userCourse: userCourseSlice,
       userWebinars: userWebinarsSlice,
       promo: promoSlice,
+      usersStats: usersStatsSlice,
     },
     devTools: true,
   });

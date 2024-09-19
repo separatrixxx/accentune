@@ -161,4 +161,11 @@ export const ru = {
     webinar_recording: 'Запись вебинара',
     webinar_program: 'Программа вебинара',
     you_better_than: 'Вы лучше, чем $$$% учеников!',
+    task_type: 'Тип задачи',
+    max_score: 'Максимальный балл',
+    student_name: 'Имя ученика',
+    student_score: 'Балл ученика',
+    total_score: 'Общий балл',
+    tasks_stats: 'Задачи',
+    users_stats: 'Ученики',
 };

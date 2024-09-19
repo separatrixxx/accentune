@@ -4,7 +4,8 @@
 	align-items: center;
 
 	width: 100%;
-	height: fit-content;
+	height: auto;
+	max-height: 275px;
 
 	border: 2px solid var(--tg-theme-section-bg-color);
 	border-radius: 10px;
