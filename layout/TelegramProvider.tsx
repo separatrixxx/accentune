@@ -26,7 +26,7 @@ export const TelegramProvider = ({ children }: { children: React.ReactNode }) =>
     }
 
     dispatch(setSubject(router.query.sub || 'obj'));
-  }, [router, subject, dispatch]);
+  }, [router, dispatch]);
 
   const value = useMemo(() => {
     return webApp

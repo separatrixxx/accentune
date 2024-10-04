@@ -9,31 +9,31 @@ import { Htag } from '../../components/Common/Htag/Htag';
 
 
 export const MainPage = (): JSX.Element => {
-  const { webApp, tgUser, user } = useSetup();
+    const { webApp, tgUser, user } = useSetup();
 
-  if (webApp) {
-    webApp?.BackButton.hide();
-  }
+    if (webApp) {
+        webApp?.BackButton.hide();
+    }
 
-  return (
-    <div className={styles.wrapper}>
-      {
-        !tgUser ?
-          <MainLink />
-          : !user.privileges ?
-            <>
-              <Spinner />
-              <Htag tag='s' className={styles.versionText}>
-                {process.env.NEXT_PUBLIC_VERSION}
-              </Htag>
-            </>
-          :
-            <>
-              <Header />
-              <MainButtons />
-              <PromoSlider />
-            </>
-      }
-    </div>
-  );
+    return (
+        <div className={styles.wrapper}>
+            {
+                !tgUser ?
+                    <MainLink />
+                    : !user.privileges ?
+                        <>
+                            <Spinner />
+                            <Htag tag='s' className={styles.versionText}>
+                                {process.env.NEXT_PUBLIC_VERSION}
+                            </Htag>
+                        </>
+                        :
+                        <>
+                            <Header />
+                            <MainButtons />
+                            <PromoSlider />
+                        </>
+            }
+        </div>
+    );
 };

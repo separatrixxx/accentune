@@ -22,7 +22,7 @@ export const PromoSlider = (): JSX.Element => {
             pagination={{ clickable: true }}
             scrollbar={{ draggable: true }}
             autoplay={{
-                delay: 400000,
+                delay: 3500,
                 disableOnInteraction: false,
             }}
         >
