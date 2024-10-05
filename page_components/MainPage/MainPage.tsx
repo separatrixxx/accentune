@@ -6,6 +6,7 @@ import { Spinner } from '../../components/Common/Spinner/Spinner';
 import { PromoSlider } from '../../components/PromoComponents/PromoSlider/PromoSlider';
 import { MainLink } from '../../components/Common/MainLink/MainLink';
 import { Htag } from '../../components/Common/Htag/Htag';
+import { ByBlock } from '../../components/Common/ByBlock/ByBlock';
 
 
 export const MainPage = (): JSX.Element => {
@@ -26,6 +27,7 @@ export const MainPage = (): JSX.Element => {
                             <Htag tag='s' className={styles.versionText}>
                                 {process.env.NEXT_PUBLIC_VERSION}
                             </Htag>
+                            <ByBlock color='light' />
                         </>
                         :
                         <>

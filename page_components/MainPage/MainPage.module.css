@@ -8,9 +8,9 @@
 .versionText {
 	position: absolute;
 	right: 0;
-	bottom: 0;
+	bottom: 20px;
 
-	margin: 0 5% 20px 0 !important;
+	margin-right: 5% !important;
 
 	color: var(--tg-theme-subtitle-text-color) !important;
 
