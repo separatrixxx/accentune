@@ -21,20 +21,21 @@ export const MainPage = (): JSX.Element => {
             {
                 !tgUser ?
                     <MainLink />
-                    : !user.privileges ?
-                        <>
-                            <Spinner />
-                            <Htag tag='s' className={styles.versionText}>
-                                {process.env.NEXT_PUBLIC_VERSION}
-                            </Htag>
-                            <ByBlock color='light' />
-                        </>
-                        :
-                        <>
-                            <Header />
-                            <MainButtons />
-                            <PromoSlider />
-                        </>
+                : !user.privileges ?
+                    <>
+                        <Spinner />
+                        <Htag tag='s' className={styles.versionText}>
+                            {process.env.NEXT_PUBLIC_VERSION}
+                        </Htag>
+                        <ByBlock color='light' />
+                    </>
+                :
+                    <>
+                        <Header />
+                        <MainButtons />
+                        <PromoSlider />
+                        <ByBlock color='light' />
+                    </>
             }
         </div>
     );

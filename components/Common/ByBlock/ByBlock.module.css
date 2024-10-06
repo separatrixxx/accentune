@@ -12,7 +12,7 @@
 .byBanana {
 	transition-duration: 300ms;
 
-	color: var(--tg-theme-subtitle-text-color) !important;
+	color: var(--tg-theme-subtitle-text-color);
 }
 
 .darkColor {
