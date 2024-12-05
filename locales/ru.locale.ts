@@ -168,4 +168,5 @@ export const ru = {
     total_score: 'Общий балл',
     tasks_stats: 'Задачи',
     users_stats: 'Ученики',
+    table_stats: 'Таблица',
 };
