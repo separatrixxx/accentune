@@ -36,7 +36,7 @@
 }
 
 .activeChangeType {
-	color: var(--primary);
+	color: var(--primary) !important;
 }
 
 @media (max-width: 1024px) {
